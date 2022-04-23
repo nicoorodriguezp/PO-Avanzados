@@ -6,9 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document
-public class Item {
-    // Product Attributes
-    private int idItem;
+public abstract class ItemState {
+
+    private int state;
     private String name;
-    private boolean critical;
 }

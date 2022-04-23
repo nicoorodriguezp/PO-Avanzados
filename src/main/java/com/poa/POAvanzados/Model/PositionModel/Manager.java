@@ -1,7 +1,8 @@
 package com.poa.POAvanzados.Model.PositionModel;
-import Model.PositionModel.PositionInterface;
 
 public class Manager implements PositionInterface {
+
+    private final int position = 1;
 
     @Override
     public void showHome() {
@@ -9,4 +10,7 @@ public class Manager implements PositionInterface {
 
     }
 
+    public int getPosition() {
+        return position;
+    }
 }
