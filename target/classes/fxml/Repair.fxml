@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" stylesheets="@../static/css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RepairController">
+   <children>
+      <Pane id="menuPane" prefHeight="58.0" prefWidth="1264.0" styleClass="head-background">
+         <children>
+            <Button id="backButton" fx:id="backButton" layoutX="49.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="backButton" wrapText="true" />
+            <Label id="title" layoutX="454.0" layoutY="13.0" prefHeight="30.0" prefWidth="357.0" styleClass="title" stylesheets="@../static/css/styles.css" text="Sistema de Control de Insumos" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="userNameLabel" layoutX="1091.0" layoutY="19.0" prefHeight="18.0" prefWidth="147.0" styleClass="labelFont" text="Nicolas Rodriguez" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView id="iconUser" fitHeight="30.0" fitWidth="32.0" layoutX="1053.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../static/icons/user-icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <SplitPane dividerPositions="0.6358954041204438" layoutX="-1.0" layoutY="57.0" prefHeight="780.0" prefWidth="1263.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="453.0">
+               <children>
+                  <Pane layoutX="1.0" layoutY="1.0" prefHeight="85.0" prefWidth="798.0">
+                     <children>
+                        <Label layoutX="133.0" layoutY="27.0" prefHeight="31.0" prefWidth="533.0" styleClass="labelFont" text="Nueva Reparacion - Lista de Items Utilizados">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="newRepairButton" layoutX="255.0" layoutY="679.0" mnemonicParsing="false" onAction="#createRepair" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Crear Reparacion">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+                  <ScrollPane layoutX="100.0" layoutY="90.0" prefHeight="570.0" prefWidth="602.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="568.0" prefWidth="599.0">
+                           <children>
+                              <VBox fx:id="listRepair" prefHeight="570.0" prefWidth="602.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="778.0" prefWidth="416.0">
+               <children>
+                  <Button fx:id="addItemButton" layoutX="78.0" layoutY="678.0" mnemonicParsing="false" onAction="#addItemToRepairList" prefHeight="58.0" prefWidth="307.0" styleClass="button1" text="Agregar Item">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="searchTF" layoutX="78.0" layoutY="31.0" prefHeight="39.0" prefWidth="269.0" styleClass="labelFont" />
+                  <Button fx:id="searchButton" layoutX="354.0" layoutY="36.0" mnemonicParsing="false" onAction="#search" prefHeight="18.0" prefWidth="30.0" styleClass="searchButton" />
+                  <ScrollPane layoutX="78.0" layoutY="90.0" prefHeight="577.0" prefWidth="307.0" styleClass="scroll-bar">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="305.0">
+                           <children>
+                              <VBox fx:id="listSearch" layoutX="-2.0" prefHeight="577.0" prefWidth="307.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

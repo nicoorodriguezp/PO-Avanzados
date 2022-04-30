@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public abstract class ItemState {
 
+    @Id
     private int state;
     private String name;
 }

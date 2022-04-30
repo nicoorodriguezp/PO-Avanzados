@@ -1,9 +1,15 @@
 package com.poa.POAvanzados.Model.UserModel;
 
 import lombok.Data;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import fxml.HomeController;
 
 @Data
 @Document
@@ -83,4 +89,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

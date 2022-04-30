@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDAO {
 
-    private final UserRepository repository; // MongoDB
+    protected final UserRepository userRepository; // MongoDB
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public User getUser(int idUser) throws DAOException {
-        return repository.findUserByIdUser(idUser);
+        return userRepository.findUserByIdUser(idUser);
     }
 
 }
