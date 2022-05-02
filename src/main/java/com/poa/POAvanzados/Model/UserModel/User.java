@@ -1,15 +1,15 @@
 package com.poa.POAvanzados.Model.UserModel;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.poa.POAvanzados.Model.PositionModel.Position;
+import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import fxml.HomeController;
 
 @Data
 @Document
@@ -17,15 +17,17 @@ public class User {
 
     @Id
     private int idUser;
-    private int position;
-    private int workplace;
+
+    private Position position;
+
+    private Workplace workplace;
 
     private String name;
     private String lastName;
     @Indexed(unique = true) // Unique email
     private String email;
 
-    public User(int idUser, int position, int workplace, String name, String lastName,
+    public User(int idUser, Position position, Workplace workplace, String name, String lastName,
             String email) {
         this.idUser = idUser;
         this.position = position;
@@ -50,19 +52,19 @@ public class User {
         this.idUser = idUser;
     }
 
-    public int getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
-    public int getWorkplace() {
+    public Workplace getWorkplace() {
         return workplace;
     }
 
-    public void setWorkplace(int workplace) {
+    public void setWorkplace(Workplace workplace) {
         this.workplace = workplace;
     }
 

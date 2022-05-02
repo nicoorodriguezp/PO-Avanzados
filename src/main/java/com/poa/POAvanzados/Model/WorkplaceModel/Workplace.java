@@ -53,4 +53,13 @@ public class Workplace {
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        if (warehouse) {
+            return "Deposito: " + this.address;
+        } else {
+            return "Laboratorio: " + this.address;
+        }
+    }
+
 }

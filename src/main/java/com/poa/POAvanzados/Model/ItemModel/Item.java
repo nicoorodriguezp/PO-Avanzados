@@ -12,6 +12,20 @@ public class Item {
     private String name;
     private boolean critical;
 
+    public Item(int idItem, String name, boolean critical) {
+        this.idItem = idItem;
+        this.name = name;
+        this.critical = critical;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public Item() {
+    }
+
     public int getIdItem() {
         return idItem;
     }

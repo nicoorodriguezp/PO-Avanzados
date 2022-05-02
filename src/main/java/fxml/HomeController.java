@@ -3,6 +3,8 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.poa.POAvanzados.Model.DAO.DAOException;
+
 import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 @Component
 public class HomeController extends Controller implements Initializable {
@@ -60,14 +63,33 @@ public class HomeController extends Controller implements Initializable {
 
     @FXML
     private void showReparationPanel(ActionEvent event) {
-
         m.showRepairPanel();
-
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
+    }
+
+    @FXML
+    private void createUserPanel(ActionEvent event) throws DAOException {
+        m.showUserPanel(false);
+    }
+
+    @FXML
+    private void deleteUserPanel(ActionEvent event) {
+
+        m.showReplenishPanel();
+    }
+
+    @FXML
+    private void modifyUserPanel(ActionEvent event) throws DAOException {
+        m.showUserPanel(true);
+    }
+
+    @FXML
+    private void replenish(ActionEvent event) {
+        m.showReplenishPanel();
     }
 
 }

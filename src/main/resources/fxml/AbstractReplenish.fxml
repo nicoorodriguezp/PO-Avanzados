@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="head-background" stylesheets="@../static/css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.AbstractReplenishController">
+   <children>
+      <Button fx:id="rButton" layoutX="221.0" layoutY="292.0" mnemonicParsing="false" onAction="#replenish" prefHeight="46.0" prefWidth="160.0" styleClass="button2" stylesheets="@../static/css/styles.css" text="Reponer" />
+      <TextField fx:id="quantityTF" alignment="CENTER" layoutX="221.0" layoutY="218.0" prefHeight="33.0" prefWidth="160.0" promptText="Cantidad" styleClass="labelFont" />
+      <ComboBox fx:id="itemsCB" layoutX="221.0" layoutY="160.0" prefHeight="33.0" prefWidth="160.0" promptText="Insumo a Reponer" style="-fx-background-color: #ffffff; -fx-background-radius: 30;" styleClass="labelFont" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="43.0" prefHeight="26.0" prefWidth="265.0" styleClass="labelFont" text="Reponer Insumo" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="workplaceCB" layoutX="221.0" layoutY="100.0" prefHeight="33.0" prefWidth="160.0" promptText="Workplace" style="-fx-background-color: #ffffff; -fx-background-radius: 30;" styleClass="labelFont" />
+      <Button fx:id="backButton" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="33.0" styleClass="backButton" />
+   </children>
+</AnchorPane>

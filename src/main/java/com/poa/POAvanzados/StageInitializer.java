@@ -1,7 +1,5 @@
 package com.poa.POAvanzados;
 
-import java.io.IOException;
-
 import com.poa.POAvanzados.JavaFxMain.StageReadyEvent;
 
 import org.springframework.context.ApplicationListener;

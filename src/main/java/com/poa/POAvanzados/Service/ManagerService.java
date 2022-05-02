@@ -6,25 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import com.poa.POAvanzados.Database.MongoDB.Entities.ItemRepository;
-import com.poa.POAvanzados.Database.MongoDB.Entities.RepairRepository;
-import com.poa.POAvanzados.Database.MongoDB.Entities.UserRepository;
-import com.poa.POAvanzados.Database.MongoDB.Entities.WorkplaceRepository;
-import com.poa.POAvanzados.Model.DAO.ManagerDAO;
+import com.poa.POAvanzados.Database.ItemRepository;
+import com.poa.POAvanzados.Database.WorkplaceRepository;
 import com.poa.POAvanzados.Model.ItemModel.ItemBuilder;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
-public class ManagerService extends WorkerService implements ManagerDAO {
+public class ManagerService extends WorkerService {
 
-    protected WorkplaceRepository wRepository;
-
-    public ManagerService(UserRepository userRepository, ItemRepository itemRepository,
-            RepairRepository repairRepository) {
-        super(userRepository, itemRepository, repairRepository);
-    }
-
-    @Override
     public void replenishWarehouse(int idWarehouse, int idItem, int quantity) {
 
         for (int q = 0; q < quantity; q++) {
@@ -35,14 +24,13 @@ public class ManagerService extends WorkerService implements ManagerDAO {
                     .addCheckIn(getDate())
                     .build();
 
-            itemRepository.insert(item);
+            ItemRepository.insert(item);
         }
 
     }
 
-    @Override
     public void replenishLaboratory(int idLaboratory, int idItem, int quantity) {
-        List<Workplace> warehouses = wRepository.findByWarehouse(true);
+        List<Workplace> warehouses = WorkplaceRepository.getWarehouses();
 
         int remaining = quantity;
         List<Integer> last_warehouses = new ArrayList<Integer>();
@@ -58,8 +46,8 @@ public class ManagerService extends WorkerService implements ManagerDAO {
 
                 last_warehouses.add(w);
 
-                List<Item_Detail> availableItemsWarehouse = itemRepository
-                        .findByIdWarehouseAndIdItemAndCheckOut(
+                List<Item_Detail> availableItemsWarehouse = ItemRepository
+                        .getItemsDetails(
                                 warehouses.get(w).getIdWorkplace(),
                                 idItem,
                                 null);
@@ -103,7 +91,7 @@ public class ManagerService extends WorkerService implements ManagerDAO {
             Item_Detail item = availableItemsWarehouse.get(i);
             item.setCheckOut(getDate());
             item.setIdLaboratory(idLaboratory);
-            itemRepository.save(item);
+            // ItemRepository.save(item);
             remaining -= 1;
         }
 

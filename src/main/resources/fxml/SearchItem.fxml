@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="307.0" styleClass="mainFxmlClass" stylesheets="@../static/css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SearchItemController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="307.0" styleClass="itemList" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SearchItemController">
    <children>
       <Label fx:id="itemName" layoutX="88.0" layoutY="7.0" onMouseClicked="#getSelected" prefHeight="36.0" prefWidth="212.0" styleClass="labelFont" text="Nombre del item">
          <font>
@@ -19,4 +20,8 @@
       </Label>
       <Separator layoutX="74.0" layoutY="4.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="9.0" />
    </children>
+   <stylesheets>
+      <URL value="@../static/css/styles.css" />
+      <URL value="@../static/css/styles.css" />
+   </stylesheets>
 </AnchorPane>

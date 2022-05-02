@@ -1,5 +1,8 @@
 package fxml;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class Controller {
 
     protected MainController m;
@@ -7,4 +10,11 @@ public class Controller {
     public void init(MainController mainController) {
         this.m = mainController;
     }
+
+    protected String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        return formatter.format(date);
+    }
+
 }

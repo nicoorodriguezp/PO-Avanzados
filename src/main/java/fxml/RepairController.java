@@ -90,6 +90,7 @@ public class RepairController extends Controller implements Initializable {
 
             }
         } catch (IOException ex) {
+            m.showAlert("Hubo un problema al intentar refrescar la lista de reparacion.", 2);
             System.out.println("\n\nEl problema fue: " + ex);
         }
 
@@ -105,6 +106,7 @@ public class RepairController extends Controller implements Initializable {
             System.out
                     .println("\nSe agrego a la lista de reparacion el item: " + itemSearchSelected.getItem().getName());
         } else {
+            m.showAlert("Debe seleccionar un item de la busqueda.", 0);
             System.out.println("\n\nDebe seleccionar un item de la busqueda.");
         }
 
@@ -148,6 +150,7 @@ public class RepairController extends Controller implements Initializable {
     @FXML
     private void search(ActionEvent event) {
         refreshSearchList();
+        checkStatusSearch();
     }
 
     protected void refreshSearchList() {
@@ -173,14 +176,13 @@ public class RepairController extends Controller implements Initializable {
 
         }
 
-        checkStatusSearch();
-
     }// fin refreshSearchList()
 
     private void checkStatusSearch() {
 
         if (listSearch.getChildren().isEmpty()) {
 
+            m.showAlert("No se encontraron items que coincidan.", 1);
             System.out.println("No se encontraron items que coincidan.");
 
         }
@@ -220,15 +222,15 @@ public class RepairController extends Controller implements Initializable {
         Repair rBuilder = new RepairBuilder()
                 .addIdRepair(0)
                 .addItems(itemsListRepair)
-                .addLaboratory(m.user.getWorkplace())
-                .addReparationDate(m.getDate())
+                .addLaboratory(m.user.getWorkplace().getIdWorkplace())
+                .addReparationDate(getDate())
                 .addReparationDesc("Just a repair.")
                 .addTechnician(m.user.getIdUser())
                 .build();
 
         // upload the repair to db
 
-        System.out.println("Se dio de alta la reparacion.");
+        m.showAlert("Se dio de alta la reparacion", 1);
     }
 
     private void checkStockStatus() {

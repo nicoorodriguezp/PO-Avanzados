@@ -16,6 +16,19 @@
     -fx-font-style: Regular;
 }
 
+.itemList {
+    -fx-border-color: #000000;
+}
+
+.itemList:pressed {
+    -fx-border-color: #2D75E8;
+}
+
+.itemList::selection {
+    -fx-border-color: #2D75E8;
+}
+
+
 .labelFont {
     -fx-font: Arial;
     -fx-font-family: Arial;
@@ -29,7 +42,7 @@
 
 .backButton {
     -fx-background-image: url("../icons/backIcon.png");
-    -fx-background-color: #1e3888;
+    -fx-background-color: transparent;
     -fx-background-size: 30 30;
 }
 
@@ -64,6 +77,24 @@
     -fx-text-fill: #371897;
 }
 
+.button2 {
+
+    -fx-text-fill: #000000;
+    -fx-font: Arial;
+    -fx-font-family: Arial;
+    -fx-font-style: Regular;
+    -fx-background-radius: 30;
+
+}
+
+.button2:hover {
+    -fx-text-fill: #1e3888;
+}
+
+.button2:pressed {
+    -fx-text-fill: #371897;
+}
+
 .trash {
     -fx-background-image: url("../icons/trashItem.png");
     -fx-background-color: transparent;
@@ -77,21 +108,34 @@
 
 
 .combo-box {
-    -fx-background-color: #141124;
+
+    -fx-background-color: transparent;
     -fx-border-color: #515658;
     -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #000000;
+
+    -fx-font: Arial;
+    -fx-font-family: Arial;
+    -fx-font-style: Regular;
+    text-align: center;
 }
 
 .combo-box:hover {
-    -fx-background-color: #141124;
-    -fx-border-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-border-color: #515658;
     -fx-border-radius: 30;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #000000;
 }
 
 .combo-box:pressed {
-    -fx-background-color: #141124;
-    -fx-border-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-border-color: #515658;
     -fx-border-radius: 30;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #000000;
 }
 
 .table-view .column-header,

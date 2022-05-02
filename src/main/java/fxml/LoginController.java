@@ -3,7 +3,9 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.poa.POAvanzados.Model.PositionModel.Admin;
 import com.poa.POAvanzados.Model.UserModel.User;
+import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 import org.springframework.stereotype.Component;
 
@@ -37,8 +39,8 @@ public class LoginController extends Controller implements Initializable {
 
         this.m.user = new User(
                 41476258,
-                0,
-                0,
+                new Admin(),
+                new Workplace(0, true, 0, "Mario Bravo 1050"),
                 "Nicolas",
                 "Rodriguez",
                 "nicogrodriguezp@gmail.com");
