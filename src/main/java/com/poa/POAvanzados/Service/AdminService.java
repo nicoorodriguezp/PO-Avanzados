@@ -1,7 +1,6 @@
 package com.poa.POAvanzados.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Database.UserRepository;

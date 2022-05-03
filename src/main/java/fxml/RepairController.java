@@ -228,6 +228,8 @@ public class RepairController extends Controller implements Initializable {
                 .addTechnician(m.user.getIdUser())
                 .build();
 
+        m.wc.createRepair(rBuilder);
+
         // upload the repair to db
 
         m.showAlert("Se dio de alta la reparacion", 1);

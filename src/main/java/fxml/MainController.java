@@ -146,7 +146,7 @@ public class MainController {
         ReportGeneratorController c = fxmlLoader.getController();
         c.init(this, type, wc.getItems(), mc.getWorkplaces());
 
-        this.stage.setScene(new Scene(parent, 600, 400));
+        this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Generador de Reportes");
         this.stage.show();
 

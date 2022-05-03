@@ -50,7 +50,6 @@ public class UserPanelController extends Controller implements Initializable {
     private Label labelUsernotUpdated;
 
     private boolean update;
-
     private int selectedWorkplace;
     private int selectedPosition;
 

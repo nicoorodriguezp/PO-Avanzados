@@ -147,6 +147,12 @@
     -fx-prompt-text-fill: #000000;
 }
 
+.table-view {
+    -fx-font: Arial;
+    -fx-font-family: Arial;
+    -fx-font-style: Regular;
+}
+
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size: 20;

@@ -1,7 +1,6 @@
 package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.poa.POAvanzados.Model.DAO.AdminDAO;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;

@@ -1,8 +1,6 @@
 package com.poa.POAvanzados.Model.UserModel;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
