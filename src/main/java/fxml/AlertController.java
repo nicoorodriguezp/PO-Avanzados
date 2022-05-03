@@ -18,6 +18,21 @@ public class AlertController implements Initializable {
     @FXML
     private ImageView iconAlert;
 
+    /**
+     * Muestra una interfaz con un mesaje determinado segun un tipo de mensaje.
+     * 
+     * @param
+     * alertDesc        : Contenido de la alerta. Mensaje a mostrar.
+     * 
+     * 
+     * @param type      :
+     * 
+     *                  (0) Alerta --
+     *                  (1) Informacion --
+     *                  (2) Error --
+     *                  (3) Database Error --
+     *                  (4) Success
+     */
     public void init(String alertDesc, int type) {
 
         alertDescLabel.setText(alertDesc);
@@ -45,6 +60,11 @@ public class AlertController implements Initializable {
                 // Database Error
                 iconAlert.setImage(
                         new Image(getClass().getResourceAsStream("/static/icons/databaseErrorIcon.png")));
+                break;
+            case 4:
+                // Success
+                iconAlert.setImage(
+                        new Image(getClass().getResourceAsStream("/static/icons/successIcon.png")));
                 break;
 
             default:

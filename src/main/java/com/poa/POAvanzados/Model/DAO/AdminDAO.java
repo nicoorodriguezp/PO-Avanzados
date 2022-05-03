@@ -10,18 +10,21 @@ public interface AdminDAO extends ManagerDAO {
     // User CRUD
     public void createUser(User user);
 
-    public void deleteUser(User user);
+    public void deleteUser(int idUser);
 
     public void updateUser(User user);
 
     // Reports
 
-    // Todos los movimientos que hubo en un dia especifico.
-    public List<Item_Detail> getAllItemsByCheckOut(String date);
+    /** @return :Todas las salidas que hubo en un dia especifico. */
+    public List<Item_Detail> getAllCheckOut(String date);
 
-    // Salidas que hubo por deposito en un dia especifico.
-    public List<Item_Detail> getItemsByIdWarehouseAndCheckOut(int idWarehouse, String date);
+    /**
+     * @return :Todas las salidas de items de un determinado deposito en un dia
+     *         especifico.
+     */
+    public List<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date);
 
-    // Salidas de item desde un deposito en un dia especifico.
-    public List<Item_Detail> getItemsByIdWarehouseAndIdItemAndCheckOut(int idWarehouse, int idItem, String date);
+    /** @return :Salidas de un item desde un deposito en un dia especifico. */
+    public List<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date);
 }

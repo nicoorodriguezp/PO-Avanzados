@@ -28,7 +28,7 @@ public class ItemRepository {
         i = new Item(2, "Puerto Jack", false);
         items.add(i);
 
-        i = new Item(3, "Puerto USBC", true);
+        i = new Item(3, "Puerto USB-C", true);
         items.add(i);
 
         i = new Item(4, "Camara", false);

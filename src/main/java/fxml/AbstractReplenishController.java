@@ -13,7 +13,6 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -68,19 +67,19 @@ public class AbstractReplenishController extends Controller implements Initializ
     private void setButtonAction(boolean warehouse) {
 
         if (warehouse) {
-            rButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    System.out.println("Soy w");
+            rButton.setOnAction(e -> {
+                System.out.println("\n\nReposicion de Deposito:");
+                m.mc.replenishWarehouse(selectedWorkplace, itemSelected,
+                        Integer.getInteger(quantityTF.getText()));
+                m.showAlert("La reposicion del Deposito se realizo correctamente.", 4);
 
-                }
             });
         } else {
-            rButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    System.out.println("Soy Labo");
-                }
+            rButton.setOnAction(e -> {
+                System.out.println("\n\nReposicion de Laboratorio:");
+                m.mc.replenishLaboratory(selectedWorkplace, itemSelected,
+                        Integer.getInteger(quantityTF.getText()));
+                m.showAlert("La reposicion del Laboratorio se realizo correctamente.", 4);
             });
 
         }
@@ -89,11 +88,6 @@ public class AbstractReplenishController extends Controller implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }
-
-    @FXML
-    public void replenish(ActionEvent event) {
-
     }
 
     @FXML

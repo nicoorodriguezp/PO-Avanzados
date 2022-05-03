@@ -3,9 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Model.PositionModel.Admin;
-import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import com.poa.POAvanzados.Model.DAO.DAOException;
 
 import org.springframework.stereotype.Component;
 
@@ -37,13 +35,12 @@ public class LoginController extends Controller implements Initializable {
     @FXML
     private void login(ActionEvent event) {
 
-        this.m.user = new User(
-                41476258,
-                new Admin(),
-                new Workplace(0, true, 0, "Mario Bravo 1050"),
-                "Nicolas",
-                "Rodriguez",
-                "nicogrodriguezp@gmail.com");
+        try {
+            this.m.user = m.wc.getUser(41476258);
+        } catch (DAOException e) {
+            m.showAlert("No se encontro el usuario ingresado.", 2);
+            e.printStackTrace();
+        }
 
         m.showHome();
 

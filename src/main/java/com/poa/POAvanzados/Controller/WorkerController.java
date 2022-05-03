@@ -1,7 +1,6 @@
 package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.poa.POAvanzados.Model.DAO.DAOException;
 import com.poa.POAvanzados.Model.DAO.WorkerDAO;

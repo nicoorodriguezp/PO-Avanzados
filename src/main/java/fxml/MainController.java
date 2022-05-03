@@ -1,19 +1,12 @@
 package fxml;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import com.poa.POAvanzados.Controller.AdminController;
 import com.poa.POAvanzados.Controller.ManagerController;
 import com.poa.POAvanzados.Controller.WorkerController;
-import com.poa.POAvanzados.Model.BusinessMessage;
 import com.poa.POAvanzados.Model.DAO.DAOException;
-import com.poa.POAvanzados.Model.ItemModel.ItemBuilder;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -29,9 +22,9 @@ public class MainController {
 
     private ApplicationContext applicationContext;
 
-    private AdminController ac = new AdminController();
-    private ManagerController mc = new ManagerController();
-    private WorkerController wc = new WorkerController();
+    protected AdminController ac = new AdminController();
+    protected ManagerController mc = new ManagerController();
+    protected WorkerController wc = new WorkerController();
 
     public User user;
     public Stage stage;
@@ -107,7 +100,13 @@ public class MainController {
         this.stage.show();
     }
 
+    /**
+     * @param alertDesc : Contenido de la alerta. Mensaje a mostrar.
+     * @param type      :(0) Alerta -- (1) Informacion -- (2) Error -- (3) Database
+     *                  Error -- (4) Success
+     */
     public void showAlert(String alertDesc, int type) {
+
         try {
             fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Alert.fxml"));
             Parent alert = (Parent) fxmlLoader.load();
@@ -134,9 +133,22 @@ public class MainController {
         c.init(this, false, wc.getItems(), mc.getWorkplaces());
 
         this.stage.setScene(new Scene(parent, 600, 400));
-        this.stage.setTitle("ReplenishPanel");
+        this.stage.setTitle("Panel de Reposicion");
         this.stage.show();
 
     }
 
+    /** @param type :(0) General -- (1) Warehouse -- (2) Item-Deposito */
+    public void showReportGenerator(int type) {
+
+        getFXML("ReportGenerator");
+
+        ReportGeneratorController c = fxmlLoader.getController();
+        c.init(this, type, wc.getItems(), mc.getWorkplaces());
+
+        this.stage.setScene(new Scene(parent, 600, 400));
+        this.stage.setTitle("Generador de Reportes");
+        this.stage.show();
+
+    }
 }

@@ -1,10 +1,11 @@
 package com.poa.POAvanzados.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Database.ItemRepository;
+import com.poa.POAvanzados.Database.RepairRepository;
+import com.poa.POAvanzados.Database.UserRepository;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Service;
 public class WorkerService {
 
     public static User getUser(int idUser) {
-        return null;
+
+        return UserRepository.getUser();
     }
 
     public static ArrayList<Item> getItems() {
@@ -32,13 +34,15 @@ public class WorkerService {
     }
 
     public static void createRepair(Repair repair) {
+        RepairRepository.createRepair(repair);
     }
 
     public static void updateItem(Item_Detail item) {
+        ItemDetailRepository.updateItem(item);
     }
 
     public static ArrayList<Repair> getAllRepairs(int idWorkplace) {
-        return null;
+        return RepairRepository.getAllRepairs(idWorkplace);
     }
 
 }

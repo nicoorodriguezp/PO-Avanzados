@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 @Component
 public class HomeController extends Controller implements Initializable {
@@ -27,15 +26,15 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     private Button newRepairButton;
     @FXML
+    private Button replenishButton;
+    @FXML
+    private Button showInventaryButton;
+    @FXML
     private Button generalReportButton;
     @FXML
     private Button warehouseReportButton;
     @FXML
     private Button itemWarehouseReportButton;
-    @FXML
-    private Button replenishButton;
-    @FXML
-    private Button showInventaryButton;
     @FXML
     private Button newEmployeeButton;
     @FXML
@@ -49,14 +48,32 @@ public class HomeController extends Controller implements Initializable {
         this.m = m;
         this.userNameLabel.setText(m.user.toString());
 
-        Boolean warehouse = false;
-
-        if (warehouse) {
+        if (m.user.getWorkplace().isWarehouse()) {
             this.workplaceIcon.setImage(
                     new Image(getClass().getResourceAsStream("/static/icons/warehouseIconBlack.png")));
         } else {
             this.workplaceIcon.setImage(
                     new Image(getClass().getResourceAsStream("/static/icons/laboratoryIconBlack.png")));
+        }
+
+        initButtons();
+
+    }
+
+    private void initButtons() {
+
+        if (m.user.getPosition().getPosition() != 0) {
+
+            generalReportButton.setVisible(false);
+            warehouseReportButton.setVisible(false);
+            itemWarehouseReportButton.setVisible(false);
+            newEmployeeButton.setVisible(false);
+            downEmployeeButton.setVisible(false);
+            changeEmployeeButton.setVisible(false);
+        }
+
+        if (m.user.getPosition().getPosition() == 2) {
+            replenishButton.setVisible(false);
         }
 
     }
@@ -90,6 +107,21 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     private void replenish(ActionEvent event) {
         m.showReplenishPanel();
+    }
+
+    @FXML
+    private void showGeneralReportGenerator(ActionEvent event) {
+        m.showReportGenerator(0);
+    }
+
+    @FXML
+    private void showWarehouseReportGenerator(ActionEvent event) {
+        m.showReportGenerator(1);
+    }
+
+    @FXML
+    private void showItemWarehouseReportGenerator(ActionEvent event) {
+        m.showReportGenerator(2);
     }
 
 }
