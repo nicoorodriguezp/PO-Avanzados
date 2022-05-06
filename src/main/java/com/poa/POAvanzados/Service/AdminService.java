@@ -33,4 +33,8 @@ public class AdminService extends ManagerService {
         return ItemDetailRepository.getCheckOutItemWarehouse(idWarehouse, idItem, date);
     }
 
+    public static ArrayList<User> getUsers() {
+        return UserRepository.getUsers();
+    }
+
 }

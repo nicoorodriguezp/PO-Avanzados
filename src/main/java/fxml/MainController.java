@@ -63,13 +63,13 @@ public class MainController {
     protected void showHome() {
 
         getFXML("Home");
-
         Controller controller = this.fxmlLoader.getController();
         controller.init(this);
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Home Panel - " + user.toString());
         this.stage.show();
+
     }
 
     protected void showRepairPanel() {
@@ -86,17 +86,37 @@ public class MainController {
 
     }
 
-    protected void showUserPanel(Boolean update) throws DAOException {
+    protected void showUserPanel(Boolean update, User selectedUser, UserListController ulc) throws DAOException {
 
-        getFXML("User");
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/User.fxml"));
+            Parent userParent = (Parent) fxmlLoader.load();
 
-        AdminController ac = new AdminController();
+            AdminController ac = new AdminController();
 
-        UserPanelController controller = this.fxmlLoader.getController();
-        controller.init(this, update, ac.getWorkplaces(), ac.getPositions());
+            UserPanelController controller = this.fxmlLoader.getController();
+            controller.init(this, update, ac.getWorkplaces(), ac.getPositions(), selectedUser, ulc);
+
+            Stage userStage = new Stage();
+            userStage.setScene(new Scene(userParent, 1263, 830));
+            userStage.setTitle("User Panel");
+            userStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Hubo un problema al cargar la interfaz de usuarios.", 2);
+        }
+    }
+
+    protected void showUserListPanel() throws DAOException {
+
+        getFXML("UserList");
+
+        UserListController controller = this.fxmlLoader.<UserListController>getController();
+        controller.init(this);
 
         this.stage.setScene(new Scene(parent, 1263, 830));
-        this.stage.setTitle("User Panel");
+        this.stage.setTitle("User List Panel");
+
         this.stage.show();
     }
 

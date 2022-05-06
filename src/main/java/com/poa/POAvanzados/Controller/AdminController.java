@@ -42,4 +42,8 @@ public class AdminController extends ManagerController implements AdminDAO {
         return AdminService.getCheckOutItemWarehouse(idWarehouse, idItem, date);
     }
 
+    public static ArrayList<User> getUsers() {
+        return AdminService.getUsers();
+    }
+
 }

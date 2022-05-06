@@ -24,15 +24,19 @@ public class User {
     private String lastName;
     @Indexed(unique = true) // Unique email
     private String email;
+    private Boolean active;
+    private String password;
 
     public User(int idUser, Position position, Workplace workplace, String name, String lastName,
-            String email) {
+            String email, Boolean active, String password) {
         this.idUser = idUser;
         this.position = position;
         this.workplace = workplace;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.active = active;
+        this.password = password;
     }
 
     @Override
@@ -88,6 +92,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

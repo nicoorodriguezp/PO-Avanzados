@@ -37,12 +37,17 @@ public class LoginController extends Controller implements Initializable {
 
         try {
             this.m.user = m.wc.getUser(41476258);
+
+            if (this.m.user.getActive()) {
+                m.showHome();
+            } else {
+                m.showAlert("El usuario no está activo, por lo tanto, no tiene acceso al sistema.", 2);
+            }
+
         } catch (DAOException e) {
-            m.showAlert("No se encontro el usuario ingresado.", 2);
+            m.showAlert("No se ha encontrado el usuario ingresado.", 2);
             e.printStackTrace();
         }
-
-        m.showHome();
 
     }
 

@@ -61,14 +61,12 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Button fx:id="newEmployeeButton" layoutX="478.0" layoutY="681.0" mnemonicParsing="false" onAction="#createUserPanel" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Nuevo Empleado" />
-            <Button fx:id="downEmployeeButton" layoutX="52.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteUserPanel" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Dar de baja Empleado" />
-            <Button fx:id="changeEmployeeButton" layoutX="919.0" layoutY="681.0" mnemonicParsing="false" onAction="#modifyUserPanel" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Modificar Empleado" />
             <ImageView fx:id="workplaceIcon" fitHeight="58.0" fitWidth="77.0" layoutX="40.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../static/icons/laboratoryIconBlack.png" />
                </image>
             </ImageView>
+            <Button fx:id="userListButton" layoutX="478.0" layoutY="678.0" mnemonicParsing="false" onAction="#goToUserListPanel" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Lista de Empleados" />
          </children>
       </Pane>
    </children>

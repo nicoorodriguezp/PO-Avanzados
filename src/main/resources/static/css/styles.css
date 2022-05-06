@@ -59,6 +59,14 @@
     -fx-background-image: url("../icons/backIconHover.png");
 }
 
+.refreshButton {
+    -fx-image: url("../icons/refreshIcon.png");
+}
+
+.refreshButton:hover {
+    -fx-image: url("../icons/refreshIconHover.png");
+}
+
 .searchButton {
     -fx-background-image: url("../icons/searchIcon.png");
     -fx-background-color: transparent;
@@ -202,4 +210,10 @@
     -fx-border-color: derive(#2D75E8, 90%);
     -fx-background-radius: 2em;
     -fx-background-insets: 2, 0, 0;
+}
+
+.check {
+    -fx-font: Arial;
+    -fx-font-family: Arial;
+    -fx-font-style: Regular;
 }

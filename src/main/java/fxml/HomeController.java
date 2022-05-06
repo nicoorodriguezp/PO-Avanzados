@@ -35,14 +35,13 @@ public class HomeController extends Controller implements Initializable {
     private Button warehouseReportButton;
     @FXML
     private Button itemWarehouseReportButton;
-    @FXML
     private Button newEmployeeButton;
-    @FXML
     private Button downEmployeeButton;
-    @FXML
     private Button changeEmployeeButton;
     @FXML
     private ImageView workplaceIcon;
+    @FXML
+    private Button userListButton;
 
     public void init(MainController m) {
         this.m = m;
@@ -89,22 +88,6 @@ public class HomeController extends Controller implements Initializable {
     }
 
     @FXML
-    private void createUserPanel(ActionEvent event) throws DAOException {
-        m.showUserPanel(false);
-    }
-
-    @FXML
-    private void deleteUserPanel(ActionEvent event) {
-
-        m.showReplenishPanel();
-    }
-
-    @FXML
-    private void modifyUserPanel(ActionEvent event) throws DAOException {
-        m.showUserPanel(true);
-    }
-
-    @FXML
     private void replenish(ActionEvent event) {
         m.showReplenishPanel();
     }
@@ -122,6 +105,11 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     private void showItemWarehouseReportGenerator(ActionEvent event) {
         m.showReportGenerator(2);
+    }
+
+    @FXML
+    private void goToUserListPanel(ActionEvent event) throws DAOException {
+        m.showUserListPanel();
     }
 
 }
