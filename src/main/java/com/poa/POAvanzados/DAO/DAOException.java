@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.Model.DAO;
+package com.poa.POAvanzados.DAO;
 
 import javax.swing.JOptionPane;
 

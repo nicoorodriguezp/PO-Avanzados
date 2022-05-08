@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.poa.POAvanzados.Controller.AdminController;
 import com.poa.POAvanzados.Controller.ManagerController;
 import com.poa.POAvanzados.Controller.WorkerController;
-import com.poa.POAvanzados.Model.DAO.DAOException;
+import com.poa.POAvanzados.DAO.DAOException;
 import com.poa.POAvanzados.Model.UserModel.User;
 
 import org.springframework.context.ApplicationContext;

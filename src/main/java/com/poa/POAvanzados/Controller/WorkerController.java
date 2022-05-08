@@ -2,48 +2,51 @@ package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
 
-import com.poa.POAvanzados.Model.DAO.DAOException;
-import com.poa.POAvanzados.Model.DAO.WorkerDAO;
+import com.poa.POAvanzados.DAO.DAOException;
+import com.poa.POAvanzados.DAO.WorkerDAO;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Service.WorkerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-public class WorkerController implements WorkerDAO {
+@Controller
+public class WorkerController{
 
-    @Override
-    public User getUser(int idUser) throws DAOException {
-        return WorkerService.getUser(idUser);
+
+    @Autowired
+    WorkerService workerService= new WorkerService();
+
+    public User getUser(int dniUser,String password) throws DAOException {
+        User user= new User();
+        user.setIdUser(dniUser);
+        user.setPassword(password);
+        return workerService.getUser(user);
     }
 
-    @Override
     public ArrayList<Item> gItems() throws DAOException {
         return WorkerService.getItems();
     }
 
-    @Override
     public ArrayList<Item_Detail> getAllInventory(int idWorkplace) {
         return WorkerService.getAllInventory(idWorkplace);
     }
 
-    @Override
     public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem) {
         return WorkerService.getInvetoryItem();
     }
 
-    @Override
     public void createRepair(Repair repair) {
         WorkerService.createRepair(repair);
     }
 
-    @Override
     public void updateItem(Item_Detail item) {
         WorkerService.updateItem(item);
 
     }
 
-    @Override
     public ArrayList<Repair> getAllRepairs(int idWorkplace) {
         return WorkerService.getAllRepairs(idWorkplace);
     }

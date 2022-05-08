@@ -1,10 +1,8 @@
 package com.poa.POAvanzados.Model.ItemModel;
 
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
 public class Item {
     // Product Attributes
 

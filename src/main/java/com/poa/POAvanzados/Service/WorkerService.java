@@ -2,6 +2,8 @@ package com.poa.POAvanzados.Service;
 
 import java.util.ArrayList;
 
+import com.poa.POAvanzados.DAO.DAOException;
+import com.poa.POAvanzados.DAO.WorkerDAOImpl;
 import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Database.ItemRepository;
 import com.poa.POAvanzados.Database.RepairRepository;
@@ -11,14 +13,18 @@ import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkerService {
 
-    public static User getUser(int idUser) {
+    @Autowired
+    WorkerDAOImpl workerDAO=new WorkerDAOImpl();
 
-        return UserRepository.getUser();
+    public User getUser(User userLogin) throws DAOException {
+
+        return workerDAO.getUser(userLogin);
     }
 
     public static ArrayList<Item> getItems() {

@@ -5,15 +5,10 @@ import lombok.Data;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
 public class User {
 
-    @Id
     private int idUser;
 
     private Position position;
@@ -22,7 +17,7 @@ public class User {
 
     private String name;
     private String lastName;
-    @Indexed(unique = true) // Unique email
+
     private String email;
     private Boolean active;
     private String password;
@@ -37,6 +32,10 @@ public class User {
         this.email = email;
         this.active = active;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     @Override

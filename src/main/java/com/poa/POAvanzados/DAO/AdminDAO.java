@@ -1,11 +1,12 @@
-package com.poa.POAvanzados.Model.DAO;
+package com.poa.POAvanzados.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 
-public interface AdminDAO extends ManagerDAO {
+public interface AdminDAO {
 
     // User CRUD
     public void createUser(User user);
@@ -13,6 +14,10 @@ public interface AdminDAO extends ManagerDAO {
     public void deleteUser(int idUser);
 
     public void updateUser(User user);
+
+    public ArrayList<User> getUsers();
+
+
 
     // Reports
 

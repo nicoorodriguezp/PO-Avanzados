@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Controller.AdminController;
-import com.poa.POAvanzados.Model.DAO.DAOException;
+import com.poa.POAvanzados.DAO.DAOException;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;

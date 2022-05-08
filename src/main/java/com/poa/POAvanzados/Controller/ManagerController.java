@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.poa.POAvanzados.Database.PositionRepository;
 import com.poa.POAvanzados.Database.WorkplaceRepository;
-import com.poa.POAvanzados.Model.DAO.ManagerDAO;
+import com.poa.POAvanzados.DAO.ManagerDAO;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 

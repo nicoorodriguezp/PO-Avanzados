@@ -2,12 +2,23 @@ package com.poa.POAvanzados.Service;
 
 import java.util.ArrayList;
 
+import com.poa.POAvanzados.DAO.AdminDAO;
+import com.poa.POAvanzados.DAO.AdminDAOImpl;
 import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Database.UserRepository;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component("adminService")
 public class AdminService extends ManagerService {
+
+    //TODO Tratar de solucionar el autowired del service
+    @Autowired
+    private AdminDAOImpl adminDAO=new AdminDAOImpl();
 
     public static void createUser(User user) {
         UserRepository.createUser(user);
@@ -33,8 +44,9 @@ public class AdminService extends ManagerService {
         return ItemDetailRepository.getCheckOutItemWarehouse(idWarehouse, idItem, date);
     }
 
-    public static ArrayList<User> getUsers() {
-        return UserRepository.getUsers();
+    public ArrayList<User> getUsers() {
+        return adminDAO.getUsers();
     }
+
 
 }

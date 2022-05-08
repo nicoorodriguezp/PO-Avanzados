@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.Model.DAO;
+package com.poa.POAvanzados.DAO;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import com.poa.POAvanzados.Model.UserModel.User;
 
 public interface WorkerDAO {
 
-    public User getUser(int idUser) throws DAOException;
+    public User getUser(User user) throws DAOException;
 
     public ArrayList<Item> gItems() throws DAOException;
 

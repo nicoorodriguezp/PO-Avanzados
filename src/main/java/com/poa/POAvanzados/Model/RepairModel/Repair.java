@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 @Data
-@Document
+
 public class Repair {
 
-    @Id
+
     private int idRepair;
     private int idLaboratory;
     private int idTechnician;

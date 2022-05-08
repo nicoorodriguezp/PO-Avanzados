@@ -1,15 +1,11 @@
 package com.poa.POAvanzados.Model.ItemModel;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
 public class Item_Detail extends Item {
 
     // Traceability
-    @Id
     private int idItemCode;
     private int idWarehouse;
     private int idLaboratory;

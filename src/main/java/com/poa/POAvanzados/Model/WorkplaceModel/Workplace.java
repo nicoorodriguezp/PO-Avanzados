@@ -1,14 +1,10 @@
 package com.poa.POAvanzados.Model.WorkplaceModel;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
 public class Workplace {
 
-    @Id
     private int idWorkplace;
     private boolean warehouse;
     private int idManager;
