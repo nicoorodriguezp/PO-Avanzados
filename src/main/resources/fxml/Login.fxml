@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" styleClass="head-background" stylesheets="@../static/css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="fxml.LoginController">
    <children>
-      <TextField fx:id="idUserTF" layoutX="521.0" layoutY="449.0" prefHeight="26.0" prefWidth="225.0">
+      <TextField fx:id="dniTF" layoutX="521.0" layoutY="449.0" prefHeight="26.0" prefWidth="225.0">
          <font>
             <Font size="17.0" />
          </font>

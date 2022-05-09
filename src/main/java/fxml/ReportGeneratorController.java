@@ -1,5 +1,7 @@
 package fxml;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -11,6 +13,11 @@ import com.poa.POAvanzados.Controller.AdminController;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +32,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
 public class ReportGeneratorController extends Controller implements Initializable {
@@ -180,8 +188,54 @@ public class ReportGeneratorController extends Controller implements Initializab
     @FXML
     private void generateExcel(ActionEvent event) throws IOException {
 
-        System.out.println("Creando excel del dia: " + datePicker.getValue()
-                .format(DateTimeFormatter.ofPattern("dd/MM/yy")));
+        if (datePicker.getValue() != null && checkOutTable.getColumns().get(0).getText() != null) {
+            String date = datePicker.getValue()
+                    .format(DateTimeFormatter.ofPattern("dd_MM_yy"));
+
+            String sheetName = "Reporte_Egresos_" + date;
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Reporte");
+            fileChooser.setInitialFileName(sheetName);
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            if (selectedFile != null) {
+
+                try (Workbook workbook = new HSSFWorkbook()) {
+                    Sheet spreadsheet = workbook.createSheet(sheetName);
+
+                    Row row = spreadsheet.createRow(0);
+
+                    for (int j = 0; j < checkOutTable.getColumns().size(); j++) {
+                        row.createCell(j).setCellValue(checkOutTable.getColumns().get(j).getText());
+                    }
+
+                    for (int i = 0; i < checkOutTable.getItems().size(); i++) {
+                        row = spreadsheet.createRow(i + 1);
+                        for (int j = 0; j < checkOutTable.getColumns().size(); j++) {
+                            if (checkOutTable.getColumns().get(j).getCellData(i) != null) {
+                                row.createCell(j)
+                                        .setCellValue(checkOutTable.getColumns().get(j).getCellData(i).toString());
+                            } else {
+                                row.createCell(j).setCellValue("");
+                            }
+                        }
+                    }
+
+                    FileOutputStream fileOut = new FileOutputStream(selectedFile.getAbsoluteFile() + ".xls");
+                    workbook.write(fileOut);
+                    fileOut.close();
+                } catch (Exception e) {
+                    this.m.showAlert("Hubo un problema al exportar el documento.", 2);
+                }
+                this.m.showAlert("Reporte de Egresos exportado correctamente.", 4);
+            } else {
+                this.m.showAlert("Debe seleccionar el directorio donde quiera exportar el documento.", 1);
+            }
+        } else {
+            this.m.showAlert(
+                    "La tabla no tiene contenido. Por favor seleccione una fecha que tenga despachos asociados.", 1);
+        }
 
     }
 
