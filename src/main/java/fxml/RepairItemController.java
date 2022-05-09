@@ -39,7 +39,7 @@ public class RepairItemController extends Controller implements Initializable {
         idItem.setText(String.valueOf(item.getIdItemCode()));
         itemName.setText(item.getName());
 
-        if (item.getState() == 3) {
+        if (item.getState() == ItemDescarded) {
             descardedCheck.selectedProperty().set(true);
         } else {
             descardedCheck.selectedProperty().set(false);
@@ -49,14 +49,14 @@ public class RepairItemController extends Controller implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                repairController.changeItemFromRepairListStatus(item, 3);
+                repairController.changeItemFromRepairListStatus(item, ItemDescarded);
             }
         });
     }
 
     @FXML
     private void removeItem(ActionEvent event) {
-        repairController.changeItemFromRepairListStatus(item, 0); // back to: "in stock"
+        repairController.changeItemFromRepairListStatus(item, ItemInStock); // back to: "in stock"
     }
 
     @Override

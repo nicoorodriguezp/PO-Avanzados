@@ -101,10 +101,23 @@ public class RepairController extends Controller implements Initializable {
 
         if (itemSearchSelected != null) {
 
-            changeItemFromRepairListStatus(itemSearchSelected.getItem(), 1);
+            boolean exist = false;
 
-            System.out
-                    .println("\nSe agrego a la lista de reparacion el item: " + itemSearchSelected.getItem().getName());
+            for (Item_Detail i : itemsListRepair) {
+                if (i == itemSearchSelected.getItem()){
+                    exist = true;
+                    System.out.println("Ya existe en la lista.");
+                }
+            }
+
+            if (!exist){
+                changeItemFromRepairListStatus(itemSearchSelected.getItem(), ItemInUse);
+
+                System.out
+                        .println("\nSe agrego a la lista de reparacion el item: " + itemSearchSelected.getItem().getName());
+            }
+
+
         } else {
             m.showAlert("Debe seleccionar un item de la busqueda.", 0);
             System.out.println("\n\nDebe seleccionar un item de la busqueda.");
@@ -114,22 +127,22 @@ public class RepairController extends Controller implements Initializable {
 
     public void changeItemFromRepairListStatus(Item_Detail i, int state) {
 
-        if (state == 0) {
+        if (state == ItemInStock) {
 
             // En caso de que se quiera sacar de la lista de reparacion.
             itemsListRepair.remove(itemsListRepair.indexOf(i));
             i.setState(state);
 
-        } else if (state == 1) {
+        } else if (state == ItemInUse) {
 
             // En caso de que el item se quiera agregar a la lista de reparacion.
             i.setState(state);
             itemsListRepair.add(i);
 
-        } else if (state == 3) {
+        } else if (state == ItemDescarded) {
 
-            if (i.getState() == 3) {
-                i.setState(1); // Si ya estaba marcado como descartado, entonces se volvio al estado en uso
+            if (i.getState() == ItemDescarded) {
+                i.setState(ItemInUse); // Si ya estaba marcado como descartado, entonces se volvio al estado en uso
             } else {
                 i.setState(state);
             }
@@ -166,11 +179,11 @@ public class RepairController extends Controller implements Initializable {
         for (int i = 0; i < itemsLaboratory.size(); i++) {
 
             // verifico si esta en estado de stock
-            if (searchTF.getText() == "" && itemsLaboratory.get(i).getState() == 0) {
+            if (searchTF.getText() == "" && itemsLaboratory.get(i).getState() == ItemInStock) {
                 addSearchItem(i);
 
             } else if (itemsLaboratory.get(i).getName().contains(
-                    searchTF.getText()) && itemsLaboratory.get(i).getState() == 0) {
+                    searchTF.getText()) && itemsLaboratory.get(i).getState() == ItemInStock) {
                 addSearchItem(i);
             }
 
@@ -211,7 +224,7 @@ public class RepairController extends Controller implements Initializable {
     private void createRepair(ActionEvent event) {
 
         for (Item_Detail i : itemsListRepair) {
-            if (i.getState() != 3) {
+            if (i.getState() != ItemDescarded) {
                 i.setState(4);
             }
             if (i.isCritical()) {
