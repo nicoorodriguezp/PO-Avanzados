@@ -12,7 +12,7 @@
    <children>
       <Pane id="menuPane" prefHeight="58.0" prefWidth="1264.0" styleClass="head-background">
          <children>
-            <Button id="backButton" fx:id="backButton" layoutX="49.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="backButton" wrapText="true" />
+            <Button id="backButton" layoutX="49.0" layoutY="14.0" mnemonicParsing="false" onAction="#showLogin" prefHeight="30.0" prefWidth="30.0" styleClass="backButton" wrapText="true" />
             <Label id="title" layoutX="454.0" layoutY="13.0" prefHeight="30.0" prefWidth="357.0" styleClass="title" stylesheets="@../static/css/styles.css" text="Sistema de Control de Insumos" textFill="WHITE">
                <font>
                   <Font size="25.0" />
@@ -32,16 +32,13 @@
       </Pane>
       <Pane id="bodyPane" layoutY="56.0" prefHeight="775.0" prefWidth="1264.0" styleClass="bodyPane">
          <children>
-            <Button fx:id="generalReportButton" layoutX="52.0" layoutY="594.0" mnemonicParsing="false" onAction="#showGeneralReportGenerator" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte General Diario" />
-            <Button fx:id="warehouseReportButton" layoutX="478.0" layoutY="594.0" mnemonicParsing="false" onAction="#showWarehouseReportGenerator" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Generar Reporte Deposito Diario" />
-            <Button fx:id="itemWarehouseReportButton" layoutX="919.0" layoutY="594.0" mnemonicParsing="false" onAction="#showItemWarehouseReportGenerator" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte Item-Deposito Diario" />
             <Button fx:id="replenishButton" layoutX="485.0" layoutY="378.0" mnemonicParsing="false" onAction="#replenish" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Reponer Item" />
-            <Button fx:id="showInventaryButton" layoutX="324.0" layoutY="157.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Ver Inventario">
+            <Button layoutX="324.0" layoutY="157.0" mnemonicParsing="false" onAction="#showInventory" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Ver Inventario">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="newRepairButton" layoutX="657.0" layoutY="157.0" mnemonicParsing="false" onAction="#showReparationPanel" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Nueva Reparacion">
+            <Button layoutX="657.0" layoutY="157.0" mnemonicParsing="false" onAction="#showReparationPanel" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Nueva Reparacion">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
@@ -56,17 +53,24 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label layoutX="492.0" layoutY="518.0" styleClass="labelFont" text="Nivel Administrativo">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
             <ImageView fx:id="workplaceIcon" fitHeight="58.0" fitWidth="77.0" layoutX="40.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../static/icons/laboratoryIconBlack.png" />
                </image>
             </ImageView>
-            <Button fx:id="userListButton" layoutX="478.0" layoutY="678.0" mnemonicParsing="false" onAction="#goToUserListPanel" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Lista de Empleados" />
+            <Pane fx:id="adminPane" layoutX="-2.0" layoutY="493.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="1263.0">
+               <children>
+                  <Button layoutX="87.0" layoutY="101.0" mnemonicParsing="false" onAction="#showGeneralReportGenerator" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte General Diario" />
+                  <Button layoutX="484.0" layoutY="101.0" mnemonicParsing="false" onAction="#showWarehouseReportGenerator" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Generar Reporte Deposito Diario" />
+                  <Button layoutX="891.0" layoutY="101.0" mnemonicParsing="false" onAction="#showItemWarehouseReportGenerator" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte Item-Deposito Diario" />
+                  <Button layoutX="484.0" layoutY="189.0" mnemonicParsing="false" onAction="#goToUserListPanel" prefHeight="58.0" prefWidth="295.0" styleClass="button1" text="Lista de Empleados" />
+                  <Label layoutX="491.0" layoutY="25.0" styleClass="labelFont" text="Nivel Administrativo">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

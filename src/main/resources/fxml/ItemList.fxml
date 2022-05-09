@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" stylesheets="@../static/css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="fxml.ItemListController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" stylesheets="@../static/css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ItemListController">
    <children>
       <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="186.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -52,11 +51,11 @@
          <columns>
             <TableColumn fx:id="idItemStockColumn" prefWidth="94.0" text="Identificacion" />
             <TableColumn fx:id="nameStockColumn" prefWidth="155.0" text="Nombre" />
-            <TableColumn fx:id="criticalStockColumn" prefWidth="101.0" text="¿Critico?" />
-            <TableColumn fx:id="itemCodeColumn" prefWidth="77.0" text="Item Code" />
-            <TableColumn fx:id="checkInColumn" prefWidth="98.0" text="Check In" />
-            <TableColumn fx:id="checkOutcolumn" prefWidth="102.0" text="Check Out" />
-            <TableColumn fx:id="warehouseColumn" prefWidth="164.0" text="Deposito" />
+            <TableColumn fx:id="criticalStockColumn" prefWidth="69.0" text="¿Critico?" />
+            <TableColumn fx:id="itemCodeColumn" prefWidth="74.0" text="Item Code" />
+            <TableColumn fx:id="checkInColumn" prefWidth="72.0" text="Check In" />
+            <TableColumn fx:id="checkOutColumn" prefWidth="72.0" text="Check Out" />
+            <TableColumn fx:id="warehouseColumn" prefWidth="231.0" text="Deposito" />
          </columns>
       </TableView>
       <Button fx:id="filterButton" layoutX="118.0" layoutY="542.0" mnemonicParsing="false" onAction="#filter" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar Insumo en Lista de Stock" />
@@ -76,5 +75,7 @@
             <CheckBox fx:id="criticalCheck" layoutX="308.0" layoutY="11.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="92.0" styleClass="check" text="¿Critico?" />
          </children>
       </Pane>
+      <Button layoutX="116.0" layoutY="734.0" mnemonicParsing="false" onAction="#filterByWorkplace" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar por Workplace" />
+      <Button layoutX="116.0" layoutY="771.0" mnemonicParsing="false" onAction="#filterByWorkplaceAndItem" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar por Workplace e Item" />
    </children>
 </AnchorPane>

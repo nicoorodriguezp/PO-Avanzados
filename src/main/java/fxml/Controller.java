@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 public class Controller {
 
     protected MainController m;
+    protected final int AdminPosition = 1;
+    protected final int ManagerPosition = 2;
+    protected final int WorkerPosition = 3;
 
     public void init(MainController mainController) {
         this.m = mainController;

@@ -15,33 +15,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 @Component
 public class HomeController extends Controller implements Initializable {
 
     @FXML
-    private Button backButton;
-    @FXML
     public Label userNameLabel;
     @FXML
-    private Button newRepairButton;
-    @FXML
     private Button replenishButton;
-    @FXML
-    private Button showInventaryButton;
-    @FXML
-    private Button generalReportButton;
-    @FXML
-    private Button warehouseReportButton;
-    @FXML
-    private Button itemWarehouseReportButton;
-    private Button newEmployeeButton;
-    private Button downEmployeeButton;
-    private Button changeEmployeeButton;
+
     @FXML
     private ImageView workplaceIcon;
     @FXML
-    private Button userListButton;
+    private Pane adminPane;
 
     public void init(MainController m) {
         this.m = m;
@@ -61,20 +48,14 @@ public class HomeController extends Controller implements Initializable {
 
     private void initButtons() {
 
-        if (m.user.getPosition().getIdPosition() != 1) {
 
-            generalReportButton.setVisible(false);
-            warehouseReportButton.setVisible(false);
-            itemWarehouseReportButton.setVisible(false);
-            newEmployeeButton.setVisible(false);
-            downEmployeeButton.setVisible(false);
-            changeEmployeeButton.setVisible(false);
+        if (m.user.getPosition().getIdPosition() != AdminPosition) {
+            adminPane.setVisible(false);
+            if (m.user.getPosition().getIdPosition() == WorkerPosition) {
+                replenishButton.setVisible(false);
+            }
+
         }
-
-        if (m.user.getPosition().getIdPosition() == 3) {
-            replenishButton.setVisible(false);
-        }
-
     }
 
     @FXML
@@ -110,6 +91,16 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     private void goToUserListPanel(ActionEvent event) throws DAOException {
         m.showUserListPanel();
+    }
+
+    @FXML
+    private void showInventory(ActionEvent event) {
+        this.m.showInventory();
+    }
+
+    @FXML
+    private void showLogin(ActionEvent event) {
+        this.m.showLogin("Sistema de Control de Insumos");
     }
 
 }

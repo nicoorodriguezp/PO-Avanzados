@@ -1,5 +1,7 @@
 package com.poa.POAvanzados.Model.ItemModel;
 
+import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+
 public class ItemBuilder {
 
     private Item_Detail item;
@@ -24,13 +26,13 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder addWarehouse(int idWarehouse) {
-        item.setIdWarehouse(idWarehouse);
+    public ItemBuilder addWarehouse(Workplace w) {
+        item.setWarehouse(w);
         return this;
     }
 
-    public ItemBuilder addLaboratory(int idLaboratory) {
-        item.setIdLaboratory(idLaboratory);
+    public ItemBuilder addLaboratory(Workplace laboratory) {
+        item.setLaboratory(laboratory);
         return this;
     }
 

@@ -17,13 +17,13 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 public class ManagerService extends WorkerService {
 
     private ManagerDAOImpl managerDAO=new ManagerDAOImpl();
-    public void replenishWarehouse(int idWarehouse, int idItem, int quantity) {
+    public void replenishWarehouse(Workplace warehouse, int idItem, int quantity) {
 
         for (int q = 0; q < quantity; q++) {
 
             Item_Detail item = new ItemBuilder()
                     .addIdItem(idItem)
-                    .addWarehouse(idWarehouse)
+                    .addWarehouse(warehouse)
                     .addCheckIn(getDate())
                     .build();
 
@@ -32,7 +32,7 @@ public class ManagerService extends WorkerService {
 
     }
 
-    public void replenishLaboratory(int idLaboratory, int idItem, int quantity) {
+    public void replenishLaboratory(Workplace laboratory, int idItem, int quantity) {
         List<Workplace> warehouses = WorkplaceRepository.getWarehouses();
 
         int remaining = quantity;
@@ -62,11 +62,11 @@ public class ManagerService extends WorkerService {
 
                 } else if (availableItemsWarehouse.size() < remaining) {
 
-                    remaining = updateItemState(remaining, idLaboratory, availableItemsWarehouse,
+                    remaining = updateItemState(remaining, laboratory, availableItemsWarehouse,
                             availableItemsWarehouse.size());
                 } else {
 
-                    remaining = updateItemState(remaining, idLaboratory, availableItemsWarehouse, remaining);
+                    remaining = updateItemState(remaining, laboratory, availableItemsWarehouse, remaining);
 
                 }
             }
@@ -75,7 +75,7 @@ public class ManagerService extends WorkerService {
 
         if (contador < warehouses.size()) {
             System.out.println(
-                    "Se abastecio el stock del item " + idItem + " en el laboratorio: " + idLaboratory
+                    "Se abastecio el stock del item " + idItem + " en el laboratorio: " + laboratory.getIdWorkplace()
                             + " correctamente. \n\n");
         } else {
             // Si ya verifico el stock en todos los warehouses, entonces no hay mas stock
@@ -89,11 +89,11 @@ public class ManagerService extends WorkerService {
 
     }
 
-    private int updateItemState(int remaining, int idLaboratory, List<Item_Detail> availableItemsWarehouse, int max) {
+    private int updateItemState(int remaining, Workplace laboratory , List<Item_Detail> availableItemsWarehouse, int max) {
         for (int i = 0; i < max; i++) {
             Item_Detail item = availableItemsWarehouse.get(i);
             item.setCheckOut(getDate());
-            item.setIdLaboratory(idLaboratory);
+            item.setLaboratory(laboratory);
             // ItemRepository.save(item);
             remaining -= 1;
         }

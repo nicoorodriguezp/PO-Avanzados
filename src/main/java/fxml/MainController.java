@@ -22,9 +22,9 @@ public class MainController {
 
     private ApplicationContext applicationContext;
 
-    protected AdminController ac = new AdminController();
-    protected ManagerController mc = new ManagerController();
-    protected WorkerController wc = new WorkerController();
+    protected final AdminController ac = new AdminController();
+    protected final ManagerController mc = new ManagerController();
+    protected final WorkerController wc = new WorkerController();
 
     public User user;
     public Stage stage;
@@ -131,7 +131,7 @@ public class MainController {
             fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Alert.fxml"));
             Parent alert = (Parent) fxmlLoader.load();
 
-            AlertController controller = this.fxmlLoader.getController();
+            AlertController controller = this.fxmlLoader.<AlertController>getController();
             controller.init(alertDesc, type);
 
             Stage alertStage = new Stage();
@@ -168,6 +168,19 @@ public class MainController {
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Generador de Reportes");
+        this.stage.show();
+
+    }
+
+    public void showInventory(){
+
+        getFXML("ItemList");
+
+        ItemListController c = fxmlLoader.<ItemListController>getController();
+        c.init(this, wc.getItems(), mc.getWorkplaces(), wc.getAllInventory(user.getWorkplace().getIdWorkplace()));
+
+        this.stage.setScene(new Scene(parent, 1263, 830));
+        this.stage.setTitle("Lista de items");
         this.stage.show();
 
     }

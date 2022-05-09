@@ -2,15 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" styleClass="head-background" stylesheets="@../static/css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="fxml.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1263.0" styleClass="head-background" stylesheets="@../static/css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LoginController">
    <children>
-      <TextField fx:id="dniTF" layoutX="521.0" layoutY="449.0" prefHeight="26.0" prefWidth="225.0">
+      <TextField fx:id="dniTF" layoutX="521.0" layoutY="449.0" prefHeight="33.0" prefWidth="225.0" styleClass="labelFont">
          <font>
             <Font size="17.0" />
          </font>
@@ -35,11 +36,6 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordTF" layoutX="519.0" layoutY="532.0" prefHeight="33.0" prefWidth="225.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </TextField>
       <Label layoutX="552.0" layoutY="499.0" prefHeight="27.0" prefWidth="164.0" styleClass="labelFont" text="Clave Personal" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="23.0" />
@@ -51,5 +47,6 @@
             <Image url="@../static/images/logoUP.png" />
          </image>
       </ImageView>
+      <PasswordField fx:id="passwordTF" layoutX="521.0" layoutY="538.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="225.0" styleClass="labelFont" />
    </children>
 </AnchorPane>

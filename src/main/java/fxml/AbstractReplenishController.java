@@ -48,7 +48,7 @@ public class AbstractReplenishController extends Controller implements Initializ
         itemsCB.valueProperty().addListener(
                 (observable, oldItem, newItem) -> itemSelected = newItem.getIdItem());
 
-        if (m.user.getPosition().getIdPosition() == 1) {
+        if (m.user.getPosition().getIdPosition() == AdminPosition) {
             // Si es admin puede reponer cualquier workplace.
             workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
         } else {

@@ -1,5 +1,6 @@
 package com.poa.POAvanzados.Model.ItemModel;
 
+import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import lombok.Data;
 
 @Data
@@ -7,8 +8,8 @@ public class Item_Detail extends Item {
 
     // Traceability
     private int idItemCode;
-    private int idWarehouse;
-    private int idLaboratory;
+    private Workplace warehouse;
+    private Workplace laboratory;
     private String checkIn; // Date of entry into Warehouse
     private String checkOut; // Date of entry into Laboratory
     private int state; // 0:Stock - 1:In Use - 2:Used - 3:Discarded
@@ -19,22 +20,6 @@ public class Item_Detail extends Item {
 
     public void setIdItemCode(int idItemCode) {
         this.idItemCode = idItemCode;
-    }
-
-    public int getIdWarehouse() {
-        return idWarehouse;
-    }
-
-    public void setIdWarehouse(int idWarehouse) {
-        this.idWarehouse = idWarehouse;
-    }
-
-    public int getIdLaboratory() {
-        return idLaboratory;
-    }
-
-    public void setIdLaboratory(int idLaboratory) {
-        this.idLaboratory = idLaboratory;
     }
 
     public String getCheckIn() {
@@ -61,4 +46,19 @@ public class Item_Detail extends Item {
         this.state = state;
     }
 
+    public Workplace getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Workplace warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public Workplace getLaboratory() {
+        return laboratory;
+    }
+
+    public void setLaboratory(Workplace laboratory) {
+        this.laboratory = laboratory;
+    }
 }

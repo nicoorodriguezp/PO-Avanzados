@@ -63,6 +63,10 @@ public class UserPanelController extends Controller implements Initializable {
 
     private UserListController ulc;
 
+    /**
+     * @param ulc :Recibe este parametro para actualizar la tabla una vez que se hace alguna modificacion o alta de
+     *            usuario.
+     * */
     public void init(MainController m, Boolean update, ArrayList<Workplace> workplaces,
                      ArrayList<Position> positions, User selectedUser, UserListController ulc) {
         this.m = m;
@@ -71,7 +75,7 @@ public class UserPanelController extends Controller implements Initializable {
         this.selectedUser = selectedUser;
 
         if (update) {
-            if (m.user.getPosition().getIdPosition() != 1) {
+            if (m.user.getPosition().getIdPosition() != AdminPosition) {
                 // Si no es un admin, entonces deshabilitar todo esto.
                 workplaceCB.setEditable(false);
                 positionCB.setEditable(false);
