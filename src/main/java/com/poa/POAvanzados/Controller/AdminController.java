@@ -27,7 +27,7 @@ public class AdminController extends ManagerController {
     }
 
     public void updateUser(User user) {
-        AdminService.updateUser(user);
+        adminService.updateUser(user);
 
     }
 

@@ -25,8 +25,8 @@ public class AdminService extends ManagerService {
         UserRepository.deleteUser(idUser);
     }
 
-    public static void updateUser(User user) {
-        UserRepository.updateUser(user);
+    public  void updateUser(User user) {
+        adminDAO.updateUser(user);
     }
 
     public static ArrayList<Item_Detail> getAllCheckOut(String date) {

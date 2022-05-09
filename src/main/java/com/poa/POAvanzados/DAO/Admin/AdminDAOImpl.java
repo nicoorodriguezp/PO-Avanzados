@@ -33,7 +33,12 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
 
     @Override
     public void updateUser(User user) {
-
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        jt.update("UPDATE public.\"User\"\n" +
+                "\tSET \"idPosition\"=?, name=?, \"lastName\"=?, email=?, password=?, activo=?, \"idWorkplace\"=?, dni=?\n" +
+                "\tWHERE \"idUser\"=?;",user.getPosition().getIdPosition(),user.getName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getActive(),user.getWorkplace().getIdWorkplace(),user.getDni(),user.getIdUser());
     }
     public ArrayList<User> getUsers() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
