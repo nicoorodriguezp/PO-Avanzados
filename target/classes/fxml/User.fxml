@@ -52,7 +52,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="idUserTF" alignment="CENTER" layoutX="502.0" layoutY="160.0" prefHeight="40.0" prefWidth="270.0" promptText="Documento Nacional" styleClass="labelFont">
+            <TextField fx:id="dniTF" alignment="CENTER" layoutX="502.0" layoutY="160.0" prefHeight="40.0" prefWidth="270.0" promptText="Documento Nacional" styleClass="labelFont">
                <font>
                   <Font size="20.0" />
                </font>

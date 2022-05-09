@@ -33,7 +33,7 @@ public class UserPanelController extends Controller implements Initializable {
     @FXML
     private TextField usernameTF;
     @FXML
-    private TextField idUserTF;
+    private TextField dniTF;
     @FXML
     private TextField lastnameTF;
     @FXML
@@ -91,7 +91,7 @@ public class UserPanelController extends Controller implements Initializable {
 
         // Cargo los datos del usuario seleccionado.
         if (this.selectedUser != null) {
-            idUserTF.setText(String.valueOf(selectedUser.getIdUser()));
+            dniTF.setText(String.valueOf(selectedUser.getDni()));
             usernameTF.setText(selectedUser.getName());
             lastnameTF.setText(selectedUser.getLastName());
             emailTF.setText(selectedUser.getEmail());
@@ -102,12 +102,12 @@ public class UserPanelController extends Controller implements Initializable {
         }
 
         // Fuerzo a que el contenido del tf sea solo numerico.
-        idUserTF.textProperty().addListener(new ChangeListener<String>() {
+        dniTF.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    idUserTF.setText(newValue.replaceAll("[^\\d]", ""));
+                    dniTF.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -122,20 +122,30 @@ public class UserPanelController extends Controller implements Initializable {
 
         if (checkUserData()) {
 
-            this.selectedUser.setIdUser(Integer.valueOf(idUserTF.getText()));
-            this.selectedUser.setName(usernameTF.getText());
-            this.selectedUser.setLastName(lastnameTF.getText());
-            this.selectedUser.setActive(activeCheck.selectedProperty().getValue());
-            this.selectedUser.setEmail(emailTF.getText());
-            this.selectedUser.setPosition(positionCB.valueProperty().getValue());
-            this.selectedUser.setWorkplace(workplaceCB.valueProperty().getValue());
-            this.selectedUser.setPassword(passwordTF.getText());
+
 
             if (!update) {
-                m.ac.createUser(this.selectedUser);
+                User user= new User();
+                user.setDni(Integer.valueOf(dniTF.getText()));
+                user.setName(usernameTF.getText());
+                user.setLastName(lastnameTF.getText());
+                user.setActive(activeCheck.selectedProperty().getValue());
+                user.setEmail(emailTF.getText());
+                user.setPosition(positionCB.valueProperty().getValue());
+                user.setWorkplace(workplaceCB.valueProperty().getValue());
+                user.setPassword(passwordTF.getText());
+                m.ac.createUser(user);
                 m.showAlert("Se agrego un " + positionCB.getSelectionModel().getSelectedItem() + " al workplace: "
                         + workplaceCB.valueProperty().getValue(), 1);
             } else {
+                this.selectedUser.setDni(Integer.valueOf(dniTF.getText()));
+                this.selectedUser.setName(usernameTF.getText());
+                this.selectedUser.setLastName(lastnameTF.getText());
+                this.selectedUser.setActive(activeCheck.selectedProperty().getValue());
+                this.selectedUser.setEmail(emailTF.getText());
+                this.selectedUser.setPosition(positionCB.valueProperty().getValue());
+                this.selectedUser.setWorkplace(workplaceCB.valueProperty().getValue());
+                this.selectedUser.setPassword(passwordTF.getText());
                 m.ac.updateUser(this.selectedUser);
                 m.showAlert("Se actualizaron los datos del usuario: " + selectedUser.getName(), 4);
             }
@@ -150,7 +160,7 @@ public class UserPanelController extends Controller implements Initializable {
 
     private boolean checkUserData() {
 
-        if (idUserTF.getText().isEmpty()) {
+        if (dniTF.getText().isEmpty()) {
             m.showAlert("Debe introducir la identificación del usuario.", 1);
             return false;
         } else if (usernameTF.getText().isEmpty()) {

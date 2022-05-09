@@ -17,7 +17,7 @@ public class AdminController extends ManagerController {
     private AdminService adminService= new AdminService();
 
     public void createUser(User user) {
-        AdminService.createUser(user);
+        adminService.createUser(user);
 
     }
 

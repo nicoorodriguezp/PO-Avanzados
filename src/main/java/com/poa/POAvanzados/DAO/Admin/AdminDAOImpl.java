@@ -18,7 +18,12 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
 
     @Override
     public void createUser(User user) {
-
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        jt.update("INSERT INTO public.\"User\"(\n" +
+                "\t\"idPosition\", name, \"lastName\", email, password, activo, \"idWorkplace\", dni)\n" +
+                "\tVALUES ( ?, ?, ?, ?, ?, ?, ?, ?);",user.getPosition().getIdPosition(),user.getName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getActive(),user.getWorkplace().getIdWorkplace(),user.getDni());
     }
 
     @Override

@@ -18,6 +18,7 @@ public class UserRowMapper implements RowMapper<User> {
         user.setPassword(resultSet.getString("password"));
         user.setEmail(resultSet.getString("email"));
         user.setActive(resultSet.getBoolean("activo"));
+        user.setDni(resultSet.getInt("dni"));
         user.setPosition(new PositionRowMapper().mapRow(resultSet,i));
         user.setWorkplace(new WorkplaceRowMapper().mapRow(resultSet,i));
         return user;

@@ -17,8 +17,8 @@ public class AdminService extends ManagerService {
     @Autowired
     private AdminDAOImpl adminDAO=new AdminDAOImpl();
 
-    public static void createUser(User user) {
-        UserRepository.createUser(user);
+    public void createUser(User user) {
+        adminDAO.createUser(user);
     }
 
     public static void deleteUser(int idUser) {
