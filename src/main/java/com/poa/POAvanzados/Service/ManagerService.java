@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import com.poa.POAvanzados.DAO.Manager.ManagerDAOImpl;
 import com.poa.POAvanzados.Database.ItemRepository;
 import com.poa.POAvanzados.Database.WorkplaceRepository;
 import com.poa.POAvanzados.Model.ItemModel.ItemBuilder;
@@ -14,6 +15,7 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 public class ManagerService extends WorkerService {
 
+    private ManagerDAOImpl managerDAO=new ManagerDAOImpl();
     public void replenishWarehouse(int idWarehouse, int idItem, int quantity) {
 
         for (int q = 0; q < quantity; q++) {
@@ -103,5 +105,9 @@ public class ManagerService extends WorkerService {
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
 
+    }
+
+    public ArrayList<Workplace> getWorkplaces() {
+        return managerDAO.getWorkplaces();
     }
 }

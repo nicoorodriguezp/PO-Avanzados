@@ -18,8 +18,8 @@ public class UserRowMapper implements RowMapper<User> {
         user.setPassword(resultSet.getString("password"));
         user.setEmail(resultSet.getString("email"));
         user.setActive(resultSet.getBoolean("activo"));
-        user.setPosition(new Position(resultSet.getInt("idPosition"),resultSet.getString("title"),resultSet.getString("category")));
-        user.setWorkplace(new Workplace(resultSet.getInt("idWorkplace"),resultSet.getBoolean("warehouse"),resultSet.getInt("idManager"),resultSet.getString("address")));
+        user.setPosition(new PositionRowMapper().mapRow(resultSet,i));
+        user.setWorkplace(new WorkplaceRowMapper().mapRow(resultSet,i));
         return user;
     }
 }

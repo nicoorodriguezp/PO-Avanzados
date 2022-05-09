@@ -29,7 +29,7 @@ public class ManagerController extends WorkerController implements ManagerDAO {
 
     @Override
     public ArrayList<Workplace> getWorkplaces() {
-        return WorkplaceRepository.getWorkplaces();
+        return managerService.getWorkplaces();
     }
 
     @Override
