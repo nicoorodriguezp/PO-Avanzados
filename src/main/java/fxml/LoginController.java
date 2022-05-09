@@ -3,11 +3,8 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.DAO.DAOException;
+import com.poa.POAvanzados.Exception.DAOException;
 
-import com.poa.POAvanzados.Model.PositionModel.Admin;
-import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
@@ -38,11 +35,10 @@ public class LoginController extends Controller implements Initializable {
     @FXML
     private void login(ActionEvent event) {
 
-        //try {
+        try {
             //TODO arreglar lo de que no se puede sacar el value de los textfields y arreglar el login del dao que se rompe
         //Esto es temporal hasta que arregle el login
-            //this.m.user = m.wc.getUser(1,"contrasena123");
-            m.user=new User(1,new Admin(),new Workplace(1,true,2,"sadadas"),"Random","McRandom","dsadad",true,"123");
+            this.m.user = m.wc.getUser(Integer.parseInt(dniTF.getText()),passwordTF.getText());
             if (this.m.user.getActive()) {
                 m.showHome();
             } else {
@@ -50,11 +46,15 @@ public class LoginController extends Controller implements Initializable {
             }
 
             //TODO cambiar el daoexception por otra excepcion mas especifica
-       /* } catch (DAOException e) {
+       } catch (DAOException e) {
             m.showAlert("No se ha encontrado el usuario ingresado.", 2);
             e.printStackTrace();
         }
-        */
+        catch (NumberFormatException e){
+            m.showAlert("Ingrese un numero de dni valido", 2);
+            e.printStackTrace();
+        }
+
 
     }
 

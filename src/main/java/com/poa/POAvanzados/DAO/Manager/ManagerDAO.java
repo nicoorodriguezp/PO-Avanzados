@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.DAO;
+package com.poa.POAvanzados.DAO.Manager;
 
 import java.util.ArrayList;
 

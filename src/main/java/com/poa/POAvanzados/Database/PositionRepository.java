@@ -1,11 +1,8 @@
 package com.poa.POAvanzados.Database;
 
-import java.util.ArrayList;
-
-import com.poa.POAvanzados.Model.PositionModel.Admin;
-import com.poa.POAvanzados.Model.PositionModel.Manager;
 import com.poa.POAvanzados.Model.PositionModel.Position;
-import com.poa.POAvanzados.Model.PositionModel.Worker;
+
+import java.util.ArrayList;
 
 public class PositionRepository {
 
@@ -13,11 +10,11 @@ public class PositionRepository {
 
         ArrayList<Position> positions = new ArrayList<>();
 
-        Position p = new Admin();
+        Position p = new Position(1,"admin","admin");
         positions.add(p);
-        p = new Manager();
+        Position p2 = new Position(2,"manager","manager");
         positions.add(p);
-        p = new Worker();
+        Position p3 = new Position(3,"worker","worker");
         positions.add(p);
 
         return positions;

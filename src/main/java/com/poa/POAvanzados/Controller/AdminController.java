@@ -2,13 +2,11 @@ package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
 
-import com.poa.POAvanzados.DAO.AdminDAO;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 @Controller

@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.DAO;
+package com.poa.POAvanzados.Exception;
 
 import javax.swing.JOptionPane;
 

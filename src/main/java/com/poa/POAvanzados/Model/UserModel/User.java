@@ -1,11 +1,15 @@
 package com.poa.POAvanzados.Model.UserModel;
 
+import com.poa.POAvanzados.Model.PositionModel.Position;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import lombok.NoArgsConstructor;
 
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class User {
 
@@ -21,22 +25,6 @@ public class User {
     private String email;
     private Boolean active;
     private String password;
-
-    public User(int idUser, Position position, Workplace workplace, String name, String lastName,
-            String email, Boolean active, String password) {
-        this.idUser = idUser;
-        this.position = position;
-        this.workplace = workplace;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.active = active;
-        this.password = password;
-    }
-
-    public User() {
-
-    }
 
     @Override
     public String toString() {

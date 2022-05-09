@@ -3,7 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.DAO.DAOException;
+import com.poa.POAvanzados.Exception.DAOException;
 
 import org.springframework.stereotype.Component;
 
@@ -61,7 +61,7 @@ public class HomeController extends Controller implements Initializable {
 
     private void initButtons() {
 
-        if (m.user.getPosition().getPosition() != 0) {
+        if (m.user.getPosition().getIdPosition() != 1) {
 
             generalReportButton.setVisible(false);
             warehouseReportButton.setVisible(false);
@@ -71,7 +71,7 @@ public class HomeController extends Controller implements Initializable {
             changeEmployeeButton.setVisible(false);
         }
 
-        if (m.user.getPosition().getPosition() == 2) {
+        if (m.user.getPosition().getIdPosition() == 3) {
             replenishButton.setVisible(false);
         }
 

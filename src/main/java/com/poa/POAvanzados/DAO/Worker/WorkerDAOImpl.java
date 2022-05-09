@@ -1,11 +1,11 @@
-package com.poa.POAvanzados.DAO;
+package com.poa.POAvanzados.DAO.Worker;
 
+import com.poa.POAvanzados.DAO.RowMappers.UserRowMapper;
+import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
-import com.poa.POAvanzados.Model.PositionModel.Admin;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,10 +20,12 @@ public class WorkerDAOImpl implements WorkerDAO{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        User userResponse= (User) jt.query("SELECT \"idUser\", \"idPosition\", name, \"lastName\", email, password, activo, \"idWorkplace\", dni\n" +
-                "\tFROM public.\"User\"\n" +
+        User userResponse= jt.queryForObject("SELECT \"idUser\", \"User\".\"idPosition\", name, \"lastName\", email, password, activo, \"User\".\"idWorkplace\", dni,\"Position\".title,\"Position\".category,\"Workplace\".address,\"Workplace\".warehouse,\"Workplace\".\"idManager\"\n" +
+                        "\tFROM public.\"User\"\n" +
+                        "\tJOIN \"Position\" ON \"User\".\"idPosition\"=\"Position\".\"idPosition\"\n" +
+                        "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"User\".\"idWorkplace\"" +
                 "\tWHERE \"dni\"=? AND \"password\" LIKE ?;",new Object[]{user.getIdUser(),user.getPassword()},
-                new BeanPropertyRowMapper(User.class));
+                new UserRowMapper());
         return userResponse;
     }
 

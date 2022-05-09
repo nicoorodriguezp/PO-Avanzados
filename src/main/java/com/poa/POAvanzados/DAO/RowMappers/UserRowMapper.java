@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.Database;
+package com.poa.POAvanzados.DAO.RowMappers;
 
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
@@ -15,20 +15,11 @@ public class UserRowMapper implements RowMapper<User> {
         user.setIdUser(resultSet.getInt("idUser"));
         user.setName(resultSet.getString("name"));
         user.setLastName(resultSet.getString("lastName"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPosition(new Position() {
-            @Override
-            public void showHome() {
-
-            }
-
-            @Override
-            public int getPosition() {
-                return 1;
-            }
-        });
         user.setPassword(resultSet.getString("password"));
-        user.setWorkplace(new Workplace(1,true,1,"dadada"));
+        user.setEmail(resultSet.getString("email"));
+        user.setActive(resultSet.getBoolean("activo"));
+        user.setPosition(new Position(resultSet.getInt("idPosition"),resultSet.getString("title"),resultSet.getString("category")));
+        user.setWorkplace(new Workplace(resultSet.getInt("idWorkplace"),resultSet.getBoolean("warehouse"),resultSet.getInt("idManager"),resultSet.getString("address")));
         return user;
     }
 }

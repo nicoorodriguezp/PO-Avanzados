@@ -1,5 +1,6 @@
-package com.poa.POAvanzados.DAO;
+package com.poa.POAvanzados.DAO.Manager;
 
+import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 

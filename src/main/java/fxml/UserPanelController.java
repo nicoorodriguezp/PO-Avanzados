@@ -64,14 +64,14 @@ public class UserPanelController extends Controller implements Initializable {
     private UserListController ulc;
 
     public void init(MainController m, Boolean update, ArrayList<Workplace> workplaces,
-            ArrayList<Position> positions, User selectedUser, UserListController ulc) {
+                     ArrayList<Position> positions, User selectedUser, UserListController ulc) {
         this.m = m;
         this.ulc = ulc;
         this.update = update;
         this.selectedUser = selectedUser;
 
         if (update) {
-            if (m.user.getPosition().getPosition() != 0) {
+            if (m.user.getPosition().getIdPosition() != 1) {
                 // Si no es un admin, entonces deshabilitar todo esto.
                 workplaceCB.setEditable(false);
                 positionCB.setEditable(false);

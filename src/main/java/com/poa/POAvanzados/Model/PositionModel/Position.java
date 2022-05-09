@@ -1,11 +1,16 @@
 package com.poa.POAvanzados.Model.PositionModel;
 
-public interface Position {
-    public void showHome();
 
-    /**
-     * @return : Devuelve el id de Posicion/Rango Laboral. (0) Admin -- (1) Manager
-     *         -- (2) Worker
-     */
-    public int getPosition();
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Position {
+
+    private int idPosition;
+    private String title;
+    private String category;
 }
