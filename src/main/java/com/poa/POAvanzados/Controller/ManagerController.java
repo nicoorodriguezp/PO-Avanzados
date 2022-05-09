@@ -34,7 +34,7 @@ public class ManagerController extends WorkerController implements ManagerDAO {
 
     @Override
     public ArrayList<Position> getPositions() {
-        return PositionRepository.getPositions();
+        return managerService.getPositions();
     }
 
 }

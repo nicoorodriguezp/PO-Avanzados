@@ -13,4 +13,9 @@ public class Position {
     private int idPosition;
     private String title;
     private String category;
+
+    @Override
+    public String toString() {
+        return  title;
+    }
 }

@@ -82,7 +82,7 @@ public class UserPanelController extends Controller implements Initializable {
         workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
         // workplaceCB.valueProperty().addListener(
         // (observable, oldWorkplace, newWorkplace) -> selectedWorkplace =
-        // newWorkplace.getIdWorkplace());
+        // newWorkplace.getIdWorkplace());21
 
         positionCB.setItems(FXCollections.observableArrayList(positions));
         // positionCB.valueProperty().addListener(

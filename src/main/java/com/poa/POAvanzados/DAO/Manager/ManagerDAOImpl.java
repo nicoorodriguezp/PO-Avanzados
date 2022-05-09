@@ -1,10 +1,12 @@
 package com.poa.POAvanzados.DAO.Manager;
 
+import com.poa.POAvanzados.DAO.RowMappers.PositionRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.WorkplaceRowMapper;
 import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import javafx.geometry.Pos;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,6 +41,13 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
 
     @Override
     public ArrayList<Position> getPositions() {
-        return null;
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Position> positions = new ArrayList<>();
+        List<Position> positionList=jt.query("SELECT \"idPosition\", title, category\n" +
+                "\tFROM public.\"Position\";",new PositionRowMapper());
+        positions.addAll(positionList);
+        return positions;
     }
 }

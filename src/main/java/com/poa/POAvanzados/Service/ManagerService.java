@@ -11,6 +11,7 @@ import com.poa.POAvanzados.Database.ItemRepository;
 import com.poa.POAvanzados.Database.WorkplaceRepository;
 import com.poa.POAvanzados.Model.ItemModel.ItemBuilder;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 public class ManagerService extends WorkerService {
@@ -109,5 +110,9 @@ public class ManagerService extends WorkerService {
 
     public ArrayList<Workplace> getWorkplaces() {
         return managerDAO.getWorkplaces();
+    }
+
+    public ArrayList<Position> getPositions() {
+        return managerDAO.getPositions();
     }
 }
