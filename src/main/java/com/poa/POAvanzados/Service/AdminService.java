@@ -21,10 +21,6 @@ public class AdminService extends ManagerService {
         adminDAO.createUser(user);
     }
 
-    public static void deleteUser(int idUser) {
-        UserRepository.deleteUser(idUser);
-    }
-
     public  void updateUser(User user) {
         adminDAO.updateUser(user);
     }

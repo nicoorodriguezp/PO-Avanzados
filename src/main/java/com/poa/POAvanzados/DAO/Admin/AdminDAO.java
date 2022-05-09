@@ -11,8 +11,6 @@ public interface AdminDAO {
     // User CRUD
     public void createUser(User user);
 
-    public void deleteUser(int idUser);
-
     public void updateUser(User user);
 
     public ArrayList<User> getUsers();

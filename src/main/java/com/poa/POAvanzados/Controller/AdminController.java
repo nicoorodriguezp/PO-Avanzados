@@ -21,11 +21,6 @@ public class AdminController extends ManagerController {
 
     }
 
-    public void deleteUser(int idUser) {
-        AdminService.deleteUser(idUser);
-
-    }
-
     public void updateUser(User user) {
         adminService.updateUser(user);
 

@@ -26,10 +26,6 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
                 "\tVALUES ( ?, ?, ?, ?, ?, ?, ?, ?);",user.getPosition().getIdPosition(),user.getName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getActive(),user.getWorkplace().getIdWorkplace(),user.getDni());
     }
 
-    @Override
-    public void deleteUser(int idUser) {
-
-    }
 
     @Override
     public void updateUser(User user) {
