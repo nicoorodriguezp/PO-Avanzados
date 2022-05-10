@@ -239,7 +239,7 @@ public class ItemListController extends Controller implements Initializable {
             itemsStockInTable.clear();
 
             if(this.m.user.getPosition().getIdPosition() == AdminPosition){
-                itemsStock = this.m.wc.getAllInventory(workplaceCB.valueProperty().getValue().getIdWorkplace());
+                itemsStock = this.m.wc.getAllInventoryByWorkplace(workplaceCB.valueProperty().getValue());
             }
 
             System.out.println("Filtrando por workplace " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
@@ -266,7 +266,7 @@ public class ItemListController extends Controller implements Initializable {
             itemsStockInTable.clear();
 
             if(this.m.user.getPosition().getIdPosition() == AdminPosition){
-                itemsStock = this.m.wc.getAllInventory(workplaceCB.valueProperty().getValue().getIdWorkplace());
+                itemsStock = this.m.wc.getAllInventoryByWorkplace(workplaceCB.valueProperty().getValue());
             }
 
             System.out.println("Filtrando por workplace e item: " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());

@@ -17,9 +17,9 @@ public class Item_DetailRowMapper implements RowMapper<Item_Detail> {
         item_detail.setIdItem(resultSet.getInt("idItem"));
         item_detail.setCheckIn(resultSet.getString("check_in"));
         item_detail.setCheckOut(resultSet.getString("check_out"));
-        item_detail.setState(new ItemState(resultSet.getInt("idState"),resultSet.getString("\"State\".\"state_description\"")));
-        item_detail.setLaboratory(new Workplace(resultSet.getInt("idLaboratory"),resultSet.getBoolean("\"laboratory\".\"warehouse\""),resultSet.getInt("\"laboratory\".\"idManager\""),resultSet.getString("\"laboratory\".\"address\"")));
-        item_detail.setWarehouse(new Workplace(resultSet.getInt("idWarehouse"),resultSet.getBoolean("\"warehouse\".\"warehouse\""),resultSet.getInt("\"warehouse\".\"idManager\""),resultSet.getString("\"warehouse\".\"address\"")));
+        item_detail.setState(new ItemState(resultSet.getInt("idState"),resultSet.getString("state_description")));
+        item_detail.setLaboratory(new Workplace(resultSet.getInt("idLaboratory"),resultSet.getBoolean("warehouse"),resultSet.getInt("idManager"),resultSet.getString("address")));
+        item_detail.setWarehouse(new Workplace(resultSet.getInt("idWarehouse"),resultSet.getBoolean("warehouse"),resultSet.getInt("idManager"),resultSet.getString("address")));
         return item_detail;
 
     }

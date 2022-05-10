@@ -77,7 +77,7 @@ public class MainController {
         getFXML("Repair");
 
         RepairController controller = this.fxmlLoader.getController();
-        controller.init(this, wc.getAllInventory(user.getWorkplace().getIdWorkplace()));
+        controller.init(this, wc.getAllInventoryByWorkplace(user.getWorkplace()));
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Repair Panel");
@@ -177,7 +177,7 @@ public class MainController {
         getFXML("ItemList");
 
         ItemListController c = fxmlLoader.<ItemListController>getController();
-        c.init(this, wc.getItems(), mc.getWorkplaces(), wc.getAllInventory(user.getWorkplace().getIdWorkplace()));
+        c.init(this, wc.getItems(), mc.getWorkplaces(), wc.getAllInventoryByWorkplace(user.getWorkplace()));
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Lista de items");

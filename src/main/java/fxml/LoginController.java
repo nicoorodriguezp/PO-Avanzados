@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Exception.DAOException;
 
+import com.poa.POAvanzados.Exception.LoginUserException;
 import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import javax.security.auth.login.LoginException;
 
 @Component
 public class LoginController extends Controller implements Initializable {
@@ -52,6 +55,10 @@ public class LoginController extends Controller implements Initializable {
         }
         catch (NumberFormatException e){
             m.showAlert("Ingrese un numero de dni valido", 2);
+            e.printStackTrace();
+        }
+        catch (LoginUserException e){
+            m.showAlert(e.getMessage(), 2);
             e.printStackTrace();
         }
 
