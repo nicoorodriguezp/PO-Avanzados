@@ -54,6 +54,146 @@ public class ItemDetailRepository {
 
                 itemsWorkplace.add(iBuilder);
 
+                iBuilder = new ItemBuilder()
+                        .addIdItem(1)
+                        .addName("Puerto Jack")
+                        .isCritical(true)
+                        .addItemCode(3)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(1)
+                        .addName("Pantalla")
+                        .isCritical(true)
+                        .addItemCode(4)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(5)
+                        .addName("Protector Pantalla")
+                        .isCritical(true)
+                        .addItemCode(5)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(4)
+                        .addName("Camara")
+                        .isCritical(true)
+                        .addItemCode(6)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(3)
+                        .addName("Puerto USB-C")
+                        .isCritical(true)
+                        .addItemCode(7)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(3)
+                        .addName("Puerto USB-C")
+                        .isCritical(true)
+                        .addItemCode(8)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(5)
+                        .addName("Protector Pantalla")
+                        .isCritical(true)
+                        .addItemCode(9)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(4)
+                        .addName("Camara")
+                        .isCritical(true)
+                        .addItemCode(10)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(3)
+                        .addName("Puerto USB-C")
+                        .isCritical(true)
+                        .addItemCode(11)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
+                iBuilder = new ItemBuilder()
+                        .addIdItem(3)
+                        .addName("Puerto USB-C")
+                        .isCritical(true)
+                        .addItemCode(12)
+                        .addWarehouse(new Workplace(0, true, 0, "Mario Bravo 1050"))
+                        .addLaboratory(new Workplace(3, false, 0, "Jean Jaures 932/6"))
+                        .addCheckIn("14/03/21")
+                        .addCheckOut("18/03/21")
+                        .addState(0)
+                        .build();
+
+                itemsWorkplace.add(iBuilder);
+
                 return itemsWorkplace;
         }
 

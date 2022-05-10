@@ -67,6 +67,22 @@
     -fx-image: url("../icons/refreshIconHover.png");
 }
 
+.nextPageButton {
+    -fx-image: url("../icons/arrowRightIcon.png");
+}
+
+.nextPageButton:hover {
+    -fx-image: url("../icons/arrowRightHoverIcon.png");
+}
+
+.FormerPageButton {
+    -fx-image: url("../icons/arrowLeftIcon.png");
+}
+
+.FormerPageButton:hover {
+    -fx-image: url("../icons/arrowLeftHoverIcon.png");
+}
+
 .searchButton {
     -fx-background-image: url("../icons/searchIcon.png");
     -fx-background-color: transparent;

@@ -49,21 +49,11 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private TableColumn<Item_Detail, Workplace> warehouseColumn;
     @FXML
-    private Button filterButton;
-    @FXML
-    private Button showAllButton;
-    @FXML
     private ComboBox<Workplace> workplaceCB;
     @FXML
     private Label workplaceLabel;
     @FXML
     private Pane crudPane;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button updateButton;
     @FXML
     private TextField itemNameTF;
     @FXML
@@ -71,10 +61,58 @@ public class ItemListController extends Controller implements Initializable {
 
     private ArrayList<Item> items =  new ArrayList<>();
     private ArrayList<Item_Detail> itemsStock =  new ArrayList<>();
+     // @itemStockInTable: Son los items que estan filtrados por algun parametro, listos para ser usados en las paginas.
     private ObservableList<Item_Detail> itemsStockInTable =  FXCollections.observableArrayList();
     private ObservableList<Item> itemsInTable =  FXCollections.observableArrayList();
 
     private Item selectedItem;
+
+    // Pagination
+    private int lastPageIndex;
+    private int maxPageIndex = 10;
+    private int actualPage;
+
+    private ArrayList<Page> paginas = new ArrayList<>();
+    @FXML
+    private Label pageLabel;
+
+    private void setPaginas(){
+
+
+        double cantMaxPerPagina = 5.0;
+        maxPageIndex = (int) Math.ceil( itemsStockInTable.size() / cantMaxPerPagina);
+        System.out.println("Se crearon " + maxPageIndex + " paginas.");
+
+        paginas.clear();
+        int pagina;
+        lastPageIndex = 0;
+
+
+        if(maxPageIndex!=0){
+            for(pagina = 1; pagina<=maxPageIndex; pagina++){
+
+
+                int index;
+                for(index = lastPageIndex; index<lastPageIndex+4 && index<itemsStockInTable.size(); index++){}
+
+                Page page = new Page(pagina, lastPageIndex, index);
+                paginas.add(page);
+                System.out.print("La pagina " + pagina + " tiene " + (page.getToItem() - page.getFromItem()) + " items.\n");
+                System.out.println("El ultimo elemento es el: " +page.getToItem());
+
+
+                lastPageIndex = index+1;
+            }
+
+            actualPage = -1;
+            nextPage(null);
+        }else{
+            itemDetailTable.setItems(null);
+            pageLabel.setText("Página " + (0) +"/" + maxPageIndex);
+        }
+
+
+    }
 
 
     public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail> itemsStock){
@@ -97,9 +135,8 @@ public class ItemListController extends Controller implements Initializable {
         this.itemsInTable.setAll(items);
 
         itemTable.setItems(itemsInTable);
-        itemDetailTable.setItems(itemsStockInTable);
-
-
+//        itemDetailTable.setItems(itemsStockInTable);
+        setPaginas();
 
     }
 
@@ -151,16 +188,21 @@ public class ItemListController extends Controller implements Initializable {
 
         // Filtra unicamente por el item seleccionado teniendo en cuenta el workplace del usuario.
 
-        itemsStockInTable.clear();
+        if(selectedItem!=null){
+            itemsStockInTable.clear();
 
-        for (Item_Detail item : itemsStock) {
-            if (item.getIdItem() == selectedItem.getIdItem()) {
-                itemsStockInTable.addAll(item);
+            for (Item_Detail item : itemsStock) {
+                if (item.getIdItem() == selectedItem.getIdItem()) {
+                    itemsStockInTable.addAll(item);
+                }
             }
+
+
+            setPaginas();
+        }else{
+            m.showAlert("Debe seleccionar el item que desea filtrar.", 1);
         }
 
-
-        itemDetailTable.setItems(itemsStockInTable);
 
     }
 
@@ -169,7 +211,7 @@ public class ItemListController extends Controller implements Initializable {
 
         itemsStockInTable.clear();
         itemsStockInTable.addAll(itemsStock);
-        itemDetailTable.setItems(itemsStockInTable);
+        setPaginas();
 
     }
 
@@ -200,7 +242,7 @@ public class ItemListController extends Controller implements Initializable {
                 itemsStock = this.m.wc.getAllInventory(workplaceCB.valueProperty().getValue().getIdWorkplace());
             }
 
-            System.out.println("Filtrando por workplace: " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
+            System.out.println("Filtrando por workplace " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
 
             for (Item_Detail item : itemsStock) {
                 if (item.getWarehouse().getIdWorkplace() ==  workplaceCB.valueProperty().getValue().getIdWorkplace()) {
@@ -208,7 +250,8 @@ public class ItemListController extends Controller implements Initializable {
                 }
             }
             
-            itemDetailTable.setItems(itemsStockInTable);
+//            itemDetailTable.setItems(itemsStockInTable);
+            setPaginas();
 
         }else{
             m.showAlert("Debe seleccionar un lugar de trabajo para filtrar.", 1);
@@ -235,11 +278,61 @@ public class ItemListController extends Controller implements Initializable {
                 }
             }
 
-            itemDetailTable.setItems(itemsStockInTable);
+//            itemDetailTable.setItems(itemsStockInTable);
+            setPaginas();
 
         }else{
             m.showAlert("Debe seleccionar un lugar de trabajo para filtrar.", 1);
         }
+    }
+
+    @FXML
+    private void nextPage(MouseEvent event) {
+
+        // Hago este auxiliar para trabajar con aquellos items que ya estan filtrados en el array "itemsStockInTable"
+        ObservableList<Item_Detail> itemsAux =  FXCollections.observableArrayList();
+
+        if(actualPage + 1 < maxPageIndex){
+
+            actualPage = actualPage + 1;
+
+            for(int i = paginas.get(actualPage).getFromItem(); i<=paginas.get(actualPage).getToItem() && i<itemsStockInTable.size(); i++){
+                itemsAux.add(itemsStockInTable.get(i));
+            }
+
+
+            itemDetailTable.setItems(itemsAux);
+            pageLabel.setText("Página " + (actualPage + 1) +"/" + maxPageIndex);
+
+        }else{
+            System.out.println("No hay mas paginas.");
+        }
+
+    }
+
+    @FXML
+    private void formerPage(MouseEvent event) {
+
+        ObservableList<Item_Detail> itemsAux =  FXCollections.observableArrayList();
+
+        if(actualPage>0){
+
+            actualPage = actualPage - 1;
+
+            for(int i = paginas.get(actualPage).getFromItem(); i<=paginas.get(actualPage).getToItem(); i++){
+                itemsAux.add(itemsStockInTable.get(i));
+            }
+
+            itemDetailTable.setItems(itemsAux);
+            pageLabel.setText("Página " + (actualPage + 1) +"/" + maxPageIndex);
+        }else{
+            System.out.println("Se encuentra en la primera pagina.");
+        }
+
+    }
+
+    @FXML
+    private void deleteItem(ActionEvent event) {
     }
 
 }
