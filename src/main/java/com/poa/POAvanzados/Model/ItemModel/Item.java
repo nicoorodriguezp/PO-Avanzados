@@ -18,7 +18,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 
     public Item() {

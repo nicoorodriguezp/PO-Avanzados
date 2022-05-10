@@ -12,11 +12,12 @@ public interface WorkerDAO {
 
     public User getUser(User user) throws DAOException;
 
-    public ArrayList<Item> gItems() throws DAOException;
+    public ArrayList<Item> getItems() throws DAOException;
 
     public ArrayList<Item_Detail> getAllInventory(int idWorkplace);
 
     public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem);
+    public void addItem(Item item);
 
     public void createRepair(Repair repair);
 

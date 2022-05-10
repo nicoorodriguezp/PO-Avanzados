@@ -1,10 +1,15 @@
 package com.poa.POAvanzados.Model.ItemModel;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public abstract class ItemState {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ItemState {
 
-    private int state;
+    private int idState;
     private String name;
+
 }

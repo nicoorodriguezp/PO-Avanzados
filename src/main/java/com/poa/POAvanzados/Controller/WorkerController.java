@@ -25,11 +25,11 @@ public class WorkerController{
         return workerService.getUser(user);
     }
 
-    public ArrayList<Item> gItems() throws DAOException {
-        return WorkerService.getItems();
+    public ArrayList<Item> getItems() {
+        return workerService.getItems();
     }
 
-    public ArrayList<Item_Detail> getAllInventory(int idWorkplace) {
+    public static ArrayList<Item_Detail> getAllInventory(int idWorkplace) {
         return WorkerService.getAllInventory(idWorkplace);
     }
 
@@ -46,12 +46,13 @@ public class WorkerController{
 
     }
 
+    public void addItem(Item item){
+        workerService.addItem(item);
+    }
     public ArrayList<Repair> getAllRepairs(int idWorkplace) {
         return WorkerService.getAllRepairs(idWorkplace);
     }
 
-    public ArrayList<Item> getItems() {
-        return WorkerService.getItems();
-    }
+
 
 }

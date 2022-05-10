@@ -13,10 +13,10 @@ public class Controller {
     protected final int WorkerPosition = 3;
 
     // Item States
-    protected final int ItemInStock = 0;
-    protected final int ItemInUse = 1;
-    protected final int ItemUsed = 2;
-    protected final int ItemDescarded = 3;
+    protected final int ItemInStock = 1;
+    protected final int ItemInUse = 2;
+    protected final int ItemUsed = 3;
+    protected final int ItemDescarded = 4;
 
     public void init(MainController mainController) {
         this.m = mainController;

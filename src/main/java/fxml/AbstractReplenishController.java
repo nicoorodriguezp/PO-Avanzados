@@ -44,6 +44,7 @@ public class AbstractReplenishController extends Controller implements Initializ
 
         this.m = m;
 
+
         itemsCB.setItems(FXCollections.observableArrayList(items));
         itemsCB.valueProperty().addListener(
                 (observable, oldItem, newItem) -> itemSelected = newItem.getIdItem());
@@ -70,7 +71,7 @@ public class AbstractReplenishController extends Controller implements Initializ
             rButton.setOnAction(e -> {
                 System.out.println("\n\nReposicion de Deposito:");
                 m.mc.replenishWarehouse(selectedWorkplace, itemSelected,
-                        Integer.getInteger(quantityTF.getText()));
+                        Integer.parseInt(quantityTF.getText()));
                 m.showAlert("La reposicion del Deposito se realizo correctamente.", 4);
 
             });
@@ -78,7 +79,8 @@ public class AbstractReplenishController extends Controller implements Initializ
             rButton.setOnAction(e -> {
                 System.out.println("\n\nReposicion de Laboratorio:");
                 m.mc.replenishLaboratory(selectedWorkplace, itemSelected,
-                        Integer.getInteger(quantityTF.getText()));
+                        Integer.parseInt(quantityTF.getText()));
+                System.out.println(itemSelected);
                 m.showAlert("La reposicion del Laboratorio se realizo correctamente.", 4);
             });
 

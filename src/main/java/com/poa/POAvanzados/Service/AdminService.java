@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.poa.POAvanzados.DAO.Admin.AdminDAOImpl;
 import com.poa.POAvanzados.Database.ItemDetailRepository;
-import com.poa.POAvanzados.Database.UserRepository;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import org.springframework.beans.factory.annotation.Autowired;

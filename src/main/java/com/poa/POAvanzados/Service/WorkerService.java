@@ -26,8 +26,17 @@ public class WorkerService {
         return workerDAO.getUser(userLogin);
     }
 
-    public static ArrayList<Item> getItems() {
-        return ItemRepository.getItems();
+    public ArrayList<Item> getItems() {
+        try{
+            return workerDAO.getItems();
+        }catch (DAOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addItem(Item item){
+        workerDAO.addItem(item);
     }
 
     public static ArrayList<Item_Detail> getAllInventory(int idWorkplace) {

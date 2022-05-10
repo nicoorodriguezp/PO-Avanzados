@@ -131,20 +131,20 @@ public class RepairController extends Controller implements Initializable {
 
             // En caso de que se quiera sacar de la lista de reparacion.
             itemsListRepair.remove(itemsListRepair.indexOf(i));
-            i.setState(state);
+            i.getState().setIdState(state);
 
         } else if (state == ItemInUse) {
 
             // En caso de que el item se quiera agregar a la lista de reparacion.
-            i.setState(state);
+            i.getState().setIdState(state);
             itemsListRepair.add(i);
 
         } else if (state == ItemDescarded) {
 
-            if (i.getState() == ItemDescarded) {
-                i.setState(ItemInUse); // Si ya estaba marcado como descartado, entonces se volvio al estado en uso
+            if (i.getState().getIdState() == ItemDescarded) {
+                i.getState().setIdState(ItemInUse); // Si ya estaba marcado como descartado, entonces se volvio al estado en uso
             } else {
-                i.setState(state);
+                i.getState().setIdState(state);
             }
             // En caso de que se quiera mantener pero cambiar el estado a descartado.
 
@@ -179,11 +179,11 @@ public class RepairController extends Controller implements Initializable {
         for (int i = 0; i < itemsLaboratory.size(); i++) {
 
             // verifico si esta en estado de stock
-            if (searchTF.getText() == "" && itemsLaboratory.get(i).getState() == ItemInStock) {
+            if (searchTF.getText() == "" && itemsLaboratory.get(i).getState().getIdState() == ItemInStock) {
                 addSearchItem(i);
 
             } else if (itemsLaboratory.get(i).getName().contains(
-                    searchTF.getText()) && itemsLaboratory.get(i).getState() == ItemInStock) {
+                    searchTF.getText()) && itemsLaboratory.get(i).getState().getIdState() == ItemInStock) {
                 addSearchItem(i);
             }
 
@@ -224,8 +224,8 @@ public class RepairController extends Controller implements Initializable {
     private void createRepair(ActionEvent event) {
 
         for (Item_Detail i : itemsListRepair) {
-            if (i.getState() != ItemDescarded) {
-                i.setState(4);
+            if (i.getState().getIdState() != ItemDescarded) {
+                i.getState().setIdState(4);
             }
             if (i.isCritical()) {
                 checkStockStatus();

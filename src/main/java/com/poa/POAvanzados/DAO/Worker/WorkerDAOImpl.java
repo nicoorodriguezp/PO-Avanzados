@@ -1,5 +1,6 @@
 package com.poa.POAvanzados.DAO.Worker;
 
+import com.poa.POAvanzados.DAO.RowMappers.ItemRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.UserRowMapper;
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Model.ItemModel.Item;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorkerDAOImpl implements WorkerDAO{
     @Override
@@ -30,18 +32,49 @@ public class WorkerDAOImpl implements WorkerDAO{
     }
 
     @Override
-    public ArrayList<Item> gItems() throws DAOException {
-        return null;
+    public ArrayList<Item> getItems() throws DAOException {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Item> items = new ArrayList<>();
+
+        List<Item> itemList=jt.query("SELECT \"idItem\", name, critical\n" +
+                "\tFROM public.\"Item\";",new ItemRowMapper());
+        items.addAll(itemList);
+        for (Item item :
+                items) {
+            System.out.println(item.getName());
+        }
+        return items;
     }
 
     @Override
     public ArrayList<Item_Detail> getAllInventory(int idWorkplace) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Item_Detail> items = new ArrayList<>();
+
+        List<Item_Detail> itemList;
         return null;
     }
 
     @Override
     public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
         return null;
+    }
+
+    @Override
+    public void addItem(Item item) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        jt.update("INSERT INTO public.\"Item\"(\n" +
+                "\t name, critical)\n" +
+                "\tVALUES ( ?, ?);",item.getName(),item.isCritical());
     }
 
     @Override

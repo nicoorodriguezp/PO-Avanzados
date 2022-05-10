@@ -2,8 +2,6 @@ package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
 
-import com.poa.POAvanzados.Database.PositionRepository;
-import com.poa.POAvanzados.Database.WorkplaceRepository;
 import com.poa.POAvanzados.DAO.Manager.ManagerDAO;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;

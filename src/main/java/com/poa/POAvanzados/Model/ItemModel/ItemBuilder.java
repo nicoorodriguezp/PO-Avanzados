@@ -8,7 +8,7 @@ public class ItemBuilder {
 
     public ItemBuilder() {
         item = new Item_Detail();
-        item.setState(0);
+        item.setState(new ItemState(0,"En Stock"));
     }
 
     public ItemBuilder addIdItem(int idItem) {
@@ -52,7 +52,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder addState(int state) {
-        item.setState(state);
+        item.getState().setIdState(state);
         return this;
     }
 

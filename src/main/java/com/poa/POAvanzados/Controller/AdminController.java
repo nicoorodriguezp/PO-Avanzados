@@ -32,7 +32,7 @@ public class AdminController extends ManagerController {
 
 
     public ArrayList<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date) {
-        return AdminService.getCheckOutWarehouse(idWarehouse, date);
+        return adminService.getCheckOutWarehouse(idWarehouse, date);
     }
 
     public ArrayList<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date) {
