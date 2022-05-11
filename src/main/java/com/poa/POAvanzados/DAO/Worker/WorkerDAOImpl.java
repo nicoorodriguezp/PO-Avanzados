@@ -1,9 +1,6 @@
 package com.poa.POAvanzados.DAO.Worker;
 
-import com.poa.POAvanzados.DAO.RowMappers.ItemRowMapper;
-import com.poa.POAvanzados.DAO.RowMappers.Item_DetailRowMapper;
-import com.poa.POAvanzados.DAO.RowMappers.UserNoPasswordRowMapper;
-import com.poa.POAvanzados.DAO.RowMappers.Workplace_ItemRowMapper;
+import com.poa.POAvanzados.DAO.RowMappers.*;
 import com.poa.POAvanzados.Email.EmailController;
 import com.poa.POAvanzados.Email.EmailDetails;
 import com.poa.POAvanzados.Exception.DAOException;
@@ -161,6 +158,15 @@ public class WorkerDAOImpl implements WorkerDAO{
         return workplace_item;
     }
     public void checkingStockForMail(Item item, Workplace_Item workplace_item){
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        User user= jt.queryForObject("SELECT \"User\".\"idUser\", \"User\".\"idPosition\", \"User\".\"name\", \"User\".\"lastName\", \"User\".\"email\", \"User\".\"activo\", \"User\".\"idWorkplace\", \"User\".\"dni\"\n" +
+                "\tFROM public.\"Workplace_Item\"\n" +
+                "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"Workplace_Item\".\"idWorkplace\"\n" +
+                "\tJOIN \"User\" ON \"Workplace\".\"idManager\"=\"User\".\"idUser\"\n" +
+                "\tWHERE \"Workplace\".\"idWorkplace\"=?",new Object[]{workplace_item.getIdWorkplace()},new UserRowMapper());
 
         EmailController e = new EmailController();
         EmailDetails emailDetails = new EmailDetails();
