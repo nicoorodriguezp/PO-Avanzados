@@ -131,7 +131,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         JdbcTemplate jt = new JdbcTemplate(ds);
         ArrayList<Item_Detail> items = new ArrayList<>();
         List<Item_Detail> item_detailList;
-        if(workplace.isWarehouse() || user_role==1){
+        if(workplace.isWarehouse()){
             throw new NotAllowedForWarehouse("Solo los usuarios de laboratorio pueden hacer una reparacion");
         }
         else {
@@ -162,17 +162,52 @@ public class WorkerDAOImpl implements WorkerDAO{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        User user= jt.queryForObject("SELECT \"User\".\"idUser\", \"User\".\"idPosition\", \"User\".\"name\", \"User\".\"lastName\", \"User\".\"email\", \"User\".\"activo\", \"User\".\"idWorkplace\", \"User\".\"dni\"\n" +
+        User manager= jt.queryForObject("SELECT \"User\".\"idUser\", \"User\".\"idPosition\", \"User\".\"name\", \"User\".\"lastName\", \"User\".\"email\", \"User\".\"activo\", \"User\".\"idWorkplace\", \"User\".\"dni\"\n" +
                 "\tFROM public.\"Workplace_Item\"\n" +
                 "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"Workplace_Item\".\"idWorkplace\"\n" +
                 "\tJOIN \"User\" ON \"Workplace\".\"idManager\"=\"User\".\"idUser\"\n" +
                 "\tWHERE \"Workplace\".\"idWorkplace\"=?",new Object[]{workplace_item.getIdWorkplace()},new UserRowMapper());
 
-        EmailController e = new EmailController();
-        EmailDetails emailDetails = new EmailDetails();
-        emailDetails.setRecipient("nicogrodriguezp@gmail.com");
-        emailDetails.setMsgBody("Prueba email");
-        emailDetails.setSubject("Prueba Email 2.0");
-        e.sendMail(emailDetails);
+        int max_slots = workplace_item.getMax_slots();
+        int fifty = (int) Math.ceil( max_slots / 2.0);
+        int twenty= (int) Math.ceil( max_slots * 0.2);
+        String message = "El stock del item se encuentra dentro del nivel de tolerancia.";
+        String email = manager.getEmail().trim();
+
+        if(item.isCritical() && workplace_item.getStock() <= fifty){
+            message = " El insumo critico"+ item.getName() + " está por debajo del nivel de tolerancia en su lugar de trabajo. \n\n" +
+                    "Por favor, solicite más suministros del item mencionado LO ANTES POSIBLE.\n\n";
+            sendEmail(email, message);
+
+        }else if(!item.isCritical() && workplace_item.getStock() <= twenty){
+            message = " El insumo secundario "+ item.getName() + " está por debajo del nivel de tolerancia en su lugar de trabajo. \n\n" +
+                    "Por favor, solicite más suministros del item mencionado.\n\n";
+            sendEmail(email, message);
+
+        }else{
+            System.out.println(message);
+        }
+
+
+    }
+
+    private void sendEmail(String addressee, String message){
+
+
+        Thread emailThread = new Thread(() -> {
+            System.out.println("Enviando email de alerta.");
+
+            EmailController e = new EmailController();
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setRecipient(addressee);
+            emailDetails.setMsgBody(message);
+            emailDetails.setSubject("Alerta de Reposición");
+            e.sendMail(emailDetails);
+
+            System.out.println("sendEmail() terminó su ejecución.");
+        });
+
+        emailThread.start();
+
     }
 }
