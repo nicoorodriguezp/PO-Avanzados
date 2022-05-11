@@ -23,7 +23,7 @@ import java.util.List;
 
 public class WorkerDAOImpl implements WorkerDAO{
     @Override
-    public User getUser(User user) throws DAOException, LoginUserException {
+    public User getUser(User user) throws LoginUserException {
         try {
             ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
             DataSource ds = (DataSource) applicationContext.getBean("dataSource");
@@ -83,15 +83,6 @@ public class WorkerDAOImpl implements WorkerDAO{
         return items;
     }
 
-    @Override
-    public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
-        JdbcTemplate jt = new JdbcTemplate(ds);
-        return null;
-    }
-
-
 
     @Override
     public void createRepair(Repair repair) {
@@ -135,18 +126,13 @@ public class WorkerDAOImpl implements WorkerDAO{
 
 
     @Override
-    public ArrayList<Repair> getAllRepairs(int idWorkplace) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
         ArrayList<Item_Detail> items = new ArrayList<>();
         List<Item_Detail> item_detailList;
-        if(workplace.isWarehouse()){
+        if(workplace.isWarehouse() || user_role==1){
             throw new NotAllowedForWarehouse("Solo los usuarios de laboratorio pueden hacer una reparacion");
         }
         else {

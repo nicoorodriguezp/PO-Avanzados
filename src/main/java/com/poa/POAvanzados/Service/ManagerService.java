@@ -15,9 +15,13 @@ import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ManagerService extends WorkerService {
 
+    @Autowired
     private ManagerDAOImpl managerDAO = new ManagerDAOImpl();
 
     public void replenishWarehouse(int idWarehouse, int idItem, int quantity, String checkIn) throws QuantityExceedsMaxSlots {
@@ -64,5 +68,11 @@ public class ManagerService extends WorkerService {
 
     public ArrayList<Position> getPositions() {
         return managerDAO.getPositions();
+    }
+
+    public ArrayList<Workplace> getWarehouse() {
+        ArrayList<Workplace> workplaceList=new ArrayList<>();
+        workplaceList.addAll(managerDAO.getWarehouses());
+        return workplaceList;
     }
 }

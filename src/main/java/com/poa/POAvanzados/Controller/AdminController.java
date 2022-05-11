@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class AdminController extends ManagerController {
 
-//TODO Tratar de solucionar el autowired del service
     @Autowired
     private AdminService adminService= new AdminService();
 

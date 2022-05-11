@@ -76,7 +76,7 @@ public class UserPanelController extends Controller implements Initializable {
 
         if (update) {
             if (m.user.getPosition().getIdPosition() != AdminPosition) {
-                // Si no es un admin, entonces deshabilitar todo esto.
+                // Si no es un admin, entonces deshabilitar estas cosas de la interfaz
                 workplaceCB.setEditable(false);
                 positionCB.setEditable(false);
                 activeCheck.disableProperty().set(true);

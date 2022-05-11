@@ -79,7 +79,7 @@ public class MainController {
             getFXML("Repair");
 
             RepairController controller = this.fxmlLoader.getController();
-            controller.init(this, wc.getAllInventoryByWorkplaceOnStock(user.getWorkplace()));
+            controller.init(this, wc.getAllInventoryByWorkplaceOnStock(user.getWorkplace(),user.getPosition().getIdPosition()));
 
             this.stage.setScene(new Scene(parent, 1263, 830));
             this.stage.setTitle("Repair Panel");
@@ -165,13 +165,13 @@ public class MainController {
 
     }
 
-    /** @param type :(0) General -- (1) Warehouse -- (2) Item-Deposito */
+    /** @param type :(1) General -- (2) Warehouse -- (3) Item-Deposito */
     public void showReportGenerator(int type) {
 
         getFXML("ReportGenerator");
 
         ReportGeneratorController c = fxmlLoader.getController();
-        c.init(this, type, wc.getItems(), mc.getWorkplaces());
+        c.init(this, type, wc.getItems(), mc.getWarehouse());
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Generador de Reportes");

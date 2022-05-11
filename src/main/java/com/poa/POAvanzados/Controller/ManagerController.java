@@ -34,4 +34,7 @@ public class ManagerController extends WorkerController{
         return managerService.getPositions();
     }
 
+    public ArrayList<Workplace> getWarehouse() {
+        return managerService.getWarehouse();
+    }
 }

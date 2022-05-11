@@ -28,7 +28,6 @@ public class LoginController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     public void init(MainController mainController) {
@@ -39,7 +38,6 @@ public class LoginController extends Controller implements Initializable {
     private void login(ActionEvent event) {
 
         try {
-            //TODO arreglar lo de que no se puede sacar el value de los textfields y arreglar el login del dao que se rompe
         //Esto es temporal hasta que arregle el login
             this.m.user = m.wc.getUser(Integer.parseInt(dniTF.getText()),passwordTF.getText());
             if (this.m.user.getActive()) {
@@ -47,13 +45,7 @@ public class LoginController extends Controller implements Initializable {
             } else {
                 m.showAlert("El usuario no está activo, por lo tanto, no tiene acceso al sistema.", 2);
             }
-
-            //TODO cambiar el daoexception por otra excepcion mas especifica
-       } catch (DAOException e) {
-            m.showAlert("No se ha encontrado el usuario ingresado.", 2);
-            e.printStackTrace();
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e){
             m.showAlert("Ingrese un numero de dni valido", 2);
             e.printStackTrace();
         }

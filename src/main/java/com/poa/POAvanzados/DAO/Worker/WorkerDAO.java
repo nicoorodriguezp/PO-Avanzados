@@ -19,13 +19,11 @@ public interface WorkerDAO {
 
     public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace);
 
-    public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem);
 
     public void createRepair(Repair repair);
 
     public void updateItemDetail(Item_Detail item); // Change state to "in use", "used", "discarded"
 
-    public ArrayList<Repair> getAllRepairs(int idWorkplace);
 
-    ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse;
+    ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse;
 }

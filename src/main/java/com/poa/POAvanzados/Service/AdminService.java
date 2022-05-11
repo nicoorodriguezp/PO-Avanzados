@@ -9,11 +9,11 @@ import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component("adminService")
+@Service
 public class AdminService extends ManagerService {
 
-    //TODO Tratar de solucionar el autowired del service
     @Autowired
     private AdminDAOImpl adminDAO=new AdminDAOImpl();
 

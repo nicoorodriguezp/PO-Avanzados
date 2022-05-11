@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository ("AdminDAOImpl")
+@Repository
 public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
 
     @Override

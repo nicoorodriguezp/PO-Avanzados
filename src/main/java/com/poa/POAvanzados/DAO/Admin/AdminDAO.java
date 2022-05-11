@@ -22,14 +22,14 @@ public interface AdminDAO {
     // Reports
 
     /** @return :Todas las salidas que hubo en un dia especifico. */
-    public List<Item_Detail> getAllCheckOut(String date);
+    public ArrayList<Item_Detail> getAllCheckOut(String date);
 
     /**
      * @return :Todas las salidas de items de un determinado deposito en un dia
      *         especifico.
      */
-    public List<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date);
+    public ArrayList<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date);
 
     /** @return :Salidas de un item desde un deposito en un dia especifico. */
-    public List<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date);
+    public ArrayList<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date);
 }

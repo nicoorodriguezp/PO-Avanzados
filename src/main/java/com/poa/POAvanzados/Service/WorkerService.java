@@ -22,7 +22,7 @@ public class WorkerService {
     @Autowired
     WorkerDAOImpl workerDAO=new WorkerDAOImpl();
 
-    public User getUser(User userLogin) throws DAOException, LoginUserException {
+    public User getUser(User userLogin) throws LoginUserException {
 
         return workerDAO.getUser(userLogin);
     }
@@ -59,7 +59,7 @@ public class WorkerService {
         return RepairRepository.getAllRepairs(idWorkplace);
     }
 
-    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
-        return workerDAO.getAllInventoryByWorkplaceOnStock(workplace);
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {
+        return workerDAO.getAllInventoryByWorkplaceOnStock(workplace,user_role);
     }
 }

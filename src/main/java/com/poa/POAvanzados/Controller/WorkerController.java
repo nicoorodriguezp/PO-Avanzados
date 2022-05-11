@@ -21,7 +21,7 @@ public class WorkerController{
     @Autowired
     WorkerService workerService= new WorkerService();
 
-    public User getUser(int dniUser,String password) throws DAOException, LoginUserException {
+    public User getUser(int dniUser,String password) throws LoginUserException {
         User user= new User();
         user.setIdUser(dniUser);
         user.setPassword(password);
@@ -48,7 +48,7 @@ public class WorkerController{
     }
 
 
-    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
-        return workerService.getAllInventoryByWorkplaceOnStock(workplace);
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {
+        return workerService.getAllInventoryByWorkplaceOnStock(workplace, user_role);
     }
 }
