@@ -68,7 +68,7 @@ public class UserListController extends Controller implements Initializable {
 
         getUsers();
 
-        idUserColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getIdUser()));
+        idUserColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getDni()));
         nameColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getName()));
         lastnameColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getLastName()));
         emailColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getEmail()));

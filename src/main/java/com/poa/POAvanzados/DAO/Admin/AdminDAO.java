@@ -3,6 +3,7 @@ package com.poa.POAvanzados.DAO.Admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 
@@ -15,7 +16,8 @@ public interface AdminDAO {
 
     public ArrayList<User> getUsers();
 
-
+    public void addItem(Item item);
+    public void updateItem(Item item);
 
     // Reports
 

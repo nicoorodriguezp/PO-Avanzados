@@ -6,6 +6,7 @@ import com.poa.POAvanzados.Controller.AdminController;
 import com.poa.POAvanzados.Controller.ManagerController;
 import com.poa.POAvanzados.Controller.WorkerController;
 import com.poa.POAvanzados.Exception.DAOException;
+import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.UserModel.User;
 
 import org.springframework.context.ApplicationContext;
@@ -74,15 +75,21 @@ public class MainController {
 
     protected void showRepairPanel() {
 
-        getFXML("Repair");
+        try {
+            getFXML("Repair");
 
-        RepairController controller = this.fxmlLoader.getController();
-        controller.init(this, wc.getAllInventoryByWorkplace(user.getWorkplace()));
+            RepairController controller = this.fxmlLoader.getController();
+            controller.init(this, wc.getAllInventoryByWorkplaceOnStock(user.getWorkplace()));
 
-        this.stage.setScene(new Scene(parent, 1263, 830));
-        this.stage.setTitle("Repair Panel");
+            this.stage.setScene(new Scene(parent, 1263, 830));
+            this.stage.setTitle("Repair Panel");
 
-        this.stage.show();
+            this.stage.show();
+        }
+        catch (NotAllowedForWarehouse e){
+            showAlert(e.getMessage(),2);
+            e.printStackTrace();
+        }
 
     }
 
@@ -149,7 +156,7 @@ public class MainController {
 
         getFXML("AbstractReplenish");
 
-        AbstractReplenishController c = fxmlLoader.<AbstractReplenishController>getController();
+        ReplenishController c = fxmlLoader.<ReplenishController>getController();
         c.init(this, false, wc.getItems(), mc.getWorkplaces());
 
         this.stage.setScene(new Scene(parent, 600, 400));

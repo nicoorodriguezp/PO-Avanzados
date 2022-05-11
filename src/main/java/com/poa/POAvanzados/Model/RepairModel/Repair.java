@@ -19,6 +19,9 @@ public class Repair {
     private String repairDescription;
     private ArrayList<Item_Detail> itemDetails;
 
+    public Repair() {
+    }
+
     public int getIdRepair() {
         return idRepair;
     }

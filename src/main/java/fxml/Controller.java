@@ -22,7 +22,7 @@ public class Controller {
     }
 
     protected String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }

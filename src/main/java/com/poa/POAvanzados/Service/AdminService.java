@@ -25,23 +25,25 @@ public class AdminService extends ManagerService {
         adminDAO.updateUser(user);
     }
 
-    public static ArrayList<Item_Detail> getAllCheckOut(String date) {
-        return ItemDetailRepository.getAllCheckOut(date);
+    public  ArrayList<Item_Detail> getAllCheckOut(String date) {
+        return adminDAO.getAllCheckOut(date);
     }
 
-    public static ArrayList<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date) {
-        return ItemDetailRepository.getCheckOutWarehouse(idWarehouse, date);
+    public ArrayList<Item_Detail> getCheckOutWarehouse(int idWarehouse, String date) {
+        return adminDAO.getCheckOutWarehouse(idWarehouse, date);
     }
 
-    public static ArrayList<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date) {
-        return ItemDetailRepository.getCheckOutItemWarehouse(idWarehouse, idItem, date);
+    public  ArrayList<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date) {
+        return adminDAO.getCheckOutItemWarehouse(idWarehouse, idItem, date);
     }
 
     public ArrayList<User> getUsers() {
         return adminDAO.getUsers();
     }
 
-
+    public void addItem(Item item){
+        adminDAO.addItem(item);
+    }
     public void updateItem(Item item) {
 
         adminDAO.updateItem(item);

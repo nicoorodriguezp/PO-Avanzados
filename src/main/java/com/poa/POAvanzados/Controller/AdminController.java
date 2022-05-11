@@ -28,7 +28,7 @@ public class AdminController extends ManagerController {
     }
 
     public ArrayList<Item_Detail> getAllCheckOut(String date) {
-        return AdminService.getAllCheckOut(date);
+        return adminService.getAllCheckOut(date);
     }
 
 
@@ -37,7 +37,7 @@ public class AdminController extends ManagerController {
     }
 
     public ArrayList<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date) {
-        return AdminService.getCheckOutItemWarehouse(idWarehouse, idItem, date);
+        return adminService.getCheckOutItemWarehouse(idWarehouse, idItem, date);
     }
 
     public ArrayList<User> getUsers() {
@@ -47,5 +47,8 @@ public class AdminController extends ManagerController {
     public void updateItem(Item item) {
         adminService.updateItem(item);
 
+    }
+    public void addItem(Item item){
+        adminService.addItem(item);
     }
 }

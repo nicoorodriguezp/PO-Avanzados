@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
+import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -36,18 +37,18 @@ public class WorkerController{
 
 
     public void createRepair(Repair repair) {
-        WorkerService.createRepair(repair);
+        workerService.createRepair(repair);
     }
 
 
 
-    public void addItem(Item item){
-        workerService.addItem(item);
-    }
+
     public ArrayList<Repair> getAllRepairs(int idWorkplace) {
         return WorkerService.getAllRepairs(idWorkplace);
     }
 
 
-
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
+        return workerService.getAllInventoryByWorkplaceOnStock(workplace);
+    }
 }

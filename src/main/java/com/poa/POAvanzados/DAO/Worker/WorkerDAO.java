@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
+import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -19,11 +20,12 @@ public interface WorkerDAO {
     public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace);
 
     public ArrayList<Item_Detail> getInventoryItem(int idWorkplace, int idItem);
-    public void addItem(Item item);
 
     public void createRepair(Repair repair);
 
     public void updateItemDetail(Item_Detail item); // Change state to "in use", "used", "discarded"
 
     public ArrayList<Repair> getAllRepairs(int idWorkplace);
+
+    ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse;
 }

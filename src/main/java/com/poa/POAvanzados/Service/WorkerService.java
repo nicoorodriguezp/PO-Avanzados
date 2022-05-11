@@ -6,6 +6,7 @@ import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
 import com.poa.POAvanzados.Database.RepairRepository;
 import com.poa.POAvanzados.Exception.LoginUserException;
+import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -35,9 +36,7 @@ public class WorkerService {
         return null;
     }
 
-    public void addItem(Item item){
-        workerDAO.addItem(item);
-    }
+
 
     public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace) {
         return workerDAO.getAllInventoryByWorkplace(workplace);
@@ -47,8 +46,9 @@ public class WorkerService {
         return null;
     }
 
-    public static void createRepair(Repair repair) {
-        RepairRepository.createRepair(repair);
+    public void createRepair(Repair repair) {
+
+        workerDAO.createRepair(repair);
     }
 
     public void updateItemDetail(Item_Detail item) {
@@ -59,4 +59,7 @@ public class WorkerService {
         return RepairRepository.getAllRepairs(idWorkplace);
     }
 
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
+        return workerDAO.getAllInventoryByWorkplaceOnStock(workplace);
+    }
 }

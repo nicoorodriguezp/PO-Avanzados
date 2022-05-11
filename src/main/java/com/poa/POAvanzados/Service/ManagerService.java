@@ -1,7 +1,6 @@
 package com.poa.POAvanzados.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,103 +9,53 @@ import java.util.Random;
 import com.poa.POAvanzados.DAO.Manager.ManagerDAOImpl;
 import com.poa.POAvanzados.Database.ItemRepository;
 import com.poa.POAvanzados.Database.WorkplaceRepository;
-import com.poa.POAvanzados.Model.ItemModel.ItemBuilder;
+import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
+import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
 public class ManagerService extends WorkerService {
 
-    private ManagerDAOImpl managerDAO=new ManagerDAOImpl();
-    public void replenishWarehouse(Workplace warehouse, int idItem, int quantity) {
+    private ManagerDAOImpl managerDAO = new ManagerDAOImpl();
 
-        for (int q = 0; q < quantity; q++) {
+    public void replenishWarehouse(int idWarehouse, int idItem, int quantity, String checkIn) throws QuantityExceedsMaxSlots {
 
-            Item_Detail item = new ItemBuilder()
-                    .addIdItem(idItem)
-                    .addWarehouse(warehouse)
-                    .addCheckIn(getDate())
-                    .build();
-
-            managerDAO.insert(item);
+        Workplace_Item workplace_item = managerDAO.checkStock(idWarehouse, idItem);
+        if (workplace_item.getMax_slots() < workplace_item.getStock() + quantity) {
+            throw new QuantityExceedsMaxSlots("La cantidad de items que quiere ingresar excede la capacidad maxima del inventario del item, cantidad actual: " + workplace_item.getStock());
         }
+        managerDAO.replenishWarehouse(idWarehouse, idItem, quantity, checkIn);
+
 
     }
 
-    public void replenishLaboratory(Workplace laboratory, int idItem, int quantity) {
-        List<Workplace> warehouses = WorkplaceRepository.getWarehouses();
-
-        int remaining = quantity;
-        List<Integer> last_warehouses = new ArrayList<Integer>();
-        int contador = 0;
-
-        while (remaining != 0 && contador < warehouses.size()) {
-
-            Random random = new Random();
-            int w = random.nextInt(warehouses.size() + 0) + 0;
-            contador++;
-
-            if (!last_warehouses.contains(w)) {
-
-                last_warehouses.add(w);
-
-                List<Item_Detail> availableItemsWarehouse = ItemRepository
-                        .getItemsDetails(
-                                warehouses.get(w).getIdWorkplace(),
-                                idItem,
-                                null);
-
-                if (availableItemsWarehouse.size() == 0) {
-
-                    // Remplazar esto por un throw business exception
-                    System.out.println("No hay stock disponible de ese item en ningun deposito.");
-
-                } else if (availableItemsWarehouse.size() < remaining) {
-
-                    remaining = updateItemState(remaining, laboratory, availableItemsWarehouse,
-                            availableItemsWarehouse.size());
-                } else {
-
-                    remaining = updateItemState(remaining, laboratory, availableItemsWarehouse, remaining);
-
+    public void replenishLaboratory(int idLaboratory, int idItem, int quantity, String checkout) throws QuantityExceedsMaxSlots, NoWarehouseWithEnoughStock {
+        Workplace_Item workplace_item = managerDAO.checkStock(idLaboratory, idItem);
+        if (workplace_item.getMax_slots() < workplace_item.getStock() + quantity) {
+            throw new QuantityExceedsMaxSlots("La cantidad de items que quiere ingresar excede la capacidad maxima del inventario del item, cantidad actual: " + workplace_item.getStock());
+        }
+        List<Workplace> warehouses = managerDAO.getWarehouses();
+        Boolean isSent = false;
+        int highestStock=0;
+        for (Workplace warehouse : warehouses) {
+            if(!isSent) {
+                Workplace_Item workplace_itemAux= managerDAO.checkStock(warehouse.getIdWorkplace(), idItem);
+                if ( workplace_itemAux.getStock()>= quantity) {
+                    managerDAO.replenishLaboratory(idLaboratory,idItem,quantity,checkout,warehouse.getIdWorkplace());
+                    isSent = true;
+                }
+                else {
+                    if(highestStock<workplace_itemAux.getStock()){
+                        highestStock=workplace_itemAux.getStock();
+                    }
                 }
             }
-
         }
-
-        if (contador < warehouses.size()) {
-            System.out.println(
-                    "Se abastecio el stock del item " + idItem + " en el laboratorio: " + laboratory.getIdWorkplace()
-                            + " correctamente. \n\n");
-        } else {
-            // Si ya verifico el stock en todos los warehouses, entonces no hay mas stock
-            // disponible.
-            // Remplazar esto por un throw business exception
-            System.out.println(
-                    "No se pudo abastecer por completo por falta de stock en los depositos.\n " +
-                            "Aun quedan " + remaining + " unidades restantes que no se han podido reabastecer. \n\n");
-
+        if (!isSent){
+            throw new NoWarehouseWithEnoughStock("No hay warehouse con stock suficiente para cubrir el pedido, el mayor stock registrado es "+highestStock);
         }
-
-    }
-
-    private int updateItemState(int remaining, Workplace laboratory , List<Item_Detail> availableItemsWarehouse, int max) {
-        for (int i = 0; i < max; i++) {
-            Item_Detail item = availableItemsWarehouse.get(i);
-            item.setCheckOut(getDate());
-            item.setLaboratory(laboratory);
-            // ItemRepository.save(item);
-            remaining -= 1;
-        }
-
-        return remaining;
-    }
-
-    private String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
-        return formatter.format(date);
-
     }
 
     public ArrayList<Workplace> getWorkplaces() {

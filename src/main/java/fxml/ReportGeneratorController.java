@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Controller.AdminController;
+import com.poa.POAvanzados.Exception.InvalidDateFormat;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
@@ -90,27 +91,40 @@ public class ReportGeneratorController extends Controller implements Initializab
                 itemsCB.setEditable(false);
                 itemsCB.setDisable(true);
                 generateButton.setOnAction(e -> {
+                    try {
+
+
                     checkOutTable.setItems(null);
                     itemsCheckedOut.clear();
                     itemsCheckedOut.addAll(ac.getAllCheckOut(String.valueOf(
-                            datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")))));
+                            datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
                     setItemsTable();
+                    }
+                    catch (NullPointerException exception){
+                        m.showAlert("Introduzca una fecha que corresponda con el formato dd/MM/yyyy", 1);
+                    }
                 });
 
                 break;
             case 2:
                 // Reporte de salidas de un deposito
+
                 itemsCB.setEditable(false);
                 itemsCB.setDisable(true);
                 workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
                 generateButton.setOnAction(e -> {
+                    try {
                     checkOutTable.setItems(null);
                     itemsCheckedOut.clear();
                     itemsCheckedOut.addAll(ac.getCheckOutWarehouse(workplaceCB.valueProperty().getValue()
-                            .getIdWorkplace(),
+                                    .getIdWorkplace(),
                             String.valueOf(
-                                    datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")))));
+                                    datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
                     setItemsTable();
+                    }
+                    catch (NullPointerException exception){
+                        m.showAlert("Introduzca una fecha que corresponda con el formato dd/MM/yyyy", 1);
+                    }
                 });
                 break;
             case 3:
@@ -118,13 +132,18 @@ public class ReportGeneratorController extends Controller implements Initializab
                 itemsCB.setItems(FXCollections.observableArrayList(items));
                 // Reportes de salidas de un item desde un deposito especifico
                 generateButton.setOnAction(e -> {
+                    try {
                     checkOutTable.setItems(null);
                     itemsCheckedOut.clear();
                     itemsCheckedOut.addAll(ac.getCheckOutItemWarehouse(workplaceCB.valueProperty().getValue()
-                            .getIdWorkplace(),
+                                    .getIdWorkplace(),
                             itemsCB.valueProperty().getValue().getIdItem(), String.valueOf(
-                                    datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yy")))));
+                                    datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))));
                     setItemsTable();
+                    }
+                    catch (NullPointerException exception){
+                        m.showAlert("Introduzca una fecha que corresponda con el formato dd/MM/yyyy", 1);
+                    }
                 });
 
                 break;

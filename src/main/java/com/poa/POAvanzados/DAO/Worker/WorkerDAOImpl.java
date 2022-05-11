@@ -1,12 +1,12 @@
 package com.poa.POAvanzados.DAO.Worker;
 
-import com.poa.POAvanzados.DAO.RowMappers.ItemRowMapper;
-import com.poa.POAvanzados.DAO.RowMappers.Item_DetailRowMapper;
-import com.poa.POAvanzados.DAO.RowMappers.UserRowMapper;
+import com.poa.POAvanzados.DAO.RowMappers.*;
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
+import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
@@ -32,8 +32,7 @@ public class WorkerDAOImpl implements WorkerDAO{
                             "\tFROM public.\"User\"\n" +
                             "\tJOIN \"Position\" ON \"User\".\"idPosition\"=\"Position\".\"idPosition\"\n" +
                             "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"User\".\"idWorkplace\"" +
-                            "\tWHERE \"dni\"=? AND \"password\" LIKE ?;", new Object[]{user.getIdUser(), user.getPassword()},
-                    new UserRowMapper());
+                            "\tWHERE \"dni\"=? AND \"password\" LIKE ?;", new Object[]{user.getIdUser(), user.getPassword()}, new UserRowMapper());
             return userResponse;
         }
         catch (EmptyResultDataAccessException e){
@@ -51,10 +50,6 @@ public class WorkerDAOImpl implements WorkerDAO{
         List<Item> itemList=jt.query("SELECT \"idItem\", name, critical\n" +
                 "\tFROM public.\"Item\";",new ItemRowMapper());
         items.addAll(itemList);
-        for (Item item :
-                items) {
-            System.out.println(item.getName());
-        }
         return items;
     }
 
@@ -66,7 +61,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         ArrayList<Item_Detail> items = new ArrayList<>();
         List<Item_Detail> item_detailList;
         if(workplace.isWarehouse()){
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                     "FROM public.\"Item_Detail\"\n" +
                     "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                     "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
@@ -75,13 +70,13 @@ public class WorkerDAOImpl implements WorkerDAO{
                     "WHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
         }
         else {
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                     "FROM public.\"Item_Detail\"\n" +
                     "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                     "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
                     "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
                     "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
-                    "WHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+                    "WHERE \"idLaboratory\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
         }
 
         items.addAll(item_detailList);
@@ -96,15 +91,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         return null;
     }
 
-    @Override
-    public void addItem(Item item) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
-        JdbcTemplate jt = new JdbcTemplate(ds);
-        jt.update("INSERT INTO public.\"Item\"(\n" +
-                "\t name, critical)\n" +
-                "\tVALUES ( ?, ?);",item.getName(),item.isCritical());
-    }
+
 
     @Override
     public void createRepair(Repair repair) {
@@ -112,13 +99,37 @@ public class WorkerDAOImpl implements WorkerDAO{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        jt.update("INSERT INTO public.\"Repair\"(\n" +
-                "\t \"idUser\", \"idWorkplace\", date, description)\n" +
-                "\tVALUES (?, ?, ?, ?);",repair.getIdTechnician(),repair.getIdLaboratory(),repair.getReparationDate(),repair.getRepairDescription());
+        int idRepair;
+        idRepair=jt.queryForObject("INSERT INTO public.\"Repair\"(\n" +
+                    "\t \"idUser\", \"idWorkplace\", date, description)\n" +
+                    "\tVALUES (?, ?, ?, ?) RETURNING \"idRepair\";",new Object[]{repair.getIdTechnician(),repair.getIdLaboratory(),repair.getReparationDate(),repair.getRepairDescription()},Integer.class);
+        repair.setIdRepair(idRepair);
+        for (Item_Detail itemDetail :
+                repair.getItemDetails()) {
+            jt.update("INSERT INTO public.\"Repair_Item\"(\n" +
+                    "\t\"idRepair\", \"idItemCode\")\n" +
+                    "\tVALUES (?, ?);",repair.getIdRepair(), itemDetail.getIdItemCode());
+            updateItemDetail(itemDetail);
+            Item item=jt.queryForObject("SELECT \"idItem\", name, critical\n" +
+                    "\tFROM public.\"Item\"\n" +
+                    "\tWHERE \"idItem\"=?;",new Object[]{itemDetail.getItem().getIdItem()},new ItemRowMapper());
+            Workplace_Item workplace_item= jt.queryForObject("SELECT \"idWorkplace\", \"idItem\", max_slots, stock\n" +
+                    "\tFROM public.\"Workplace_Item\"\n" +
+                    "\tWHERE \"idWorkplace\"=? AND \"idItem\"=?;",new Object[]{itemDetail.getLaboratory(),itemDetail.getItem().getIdItem()} ,new Workplace_ItemRowMapper());
+            checkingStockForMail(item,workplace_item);
+        }
+
     }
 
     @Override
     public void updateItemDetail(Item_Detail item) {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        jt.update("UPDATE public.\"Item_Detail\"\n" +
+                "\tSET \"idState\"=?\n" +
+                "\tWHERE \"idItemCode\"=?;",item.getState().getIdState(),item.getIdItemCode());
 
     }
 
@@ -126,5 +137,33 @@ public class WorkerDAOImpl implements WorkerDAO{
     @Override
     public ArrayList<Repair> getAllRepairs(int idWorkplace) {
         return null;
+    }
+
+    @Override
+    public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace) throws NotAllowedForWarehouse {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Item_Detail> items = new ArrayList<>();
+        List<Item_Detail> item_detailList;
+        if(workplace.isWarehouse()){
+            throw new NotAllowedForWarehouse("Solo los usuarios de laboratorio pueden hacer una reparacion");
+        }
+        else {
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
+                    "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
+                    "WHERE \"idLaboratory\"=? AND \"Item_Detail\".\"idState\"=1;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+        }
+
+        items.addAll(item_detailList);
+        return items;
+    }
+
+    public void checkingStockForMail(Item item, Workplace_Item workplace_item){
+
     }
 }

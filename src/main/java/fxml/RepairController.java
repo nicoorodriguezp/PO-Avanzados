@@ -232,8 +232,7 @@ public class RepairController extends Controller implements Initializable {
             }
 
         }
-        Repair rBuilder = new RepairBuilder()
-                .addIdRepair(0)
+        Repair repair = new RepairBuilder()
                 .addItems(itemsListRepair)
                 .addLaboratory(m.user.getWorkplace().getIdWorkplace())
                 .addReparationDate(getDate())
@@ -241,7 +240,7 @@ public class RepairController extends Controller implements Initializable {
                 .addTechnician(m.user.getIdUser())
                 .build();
 
-        m.wc.createRepair(rBuilder);
+        m.wc.createRepair(repair);
 
         // upload the repair to db
 

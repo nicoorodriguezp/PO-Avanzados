@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
+import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
@@ -24,7 +26,7 @@ import javafx.scene.control.TextField;
  *
  * @author ngrp
  */
-public class AbstractReplenishController extends Controller implements Initializable {
+public class ReplenishController extends Controller implements Initializable {
 
     @FXML
     private Button rButton;
@@ -67,24 +69,38 @@ public class AbstractReplenishController extends Controller implements Initializ
 
     private void setButtonAction(boolean warehouse) {
 
-        if (warehouse) {
-            rButton.setOnAction(e -> {
-                System.out.println("\n\nReposicion de Deposito:");
-                m.mc.replenishWarehouse(selectedWorkplace, itemSelected,
-                        Integer.parseInt(quantityTF.getText()));
-                m.showAlert("La reposicion del Deposito se realizo correctamente.", 4);
 
-            });
-        } else {
-            rButton.setOnAction(e -> {
-                System.out.println("\n\nReposicion de Laboratorio:");
-                m.mc.replenishLaboratory(selectedWorkplace, itemSelected,
-                        Integer.parseInt(quantityTF.getText()));
-                System.out.println(itemSelected);
-                m.showAlert("La reposicion del Laboratorio se realizo correctamente.", 4);
-            });
+            if (warehouse) {
+                rButton.setOnAction(e -> {
+                    try {
+                    System.out.println("\n\nReposicion de Deposito:");
+                    m.mc.replenishWarehouse(selectedWorkplace, itemSelected,
+                            Integer.parseInt(quantityTF.getText()), getDate());
+                    m.showAlert("La reposicion del Deposito se realizo correctamente.", 4);
+                    }catch (QuantityExceedsMaxSlots exception){
+                        m.showAlert(exception.getMessage(),2);
+                    }
 
-        }
+                });
+            } else {
+                rButton.setOnAction(e -> {
+                    try {
+                        System.out.println("\n\nReposicion de Laboratorio:");
+                        m.mc.replenishLaboratory(selectedWorkplace, itemSelected,
+                                Integer.parseInt(quantityTF.getText()), getDate());
+                        System.out.println(itemSelected);
+                        m.showAlert("La reposicion del Laboratorio se realizo correctamente.", 4);
+                    }
+                    catch (QuantityExceedsMaxSlots exception){
+                        m.showAlert(exception.getMessage(),2);
+                    } catch (NoWarehouseWithEnoughStock ex) {
+                        m.showAlert(ex.getMessage(),2);
+                    }
+                });
+
+            }
+
+
 
     }
 
