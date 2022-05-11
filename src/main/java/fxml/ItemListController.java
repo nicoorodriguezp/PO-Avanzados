@@ -123,6 +123,7 @@ public class ItemListController extends Controller implements Initializable {
         this.m = m;
         this.items = items;
         this.itemsStock = itemsStock;
+        this.userNameLabel.setText(m.user.toString());
 
         if(this.m.user.getPosition().getIdPosition() == AdminPosition){
             //Si es admin, mostrar las opciones de alta, modificacion y baja de items.

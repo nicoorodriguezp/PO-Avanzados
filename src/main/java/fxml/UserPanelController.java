@@ -73,6 +73,7 @@ public class UserPanelController extends Controller implements Initializable {
         this.ulc = ulc;
         this.update = update;
         this.selectedUser = selectedUser;
+        this.userNameLabel.setText(m.user.toString());
 
         if (update) {
             if (m.user.getPosition().getIdPosition() != AdminPosition) {

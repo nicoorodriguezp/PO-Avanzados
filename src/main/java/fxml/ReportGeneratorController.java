@@ -82,7 +82,7 @@ public class ReportGeneratorController extends Controller implements Initializab
 
         this.m = m;
         AdminController ac = new AdminController();
-        this.userNameLabel.setText(m.user.getName());
+        this.userNameLabel.setText(m.user.toString());
         switch (type) {
             case 1:
                 // Reporte General
