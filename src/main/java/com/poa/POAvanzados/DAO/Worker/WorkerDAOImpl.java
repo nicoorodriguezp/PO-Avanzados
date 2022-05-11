@@ -13,10 +13,8 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.security.auth.login.LoginException;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +26,11 @@ public class WorkerDAOImpl implements WorkerDAO{
             ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
             DataSource ds = (DataSource) applicationContext.getBean("dataSource");
             JdbcTemplate jt = new JdbcTemplate(ds);
-            User userResponse = jt.queryForObject("SELECT \"idUser\", \"User\".\"idPosition\", name, \"lastName\", email, password, activo, \"User\".\"idWorkplace\", dni,\"Position\".title,\"Position\".category,\"Workplace\".address,\"Workplace\".warehouse,\"Workplace\".\"idManager\"\n" +
+            User userResponse = jt.queryForObject("SELECT \"idUser\", \"User\".\"idPosition\", name, \"lastName\", email, activo, \"User\".\"idWorkplace\", dni,\"Position\".title,\"Position\".category,\"Workplace\".address,\"Workplace\".warehouse,\"Workplace\".\"idManager\"\n" +
                             "\tFROM public.\"User\"\n" +
                             "\tJOIN \"Position\" ON \"User\".\"idPosition\"=\"Position\".\"idPosition\"\n" +
                             "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"User\".\"idWorkplace\"" +
-                            "\tWHERE \"dni\"=? AND \"password\" LIKE ?;", new Object[]{user.getIdUser(), user.getPassword()}, new UserRowMapper());
+                            "\tWHERE \"dni\"=? AND \"password\" LIKE ?;", new Object[]{user.getIdUser(), user.getPassword()}, new UserNoPasswordRowMapper());
             return userResponse;
         }
         catch (EmptyResultDataAccessException e){
@@ -104,9 +102,8 @@ public class WorkerDAOImpl implements WorkerDAO{
             Item item=jt.queryForObject("SELECT \"idItem\", name, critical\n" +
                     "\tFROM public.\"Item\"\n" +
                     "\tWHERE \"idItem\"=?;",new Object[]{itemDetail.getItem().getIdItem()},new ItemRowMapper());
-            Workplace_Item workplace_item= jt.queryForObject("SELECT \"idWorkplace\", \"idItem\", max_slots, stock\n" +
-                    "\tFROM public.\"Workplace_Item\"\n" +
-                    "\tWHERE \"idWorkplace\"=? AND \"idItem\"=?;",new Object[]{itemDetail.getLaboratory(),itemDetail.getItem().getIdItem()} ,new Workplace_ItemRowMapper());
+
+            Workplace_Item workplace_item= checkStock(repair.getIdLaboratory(),item.getIdItem());
             checkingStockForMail(item,workplace_item);
         }
 
@@ -148,7 +145,16 @@ public class WorkerDAOImpl implements WorkerDAO{
         items.addAll(item_detailList);
         return items;
     }
+    public Workplace_Item checkStock(int idWorkplace, int idItem) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        Workplace_Item workplace_item = jt.queryForObject("SELECT \"idWorkplace\", \"idItem\", max_slots, stock\n" +
+                "\tFROM public.\"Workplace_Item\"\n" +
+                "\tWHERE \"idWorkplace\"=? AND \"idItem\"=?;", new Object[]{idWorkplace, idItem}, new Workplace_ItemRowMapper());
 
+        return workplace_item;
+    }
     public void checkingStockForMail(Item item, Workplace_Item workplace_item){
 
     }

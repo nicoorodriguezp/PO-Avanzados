@@ -19,7 +19,5 @@ public interface ManagerDAO {
 
     public ArrayList<Position> getPositions();
 
-    Workplace_Item checkStock(int idWarehouse, int idItem);
-
     List<Workplace> getWarehouses();
 }

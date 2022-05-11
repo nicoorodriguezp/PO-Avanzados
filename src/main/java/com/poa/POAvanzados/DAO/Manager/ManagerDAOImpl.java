@@ -45,8 +45,8 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
         JdbcTemplate jt = new JdbcTemplate(ds);
 
         jt.update("UPDATE public.\"Item_Detail\"\n" +
-                    "\tSET \"idLaboratory\"=?, check_out=?\n" +
-                    "\tWHERE \"idWarehouse\"=? AND \"idLaboratory\" is null AND check_out is null;", idLaboratory, checkOut, idWarehouse);
+                "\tSET \"idLaboratory\"=?, check_out=?\n" +
+                "\tWHERE \"idItemCode\" in (SELECT \"idItemCode\" FROM \"Item_Detail\" WHERE \"idLaboratory\" is  null AND check_out is  null AND \"idWarehouse\"=? LIMIT ?)", idLaboratory, checkOut, idWarehouse,quantity);
 
         jt.update("UPDATE public.\"Workplace_Item\"\n" +
                 "\tSET  stock= stock+?\n" +
@@ -60,9 +60,7 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
                 "\tFROM public.\"Item\"\n" +
                 "\tWHERE \"idItem\"=?;",new Object[]{idItem},new ItemRowMapper());
 
-        Workplace_Item workplace_item= jt.queryForObject("SELECT \"idWorkplace\", \"idItem\", max_slots, stock\n" +
-                "\tFROM public.\"Workplace_Item\"\n" +
-                "\tWHERE \"idWorkplace\"=? AND \"idItem\"=?;",new Object[]{idLaboratory,idItem} ,new Workplace_ItemRowMapper());
+        Workplace_Item workplace_item= checkStock(idWarehouse,idItem);
         checkingStockForMail(item,workplace_item);
     }
 
@@ -89,19 +87,6 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
                 "\tFROM public.\"Position\";",new PositionRowMapper());
         positions.addAll(positionList);
         return positions;
-    }
-
-    @Override
-    public Workplace_Item checkStock(int idWorkplace, int idItem) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
-        JdbcTemplate jt = new JdbcTemplate(ds);
-        Workplace_Item workplace_item= jt.queryForObject("SELECT max_slots, stock\n" +
-                "\tFROM public.\"Workplace_Item\"\n" +
-                "\tWHERE \"idWorkplace\"=? AND \"idItem\"=?;",new Object[]{idWorkplace,idItem}, new Workplace_ItemRowMapper());
-
-        return workplace_item;
-
     }
 
     @Override

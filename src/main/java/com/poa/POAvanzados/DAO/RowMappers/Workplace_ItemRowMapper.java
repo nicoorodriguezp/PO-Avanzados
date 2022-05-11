@@ -12,6 +12,8 @@ public class Workplace_ItemRowMapper implements RowMapper<Workplace_Item> {
     @Override
     public Workplace_Item mapRow(ResultSet resultSet, int i) throws SQLException {
         Workplace_Item workplace_item=new Workplace_Item();
+        workplace_item.setIdWorkplace(resultSet.getInt("idWorkplace"));
+        workplace_item.setIdItem(resultSet.getInt("idItem"));
         workplace_item.setStock(resultSet.getInt("stock"));
         workplace_item.setMax_slots(resultSet.getInt("max_slots"));
         return workplace_item;

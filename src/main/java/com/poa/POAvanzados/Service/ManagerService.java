@@ -25,7 +25,6 @@ public class ManagerService extends WorkerService {
     private ManagerDAOImpl managerDAO = new ManagerDAOImpl();
 
     public void replenishWarehouse(int idWarehouse, int idItem, int quantity, String checkIn) throws QuantityExceedsMaxSlots {
-
         Workplace_Item workplace_item = managerDAO.checkStock(idWarehouse, idItem);
         if (workplace_item.getMax_slots() < workplace_item.getStock() + quantity) {
             throw new QuantityExceedsMaxSlots("La cantidad de items que quiere ingresar excede la capacidad maxima del inventario del item, cantidad actual: " + workplace_item.getStock());

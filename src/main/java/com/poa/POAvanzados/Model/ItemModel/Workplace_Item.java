@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Workplace_Item {
+    int idWorkplace;
+    int idItem;
     int max_slots;
     int stock;
 }
