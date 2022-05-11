@@ -9,6 +9,7 @@ import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,18 +147,18 @@ public class ItemListController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Tabla de Items
-        idItemColumn.setCellValueFactory(new PropertyValueFactory<>("idItem"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        criticalColumn.setCellValueFactory(new PropertyValueFactory<>("critical"));
+        idItemColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getIdItem()));
+        nameColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getName()));
+        criticalColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().isCritical()));
 
         // Tabla de Stock
-        idItemStockColumn.setCellValueFactory(new PropertyValueFactory<>("idItem"));
-        itemCodeColumn.setCellValueFactory(new PropertyValueFactory<>("idItemCode"));
-        nameStockColumn.setCellValueFactory(itemDetail -> new SimpleStringProperty(itemDetail.getValue().getItem().getName()));
-        criticalStockColumn.setCellValueFactory(itemDetail -> new SimpleBooleanProperty(itemDetail.getValue().getItem().isCritical()));
-        checkInColumn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
-        checkOutColumn.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
-        warehouseColumn.setCellValueFactory(new PropertyValueFactory<>("warehouse"));
+        idItemStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getIdItem()));
+        itemCodeColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getIdItemCode()));
+        nameStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getName()));
+        criticalStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().isCritical()));
+        checkInColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckIn()));
+        checkOutColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckOut()));
+        warehouseColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getWarehouse()));
 
     }
 

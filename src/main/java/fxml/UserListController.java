@@ -10,6 +10,7 @@ import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,13 +68,13 @@ public class UserListController extends Controller implements Initializable {
 
         getUsers();
 
-        idUserColumn.setCellValueFactory(new PropertyValueFactory<>("dni"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
-        workplaceColumn.setCellValueFactory(new PropertyValueFactory<>("workplace"));
-        activeColumn.setCellValueFactory(new PropertyValueFactory<>("active"));
+        idUserColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getIdUser()));
+        nameColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getName()));
+        lastnameColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getLastName()));
+        emailColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getEmail()));
+        positionColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getPosition().getTitle()));
+        workplaceColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getWorkplace().getAddress()));
+        activeColumn.setCellValueFactory(user -> new SimpleObjectProperty(user.getValue().getActive()));
 
         searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println(newValue);

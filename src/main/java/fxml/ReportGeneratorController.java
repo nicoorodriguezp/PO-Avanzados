@@ -14,6 +14,7 @@ import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
+import javafx.beans.property.SimpleObjectProperty;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -147,16 +148,16 @@ public class ReportGeneratorController extends Controller implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        idItemColumn.setCellValueFactory(new PropertyValueFactory<>("idItem"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        criticalColumn.setCellValueFactory(new PropertyValueFactory<>("critical"));
+        idItemColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getIdItem()));
+        nameColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getName()));
+        criticalColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().isCritical()));
 
-        itemCodeColumn.setCellValueFactory(new PropertyValueFactory<>("idItemCode"));
-        warehouseColumn.setCellValueFactory(new PropertyValueFactory<>("warehouse"));
-        checkInColumn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
-        checkOutColumn.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
-        laboratoryColumn.setCellValueFactory(new PropertyValueFactory<>("laboratory"));
-        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
+        itemCodeColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getIdItemCode()));
+        warehouseColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getWarehouse().getAddress()));
+        checkInColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckIn()));
+        checkOutColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckOut()));
+        laboratoryColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getLaboratory().getAddress()));
+        stateColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getState().getName()));
 
         datePicker.setConverter(new StringConverter<LocalDate>() {
 

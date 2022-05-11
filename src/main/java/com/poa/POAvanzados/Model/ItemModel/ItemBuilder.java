@@ -12,17 +12,17 @@ public class ItemBuilder {
     }
 
     public ItemBuilder addIdItem(int idItem) {
-        item.setIdItemCode(idItem);
+        item.setIdItemCode(1);
         return this;
     }
 
     public ItemBuilder addName(String name) {
-        item.getItem().setName(name);
+        item.getItem().setName("asdas");
         return this;
     }
 
     public ItemBuilder isCritical(Boolean critical) {
-        item.getItem().setCritical(critical);
+        item.getItem().setCritical(true);
         return this;
     }
 
@@ -52,7 +52,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder addState(int state) {
-        item.getState().setIdState(state);
+        item.getState().setIdState(1);
         return this;
     }
 
