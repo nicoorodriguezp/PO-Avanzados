@@ -4,6 +4,8 @@ import com.poa.POAvanzados.DAO.RowMappers.ItemRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.Item_DetailRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.UserNoPasswordRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.Workplace_ItemRowMapper;
+import com.poa.POAvanzados.Email.EmailController;
+import com.poa.POAvanzados.Email.EmailDetails;
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
@@ -160,5 +162,11 @@ public class WorkerDAOImpl implements WorkerDAO{
     }
     public void checkingStockForMail(Item item, Workplace_Item workplace_item){
 
+        EmailController e = new EmailController();
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setRecipient("nicogrodriguezp@gmail.com");
+        emailDetails.setMsgBody("Prueba email");
+        emailDetails.setSubject("Prueba Email 2.0");
+        e.sendMail(emailDetails);
     }
 }

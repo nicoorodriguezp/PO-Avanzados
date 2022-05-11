@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import com.poa.POAvanzados.Exception.DAOException;
 
 import com.poa.POAvanzados.Exception.LoginUserException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
@@ -32,6 +34,15 @@ public class LoginController extends Controller implements Initializable {
 
     public void init(MainController mainController) {
         this.m = mainController;
+        dniTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    dniTF.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
     @FXML
