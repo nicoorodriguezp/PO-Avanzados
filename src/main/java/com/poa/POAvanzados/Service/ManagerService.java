@@ -28,7 +28,7 @@ public class ManagerService extends WorkerService {
                     .addCheckIn(getDate())
                     .build();
 
-            ItemRepository.insert(item);
+            managerDAO.insert(item);
         }
 
     }

@@ -114,7 +114,7 @@ public class RepairController extends Controller implements Initializable {
                 changeItemFromRepairListStatus(itemSearchSelected.getItem(), ItemInUse);
 
                 System.out
-                        .println("\nSe agrego a la lista de reparacion el item: " + itemSearchSelected.getItem().getName());
+                        .println("\nSe agrego a la lista de reparacion el item: " + itemSearchSelected.getItem().getItem().getName());
             }
 
 
@@ -182,7 +182,7 @@ public class RepairController extends Controller implements Initializable {
             if (searchTF.getText() == "" && itemsLaboratory.get(i).getState().getIdState() == ItemInStock) {
                 addSearchItem(i);
 
-            } else if (itemsLaboratory.get(i).getName().contains(
+            } else if (itemsLaboratory.get(i).getItem().getName().contains(
                     searchTF.getText()) && itemsLaboratory.get(i).getState().getIdState() == ItemInStock) {
                 addSearchItem(i);
             }
@@ -225,9 +225,9 @@ public class RepairController extends Controller implements Initializable {
 
         for (Item_Detail i : itemsListRepair) {
             if (i.getState().getIdState() != ItemDescarded) {
-                i.getState().setIdState(4);
+                i.getState().setIdState(ItemInUse);
             }
-            if (i.isCritical()) {
+            if (i.getItem().isCritical()) {
                 checkStockStatus();
             }
 

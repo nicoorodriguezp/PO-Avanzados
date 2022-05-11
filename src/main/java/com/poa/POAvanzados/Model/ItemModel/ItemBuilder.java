@@ -8,21 +8,21 @@ public class ItemBuilder {
 
     public ItemBuilder() {
         item = new Item_Detail();
-        item.setState(new ItemState(0,"En Stock"));
+        item.setState(new ItemState(1,"En Stock"));
     }
 
     public ItemBuilder addIdItem(int idItem) {
-        item.setIdItem(idItem);
+        item.setIdItemCode(idItem);
         return this;
     }
 
     public ItemBuilder addName(String name) {
-        item.setName(name);
+        item.getItem().setName(name);
         return this;
     }
 
     public ItemBuilder isCritical(Boolean critical) {
-        item.setCritical(critical);
+        item.getItem().setCritical(critical);
         return this;
     }
 

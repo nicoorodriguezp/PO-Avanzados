@@ -66,22 +66,22 @@ public class WorkerDAOImpl implements WorkerDAO{
         ArrayList<Item_Detail> items = new ArrayList<>();
         List<Item_Detail> item_detailList;
         if(workplace.isWarehouse()){
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\"\n" +
-                    "\tFROM public.\"Item_Detail\"\n" +
-                    "\tJOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
-                    "\tJOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
-                    "\tJOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
-                    "\tJOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
-                    "\tWHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
+                    "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
+                    "WHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
         }
         else {
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\"\n" +
-                    "\tFROM public.\"Item_Detail\"\n" +
-                    "\tJOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
-                    "\tJOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
-                    "\tJOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
-                    "\tJOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
-                    "\tWHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
+                    "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
+                    "WHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
         }
 
         items.addAll(item_detailList);
@@ -118,7 +118,7 @@ public class WorkerDAOImpl implements WorkerDAO{
     }
 
     @Override
-    public void updateItem(Item_Detail item) {
+    public void updateItemDetail(Item_Detail item) {
 
     }
 

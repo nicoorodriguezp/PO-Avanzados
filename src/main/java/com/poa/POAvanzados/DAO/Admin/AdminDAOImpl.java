@@ -2,6 +2,7 @@ package com.poa.POAvanzados.DAO.Admin;
 
 import com.poa.POAvanzados.DAO.Manager.ManagerDAOImpl;
 import com.poa.POAvanzados.DAO.RowMappers.UserRowMapper;
+import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import org.springframework.context.ApplicationContext;
@@ -65,5 +66,15 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
     @Override
     public List<Item_Detail> getCheckOutItemWarehouse(int idWarehouse, int idItem, String date) {
         return null;
+    }
+
+    public void updateItem(Item item) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        jt.update("UPDATE public.\"Item\"\n" +
+                "\tSET  name=?, critical=?\n" +
+                "\tWHERE idItem=?;",item.getName(),item.isCritical());
+
     }
 }

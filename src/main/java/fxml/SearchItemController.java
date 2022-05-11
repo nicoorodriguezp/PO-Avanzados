@@ -28,7 +28,7 @@ public class SearchItemController implements Initializable {
         this.item = item;
         this.repairController = repairController;
 
-        this.itemName.setText(item.getName());
+        this.itemName.setText(item.getItem().getName());
 
         this.idItem.setText(String.valueOf(item.getIdItemCode()));
 

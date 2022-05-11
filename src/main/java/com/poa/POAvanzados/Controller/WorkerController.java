@@ -39,10 +39,7 @@ public class WorkerController{
         WorkerService.createRepair(repair);
     }
 
-    public void updateItem(Item_Detail item) {
-        WorkerService.updateItem(item);
 
-    }
 
     public void addItem(Item item){
         workerService.addItem(item);

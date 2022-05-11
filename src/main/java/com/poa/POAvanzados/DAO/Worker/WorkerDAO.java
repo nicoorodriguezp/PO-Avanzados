@@ -23,7 +23,7 @@ public interface WorkerDAO {
 
     public void createRepair(Repair repair);
 
-    public void updateItem(Item_Detail item); // Change state to "in use", "used", "discarded"
+    public void updateItemDetail(Item_Detail item); // Change state to "in use", "used", "discarded"
 
     public ArrayList<Repair> getAllRepairs(int idWorkplace);
 }

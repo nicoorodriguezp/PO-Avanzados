@@ -37,7 +37,7 @@ public class RepairItemController extends Controller implements Initializable {
         this.repairController = repairController;
 
         idItem.setText(String.valueOf(item.getIdItemCode()));
-        itemName.setText(item.getName());
+        itemName.setText(item.getItem().getName());
 
         if (item.getState().getIdState() == ItemDescarded) {
             descardedCheck.selectedProperty().set(true);

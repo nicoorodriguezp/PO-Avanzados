@@ -75,17 +75,17 @@ public class HomeController extends Controller implements Initializable {
 
     @FXML
     private void showGeneralReportGenerator(ActionEvent event) {
-        m.showReportGenerator(0);
-    }
-
-    @FXML
-    private void showWarehouseReportGenerator(ActionEvent event) {
         m.showReportGenerator(1);
     }
 
     @FXML
-    private void showItemWarehouseReportGenerator(ActionEvent event) {
+    private void showWarehouseReportGenerator(ActionEvent event) {
         m.showReportGenerator(2);
+    }
+
+    @FXML
+    private void showItemWarehouseReportGenerator(ActionEvent event) {
+        m.showReportGenerator(3);
     }
 
     @FXML

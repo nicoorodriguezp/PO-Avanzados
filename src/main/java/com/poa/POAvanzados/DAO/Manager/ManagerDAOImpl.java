@@ -3,6 +3,7 @@ package com.poa.POAvanzados.DAO.Manager;
 import com.poa.POAvanzados.DAO.RowMappers.PositionRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.WorkplaceRowMapper;
 import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
+import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
@@ -49,5 +50,8 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
                 "\tFROM public.\"Position\";",new PositionRowMapper());
         positions.addAll(positionList);
         return positions;
+    }
+
+    public void insert(Item_Detail item) {
     }
 }

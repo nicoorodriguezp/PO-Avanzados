@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
-import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Database.RepairRepository;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Model.ItemModel.Item;
@@ -52,8 +51,8 @@ public class WorkerService {
         RepairRepository.createRepair(repair);
     }
 
-    public static void updateItem(Item_Detail item) {
-        ItemDetailRepository.updateItem(item);
+    public void updateItemDetail(Item_Detail item) {
+        workerDAO.updateItemDetail(item);
     }
 
     public static ArrayList<Repair> getAllRepairs(int idWorkplace) {

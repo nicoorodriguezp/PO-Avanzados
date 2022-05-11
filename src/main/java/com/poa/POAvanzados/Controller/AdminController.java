@@ -2,6 +2,7 @@ package com.poa.POAvanzados.Controller;
 
 import java.util.ArrayList;
 
+import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import com.poa.POAvanzados.Service.AdminService;
@@ -43,5 +44,8 @@ public class AdminController extends ManagerController {
         return adminService.getUsers();
     }
 
+    public void updateItem(Item item) {
+        adminService.updateItem(item);
 
+    }
 }

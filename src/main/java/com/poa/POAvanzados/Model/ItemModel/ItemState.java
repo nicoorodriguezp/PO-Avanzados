@@ -12,4 +12,8 @@ public class ItemState {
     private int idState;
     private String name;
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

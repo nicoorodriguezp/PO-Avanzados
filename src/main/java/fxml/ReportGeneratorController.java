@@ -80,9 +80,9 @@ public class ReportGeneratorController extends Controller implements Initializab
 
         this.m = m;
         AdminController ac = new AdminController();
-
+        this.userNameLabel.setText(m.user.getName());
         switch (type) {
-            case 0:
+            case 1:
                 // Reporte General
                 workplaceCB.setEditable(false);
                 workplaceCB.setDisable(true);
@@ -97,10 +97,11 @@ public class ReportGeneratorController extends Controller implements Initializab
                 });
 
                 break;
-            case 1:
+            case 2:
                 // Reporte de salidas de un deposito
                 itemsCB.setEditable(false);
                 itemsCB.setDisable(true);
+                workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
                 generateButton.setOnAction(e -> {
                     checkOutTable.setItems(null);
                     itemsCheckedOut.clear();
@@ -111,7 +112,9 @@ public class ReportGeneratorController extends Controller implements Initializab
                     setItemsTable();
                 });
                 break;
-            case 2:
+            case 3:
+                workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
+                itemsCB.setItems(FXCollections.observableArrayList(items));
                 // Reportes de salidas de un item desde un deposito especifico
                 generateButton.setOnAction(e -> {
                     checkOutTable.setItems(null);
@@ -149,10 +152,10 @@ public class ReportGeneratorController extends Controller implements Initializab
         criticalColumn.setCellValueFactory(new PropertyValueFactory<>("critical"));
 
         itemCodeColumn.setCellValueFactory(new PropertyValueFactory<>("idItemCode"));
-        warehouseColumn.setCellValueFactory(new PropertyValueFactory<>("idWarehouse"));
+        warehouseColumn.setCellValueFactory(new PropertyValueFactory<>("warehouse"));
         checkInColumn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
         checkOutColumn.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
-        laboratoryColumn.setCellValueFactory(new PropertyValueFactory<>("idLaboratory"));
+        laboratoryColumn.setCellValueFactory(new PropertyValueFactory<>("laboratory"));
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
 
         datePicker.setConverter(new StringConverter<LocalDate>() {

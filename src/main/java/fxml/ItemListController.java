@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -151,8 +153,8 @@ public class ItemListController extends Controller implements Initializable {
         // Tabla de Stock
         idItemStockColumn.setCellValueFactory(new PropertyValueFactory<>("idItem"));
         itemCodeColumn.setCellValueFactory(new PropertyValueFactory<>("idItemCode"));
-        nameStockColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        criticalStockColumn.setCellValueFactory(new PropertyValueFactory<>("critical"));
+        nameStockColumn.setCellValueFactory(itemDetail -> new SimpleStringProperty(itemDetail.getValue().getItem().getName()));
+        criticalStockColumn.setCellValueFactory(itemDetail -> new SimpleBooleanProperty(itemDetail.getValue().getItem().isCritical()));
         checkInColumn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
         checkOutColumn.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
         warehouseColumn.setCellValueFactory(new PropertyValueFactory<>("warehouse"));
@@ -192,7 +194,7 @@ public class ItemListController extends Controller implements Initializable {
             itemsStockInTable.clear();
 
             for (Item_Detail item : itemsStock) {
-                if (item.getIdItem() == selectedItem.getIdItem()) {
+                if (item.getItem().getIdItem() == selectedItem.getIdItem()) {
                     itemsStockInTable.addAll(item);
                 }
             }
@@ -220,7 +222,7 @@ public class ItemListController extends Controller implements Initializable {
         Item i = new Item();
         i.setName(itemNameTF.getText());
         i.setCritical(criticalCheck.selectedProperty().getValue());
-//        this.m.ac.createItem(i);
+        this.m.ac.addItem(i);
     }
 
     @FXML
@@ -228,7 +230,7 @@ public class ItemListController extends Controller implements Initializable {
 
         selectedItem.setName(itemNameTF.getText());
         selectedItem.setCritical(criticalCheck.selectedProperty().getValue());
-//        this.m.ac.updateItemList(selectedItem);
+        this.m.ac.updateItem(selectedItem);
     }
 
     @FXML
@@ -273,7 +275,7 @@ public class ItemListController extends Controller implements Initializable {
 
             for (Item_Detail item : itemsStock) {
                 if (item.getWarehouse().getIdWorkplace() ==  workplaceCB.valueProperty().getValue().getIdWorkplace()
-                        &&item.getIdItem() == selectedItem.getIdItem()) {
+                        &&item.getItem().getIdItem() == selectedItem.getIdItem()) {
                     itemsStockInTable.addAll(item);
                 }
             }
