@@ -1,15 +1,13 @@
 package com.poa.POAvanzados.Service;
 
-import java.util.ArrayList;
-
 import com.poa.POAvanzados.DAO.Admin.AdminDAOImpl;
-import com.poa.POAvanzados.Database.ItemDetailRepository;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class AdminService extends ManagerService {

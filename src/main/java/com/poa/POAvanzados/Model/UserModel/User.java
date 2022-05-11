@@ -1,10 +1,9 @@
 package com.poa.POAvanzados.Model.UserModel;
 
 import com.poa.POAvanzados.Model.PositionModel.Position;
+import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import lombok.NoArgsConstructor;
 
 

@@ -1,7 +1,5 @@
 package com.poa.POAvanzados.Controller;
 
-import java.util.ArrayList;
-
 import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
 import com.poa.POAvanzados.Model.PositionModel.Position;
@@ -9,6 +7,8 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import com.poa.POAvanzados.Service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
 
 @Controller
 public class ManagerController extends WorkerController{

@@ -1,11 +1,10 @@
 package com.poa.POAvanzados.DAO.Admin;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.UserModel.User;
+
+import java.util.ArrayList;
 
 public interface AdminDAO {
 

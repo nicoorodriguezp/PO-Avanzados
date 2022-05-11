@@ -1,7 +1,6 @@
 package com.poa.POAvanzados.DAO.RowMappers;
 
 import com.poa.POAvanzados.Model.PositionModel.Position;
-import javafx.geometry.Pos;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

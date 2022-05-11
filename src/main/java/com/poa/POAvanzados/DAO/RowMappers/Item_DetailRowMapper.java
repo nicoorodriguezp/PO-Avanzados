@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class Item_DetailRowMapper implements RowMapper<Item_Detail> {
     @Override

@@ -1,6 +1,6 @@
 package com.poa.POAvanzados.Exception;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class DAOException extends Exception {
 

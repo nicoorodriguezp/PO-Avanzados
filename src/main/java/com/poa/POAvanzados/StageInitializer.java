@@ -1,11 +1,9 @@
 package com.poa.POAvanzados;
 
 import com.poa.POAvanzados.JavaFxMain.StageReadyEvent;
-
+import fxml.MainController;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
-import fxml.MainController;
 
 @Component
 public class StageInitializer implements ApplicationListener<JavaFxMain.StageReadyEvent> {

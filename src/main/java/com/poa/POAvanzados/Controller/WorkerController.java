@@ -1,8 +1,5 @@
 package com.poa.POAvanzados.Controller;
 
-import java.util.ArrayList;
-
-import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
@@ -13,6 +10,8 @@ import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import com.poa.POAvanzados.Service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
 
 @Controller
 public class WorkerController{
@@ -40,12 +39,6 @@ public class WorkerController{
         workerService.createRepair(repair);
     }
 
-
-
-
-    public ArrayList<Repair> getAllRepairs(int idWorkplace) {
-        return WorkerService.getAllRepairs(idWorkplace);
-    }
 
 
     public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {

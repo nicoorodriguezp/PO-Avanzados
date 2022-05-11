@@ -1,8 +1,6 @@
 package com.poa.POAvanzados.DAO.RowMappers;
 
-import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

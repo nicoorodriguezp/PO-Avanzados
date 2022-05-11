@@ -1,22 +1,16 @@
 package com.poa.POAvanzados.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-
 import com.poa.POAvanzados.DAO.Manager.ManagerDAOImpl;
-import com.poa.POAvanzados.Database.ItemRepository;
-import com.poa.POAvanzados.Database.WorkplaceRepository;
 import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ManagerService extends WorkerService {

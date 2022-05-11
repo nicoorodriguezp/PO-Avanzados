@@ -1,10 +1,9 @@
 package com.poa.POAvanzados.Model.RepairModel;
 
-import java.util.ArrayList;
-
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
-
 import lombok.Data;
+
+import java.util.ArrayList;
 
 
 @Data

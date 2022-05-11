@@ -1,13 +1,11 @@
 package com.poa.POAvanzados.DAO.Manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
-import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface ManagerDAO {
 
