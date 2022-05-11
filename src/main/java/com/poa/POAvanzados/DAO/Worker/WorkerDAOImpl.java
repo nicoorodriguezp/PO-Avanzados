@@ -118,8 +118,11 @@ public class WorkerDAOImpl implements WorkerDAO{
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
         jt.update("UPDATE public.\"Item_Detail\"\n" +
-                "\tSET \"idState\"=?\n" +
-                "\tWHERE \"idItemCode\"=?;",item.getState().getIdState(),item.getIdItemCode());
+                "\tSET \"idState\"=2\n" +
+                "\tWHERE \"idItemCode\"=(SELECT \"idItemCode\"\n" +
+                "\t\t\t\t\t   FROM \"Item_Detail\"\n" +
+                "\t\t\t\t\t   WHERE \"idItemCode\"=?\n" +
+                "\t\t\t\t\t   LIMIT 1);",item.getState().getIdState(),item.getIdItemCode());
 
     }
 
@@ -131,7 +134,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         JdbcTemplate jt = new JdbcTemplate(ds);
         ArrayList<Item_Detail> items = new ArrayList<>();
         List<Item_Detail> item_detailList;
-        if(workplace.isWarehouse()){
+        if(user_role==3 && workplace.isWarehouse()){
             throw new NotAllowedForWarehouse("Solo los usuarios de laboratorio pueden hacer una reparacion");
         }
         else {
@@ -166,7 +169,7 @@ public class WorkerDAOImpl implements WorkerDAO{
                 "\tFROM public.\"Workplace_Item\"\n" +
                 "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"Workplace_Item\".\"idWorkplace\"\n" +
                 "\tJOIN \"User\" ON \"Workplace\".\"idManager\"=\"User\".\"idUser\"\n" +
-                "\tWHERE \"Workplace\".\"idWorkplace\"=?",new Object[]{workplace_item.getIdWorkplace()},new UserRowMapper());
+                "\tWHERE \"Workplace\".\"idWorkplace\"=?",new Object[]{workplace_item.getIdWorkplace()},new UserNoPasswordRowMapper());
 
         int max_slots = workplace_item.getMax_slots();
         int fifty = (int) Math.ceil( max_slots / 2.0);

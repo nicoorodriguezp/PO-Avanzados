@@ -112,15 +112,18 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        jt.update("INSERT INTO public.\"Item\"(\n" +
+        int id_item;
+        id_item=jt.queryForObject("INSERT INTO public.\"Item\"(\n" +
                 "\t name, critical)\n" +
-                "\tVALUES ( ?, ?);",item.getName(),item.isCritical());
+                "\tVALUES ( ?, ?)\n" +
+                "\tRETURNING \"idItem\";",new Object[]{item.getName(),item.isCritical()},Integer.class);
         List<Workplace> workplaceList=getWorkplaces();
         for (Workplace workplace:
              workplaceList) {
+            Integer id=jt.queryForObject("SELECT max(\"idItem\") From \"Item\";",Integer.class);
             jt.update("INSERT INTO public.\"Workplace_Item\"(\n" +
                     "\t\"idWorkplace\", \"idItem\", max_slots, stock)\n" +
-                    "\tVALUES (?, ?, ?, ?);",workplace.getIdWorkplace(),item.getIdItem(),50,0);
+                    "\tVALUES (?, ?, ?, ?);",workplace.getIdWorkplace(),id_item,50,0);
         }
     }
     public void updateItem(Item item) {
@@ -129,7 +132,7 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
         JdbcTemplate jt = new JdbcTemplate(ds);
         jt.update("UPDATE public.\"Item\"\n" +
                 "\tSET  name=?, critical=?\n" +
-                "\tWHERE \"idItem\"=?;",item.getName(),item.isCritical(),item.getIdItem());
+                "\tWHERE \"idItem\"=? ;",item.getName(),item.isCritical(),item.getIdItem());
 
     }
 }

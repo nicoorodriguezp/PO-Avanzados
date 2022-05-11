@@ -54,11 +54,4 @@ class WorkerServiceTest {
         verify(workerDAO,atLeastOnce()).createRepair(any());
     }
 
-    @SneakyThrows
-    @Test
-    void getAllInventoryByWorkplaceOnStock() {
-
-        workerDAO.getAllInventoryByWorkplaceOnStock(new Workplace(),1);
-        verify(workerDAO,atLeastOnce()).createRepair(any());
-    }
 }
