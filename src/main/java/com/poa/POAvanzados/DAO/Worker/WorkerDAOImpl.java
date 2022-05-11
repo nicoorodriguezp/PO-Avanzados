@@ -118,7 +118,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
         jt.update("UPDATE public.\"Item_Detail\"\n" +
-                "\tSET \"idState\"=2\n" +
+                "\tSET \"idState\"=?\n" +
                 "\tWHERE \"idItemCode\"=(SELECT \"idItemCode\"\n" +
                 "\t\t\t\t\t   FROM \"Item_Detail\"\n" +
                 "\t\t\t\t\t   WHERE \"idItemCode\"=?\n" +
@@ -165,11 +165,11 @@ public class WorkerDAOImpl implements WorkerDAO{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        User manager= jt.queryForObject("SELECT \"User\".\"idUser\", \"User\".\"idPosition\", \"User\".\"name\", \"User\".\"lastName\", \"User\".\"email\", \"User\".\"activo\", \"User\".\"idWorkplace\", \"User\".\"dni\"\n" +
-                "\tFROM public.\"Workplace_Item\"\n" +
-                "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"Workplace_Item\".\"idWorkplace\"\n" +
-                "\tJOIN \"User\" ON \"Workplace\".\"idManager\"=\"User\".\"idUser\"\n" +
-                "\tWHERE \"Workplace\".\"idWorkplace\"=?",new Object[]{workplace_item.getIdWorkplace()},new UserNoPasswordRowMapper());
+        User manager= jt.queryForObject("SELECT \"idUser\", \"User\".\"idPosition\", name, \"lastName\", email, activo, \"User\".\"idWorkplace\", dni,\"Position\".title,\"Position\".category,\"Workplace\".address,\"Workplace\".warehouse,\"Workplace\".\"idManager\"\n" +
+                "\tFROM public.\"User\"\n" +
+                "\tJOIN \"Position\" ON \"User\".\"idPosition\"=\"Position\".\"idPosition\"\n" +
+                "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"User\".\"idWorkplace\"" +
+                "\tWHERE \"Workplace\".\"idWorkplace\" = ? AND \"User\".\"idPosition\"=2;", new Object[]{workplace_item.getIdWorkplace()}, new UserNoPasswordRowMapper());
 
         int max_slots = workplace_item.getMax_slots();
         int fifty = (int) Math.ceil( max_slots / 2.0);
