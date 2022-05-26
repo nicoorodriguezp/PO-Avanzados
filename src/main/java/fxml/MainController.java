@@ -184,7 +184,7 @@ public class MainController {
         getFXML("ItemList");
 
         ItemListController c = fxmlLoader.<ItemListController>getController();
-        c.init(this, wc.getItemsCount(), mc.getWorkplaces(), wc.getAllInventoryByWorkplace(user.getWorkplace()));
+        c.init(this, wc.getItems(), mc.getWorkplaces(), wc.getAllInventoryByWorkplace(user.getWorkplace()));
 
         this.stage.setScene(new Scene(parent, 1263, 830));
         this.stage.setTitle("Lista de items");

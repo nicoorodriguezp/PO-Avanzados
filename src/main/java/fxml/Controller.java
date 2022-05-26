@@ -15,7 +15,7 @@ public class Controller {
     // Item States
     protected final int ItemInStock = 1;
     protected final int ItemInUse = 2;
-    protected final int ItemDiscarded = 3;
+    protected final int ItemDescarded = 3;
 
     public void init(MainController mainController) {
         this.m = mainController;

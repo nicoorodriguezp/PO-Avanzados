@@ -19,4 +19,8 @@ public class Item_Detail {
     private String checkOut; // Date of entry into Laboratory
     private ItemState state;
 
+    @Override
+    public String toString() {
+        return  item.getName();
+    }
 }

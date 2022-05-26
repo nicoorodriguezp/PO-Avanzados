@@ -3,7 +3,6 @@ package com.poa.POAvanzados.Controller;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
@@ -30,9 +29,6 @@ public class WorkerController{
 
     public ArrayList<Item> getItems() {
         return workerService.getItems();
-    }
-    public ArrayList<ItemCount> getItemsCount() {
-        return workerService.getItemsCount();
     }
     public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace) {
         return workerService.getAllInventoryByWorkplace(workplace);

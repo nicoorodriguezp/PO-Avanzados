@@ -7,7 +7,6 @@ import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -51,30 +50,6 @@ public class WorkerDAOImpl implements WorkerDAO{
         List<Item> itemList=jt.query("SELECT \"idItem\", name, critical\n" +
                 "\tFROM public.\"Item\";",new ItemRowMapper());
         items.addAll(itemList);
-        return items;
-    }
-
-
-    @Override
-    public ArrayList<ItemCount> getItemsCount() throws DAOException {
-
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
-        JdbcTemplate jt = new JdbcTemplate(ds);
-
-        ArrayList<ItemCount> items = new ArrayList<>();
-
-        String sql =
-                "SELECT I.idItem AS idItem, I.name AS name, I.critical AS critical, SUM( ID.state = 2 ) AS usedCount, SUM( ID.state = 3 ) AS discardedCount  " +
-                "FROM Item I JOIN Item_Detail ID ON (I.idItem = ID.idItem)" +
-                "GROUP BY I.idItem";
-
-        List<ItemCount> itemList=jt.query(
-                sql,
-                new ItemCountRowMapper()
-        );
-        items.addAll(itemList);
-
         return items;
     }
 

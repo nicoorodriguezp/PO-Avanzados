@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,17 +28,13 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private Label userNameLabel;
     @FXML
-    private TableView<ItemCount> itemTable;
+    private TableView<Item> itemTable;
     @FXML
-    private TableColumn<ItemCount, Integer> idItemColumn;
+    private TableColumn<Item, Integer> idItemColumn;
     @FXML
-    private TableColumn<ItemCount, String> nameColumn;
+    private TableColumn<Item, String> nameColumn;
     @FXML
-    private TableColumn<ItemCount, Boolean> criticalColumn;
-    @FXML
-    private TableColumn<ItemCount, Integer> usedColumn;
-    @FXML
-    private TableColumn<ItemCount, Item> discardedColumn;
+    private TableColumn<Item, Boolean> criticalColumn;
     @FXML
     private TableView<Item_Detail> itemDetailTable;
     @FXML
@@ -57,8 +52,6 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private TableColumn<Item_Detail, Workplace> warehouseColumn;
     @FXML
-    private TableColumn<Item_Detail, Workplace> laboratoryColumn;
-    @FXML
     private ComboBox<Workplace> workplaceCB;
     @FXML
     private Label workplaceLabel;
@@ -69,13 +62,13 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private CheckBox criticalCheck;
 
-    private ArrayList<ItemCount> items =  new ArrayList<>();
+    private ArrayList<Item> items =  new ArrayList<>();
     private ArrayList<Item_Detail> itemsStock =  new ArrayList<>();
      // @itemStockInTable: Son los items que estan filtrados por algun parametro, listos para ser usados en las paginas.
     private ObservableList<Item_Detail> itemsStockInTable =  FXCollections.observableArrayList();
-    private ObservableList<ItemCount> itemsInTable =  FXCollections.observableArrayList();
+    private ObservableList<Item> itemsInTable =  FXCollections.observableArrayList();
 
-    private ItemCount selectedItem;
+    private Item selectedItem;
 
     // Pagination
     private int lastPageIndex;
@@ -125,7 +118,7 @@ public class ItemListController extends Controller implements Initializable {
     }
 
 
-    public void init(MainController m, ArrayList<ItemCount> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail> itemsStock){
+    public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail> itemsStock){
 
         this.m = m;
         this.items = items;
@@ -155,21 +148,19 @@ public class ItemListController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Tabla de Items
-        idItemColumn.setCellValueFactory(itemCount    -> new SimpleObjectProperty(itemCount.getValue().getIdItem()));
-        nameColumn.setCellValueFactory(itemCount      -> new SimpleObjectProperty(itemCount.getValue().getName()));
-        criticalColumn.setCellValueFactory(itemCount  -> new SimpleObjectProperty(itemCount.getValue().isCritical()));
-        usedColumn.setCellValueFactory(itemCount      -> new SimpleObjectProperty(itemCount.getValue().getUsedCount()));
-        discardedColumn.setCellValueFactory(itemCount -> new SimpleObjectProperty(itemCount.getValue().getDiscardedCount()));
+        idItemColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getIdItem()));
+        nameColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getName()));
+        criticalColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().isCritical()));
 
         // Tabla de Stock
-        idItemStockColumn.setCellValueFactory(itemDetail   -> new SimpleObjectProperty(itemDetail.getValue().getItem().getIdItem()));
-        itemCodeColumn.setCellValueFactory(itemDetail      -> new SimpleObjectProperty(itemDetail.getValue().getIdItemCode()));
-        nameStockColumn.setCellValueFactory(itemDetail     -> new SimpleObjectProperty(itemDetail.getValue().getItem().getName()));
+        idItemStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getIdItem()));
+        itemCodeColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getIdItemCode()));
+        nameStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().getName()));
         criticalStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().isCritical()));
-        checkInColumn.setCellValueFactory(itemDetail       -> new SimpleObjectProperty(itemDetail.getValue().getCheckIn()));
-        checkOutColumn.setCellValueFactory(itemDetail      -> new SimpleObjectProperty(itemDetail.getValue().getCheckOut()));
-        warehouseColumn.setCellValueFactory(itemDetail     -> new SimpleObjectProperty(itemDetail.getValue().getWarehouse().getAddress()));
-        laboratoryColumn.setCellValueFactory(itemDetail    -> new SimpleObjectProperty(itemDetail.getValue().getLaboratory().getAddress()));
+        checkInColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckIn()));
+        checkOutColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckOut()));
+        warehouseColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getWarehouse()));
+
     }
 
     @FXML
@@ -344,5 +335,8 @@ public class ItemListController extends Controller implements Initializable {
 
     }
 
+    @FXML
+    private void deleteItem(ActionEvent event) {
+    }
 
 }

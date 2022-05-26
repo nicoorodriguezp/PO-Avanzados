@@ -139,9 +139,9 @@ public class RepairController extends Controller implements Initializable {
             i.getState().setIdState(state);
             itemsListRepair.add(i);
 
-        } else if (state == ItemDiscarded) {
+        } else if (state == ItemDescarded) {
 
-            if (i.getState().getIdState() == ItemDiscarded) {
+            if (i.getState().getIdState() == ItemDescarded) {
                 i.getState().setIdState(ItemInUse); // Si ya estaba marcado como descartado, entonces se volvio al estado en uso
             } else {
                 i.getState().setIdState(state);
@@ -224,7 +224,7 @@ public class RepairController extends Controller implements Initializable {
     private void createRepair(ActionEvent event) {
 
         for (Item_Detail i : itemsListRepair) {
-            if (i.getState().getIdState() != ItemDiscarded) {
+            if (i.getState().getIdState() != ItemDescarded) {
                 i.getState().setIdState(ItemInUse);
             }
             if (i.getItem().isCritical()) {

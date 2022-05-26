@@ -5,7 +5,6 @@ import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
@@ -29,15 +28,6 @@ public class WorkerService {
     public ArrayList<Item> getItems() {
         try{
             return workerDAO.getItems();
-        }catch (DAOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public ArrayList<ItemCount> getItemsCount() {
-        try{
-            return workerDAO.getItemsCount();
         }catch (DAOException e){
             e.printStackTrace();
         }
