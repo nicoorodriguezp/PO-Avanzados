@@ -8,6 +8,7 @@ import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
@@ -54,29 +55,25 @@ public class WorkerDAOImpl implements WorkerDAO{
     }
 
     @Override
-    public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace) {
+    public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
-        ArrayList<Item_Detail> items = new ArrayList<>();
-        List<Item_Detail> item_detailList;
+        ArrayList<Item_Detail_Inventory> items = new ArrayList<>();
+        List<Item_Detail_Inventory> item_detailList;
         if(workplace.isWarehouse()){
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\" as addressDeposito,\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\" as addressLaboratorio ,\"laboratory\".\"warehouse\" ,\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                     "FROM public.\"Item_Detail\"\n" +
                     "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                     "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
-                    "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
-                    "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
-                    "WHERE \"idWarehouse\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+                    "WHERE \"idWarehouse\"=? and \"idLaboratory\" is null;",new Object[]{workplace.getIdWorkplace()},new Item_DetailInventoryRowMapper());
         }
         else {
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\" as addressDeposito,\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\" as addressLaboratorio ,\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                     "FROM public.\"Item_Detail\"\n" +
                     "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                     "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
-                    "JOIN \"Workplace\" \"warehouse\" ON \"warehouse\".\"idWorkplace\"=\"Item_Detail\".\"idWarehouse\"\n" +
-                    "JOIN \"Workplace\" \"laboratory\" ON \"laboratory\".\"idWorkplace\"=\"Item_Detail\".\"idLaboratory\"\n" +
-                    "WHERE \"idLaboratory\"=?;",new Object[]{workplace.getIdWorkplace()},new Item_DetailRowMapper());
+                    "WHERE \"idLaboratory\"=? and \"Item_Detail\".\"idState\" = 1;",new Object[]{workplace.getIdWorkplace()},new Item_DetailInventoryRowMapper());
         }
 
         items.addAll(item_detailList);

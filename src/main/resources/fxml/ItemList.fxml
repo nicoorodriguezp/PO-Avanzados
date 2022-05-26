@@ -57,7 +57,6 @@
             <TableColumn fx:id="itemCodeColumn" prefWidth="74.0" text="Item Code" />
             <TableColumn fx:id="checkInColumn" prefWidth="72.0" text="Check In" />
             <TableColumn fx:id="checkOutColumn" prefWidth="72.0" text="Check Out" />
-            <TableColumn fx:id="warehouseColumn" prefWidth="225.0" text="Deposito" />
          </columns>
       </TableView>
       <Button layoutX="119.0" layoutY="597.0" mnemonicParsing="false" onAction="#filter" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar Insumo en Lista de Stock" />

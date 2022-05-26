@@ -5,6 +5,7 @@ import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
 import com.poa.POAvanzados.Model.UserModel.User;
@@ -18,7 +19,7 @@ public interface WorkerDAO {
 
     public ArrayList<Item> getItems() throws DAOException;
 
-    public ArrayList<Item_Detail> getAllInventoryByWorkplace(Workplace workplace);
+    public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace);
 
 
     public void createRepair(Repair repair);

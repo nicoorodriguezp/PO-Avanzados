@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
+import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,21 +37,19 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private TableColumn<Item, Boolean> criticalColumn;
     @FXML
-    private TableView<Item_Detail> itemDetailTable;
+    private TableView<Item_Detail_Inventory> itemDetailTable;
     @FXML
-    private TableColumn<Item_Detail, Integer> idItemStockColumn;
+    private TableColumn<Item_Detail_Inventory, Integer> idItemStockColumn;
     @FXML
-    private TableColumn<Item_Detail, String> nameStockColumn;
+    private TableColumn<Item_Detail_Inventory, String> nameStockColumn;
     @FXML
-    private TableColumn<Item_Detail, Boolean> criticalStockColumn;
+    private TableColumn<Item_Detail_Inventory, Boolean> criticalStockColumn;
     @FXML
-    private TableColumn<Item_Detail, Integer> itemCodeColumn;
+    private TableColumn<Item_Detail_Inventory, Integer> itemCodeColumn;
     @FXML
-    private TableColumn<Item_Detail, String> checkInColumn;
+    private TableColumn<Item_Detail_Inventory, String> checkInColumn;
     @FXML
-    private TableColumn<Item_Detail, String> checkOutColumn;
-    @FXML
-    private TableColumn<Item_Detail, Workplace> warehouseColumn;
+    private TableColumn<Item_Detail_Inventory, String> checkOutColumn;
     @FXML
     private ComboBox<Workplace> workplaceCB;
     @FXML
@@ -63,9 +62,9 @@ public class ItemListController extends Controller implements Initializable {
     private CheckBox criticalCheck;
 
     private ArrayList<Item> items =  new ArrayList<>();
-    private ArrayList<Item_Detail> itemsStock =  new ArrayList<>();
+    private ArrayList<Item_Detail_Inventory> itemsStock =  new ArrayList<>();
      // @itemStockInTable: Son los items que estan filtrados por algun parametro, listos para ser usados en las paginas.
-    private ObservableList<Item_Detail> itemsStockInTable =  FXCollections.observableArrayList();
+    private ObservableList<Item_Detail_Inventory> itemsStockInTable =  FXCollections.observableArrayList();
     private ObservableList<Item> itemsInTable =  FXCollections.observableArrayList();
 
     private Item selectedItem;
@@ -118,7 +117,7 @@ public class ItemListController extends Controller implements Initializable {
     }
 
 
-    public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail> itemsStock){
+    public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail_Inventory> itemsStock){
 
         this.m = m;
         this.items = items;
@@ -159,8 +158,6 @@ public class ItemListController extends Controller implements Initializable {
         criticalStockColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getItem().isCritical()));
         checkInColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckIn()));
         checkOutColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getCheckOut()));
-        warehouseColumn.setCellValueFactory(itemDetail -> new SimpleObjectProperty(itemDetail.getValue().getWarehouse()));
-
     }
 
     @FXML
@@ -195,7 +192,7 @@ public class ItemListController extends Controller implements Initializable {
         if(selectedItem!=null){
             itemsStockInTable.clear();
 
-            for (Item_Detail item : itemsStock) {
+            for (Item_Detail_Inventory item : itemsStock) {
                 if (item.getItem().getIdItem() == selectedItem.getIdItem()) {
                     itemsStockInTable.addAll(item);
                 }
@@ -248,10 +245,8 @@ public class ItemListController extends Controller implements Initializable {
 
             System.out.println("Filtrando por workplace " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
 
-            for (Item_Detail item : itemsStock) {
-                if (item.getWarehouse().getIdWorkplace() ==  workplaceCB.valueProperty().getValue().getIdWorkplace()) {
+            for (Item_Detail_Inventory item : itemsStock) {
                     itemsStockInTable.addAll(item);
-                }
             }
             
 //            itemDetailTable.setItems(itemsStockInTable);
@@ -275,11 +270,8 @@ public class ItemListController extends Controller implements Initializable {
 
             System.out.println("Filtrando por workplace e item: " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
 
-            for (Item_Detail item : itemsStock) {
-                if (item.getWarehouse().getIdWorkplace() ==  workplaceCB.valueProperty().getValue().getIdWorkplace()
-                        &&item.getItem().getIdItem() == selectedItem.getIdItem()) {
+            for (Item_Detail_Inventory item : itemsStock) {
                     itemsStockInTable.addAll(item);
-                }
             }
 
 //            itemDetailTable.setItems(itemsStockInTable);
@@ -294,7 +286,7 @@ public class ItemListController extends Controller implements Initializable {
     private void nextPage(MouseEvent event) {
 
         // Hago este auxiliar para trabajar con aquellos items que ya estan filtrados en el array "itemsStockInTable"
-        ObservableList<Item_Detail> itemsAux =  FXCollections.observableArrayList();
+        ObservableList<Item_Detail_Inventory> itemsAux =  FXCollections.observableArrayList();
 
         if(actualPage + 1 < maxPageIndex){
 
@@ -317,7 +309,7 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private void formerPage(MouseEvent event) {
 
-        ObservableList<Item_Detail> itemsAux =  FXCollections.observableArrayList();
+        ObservableList<Item_Detail_Inventory> itemsAux =  FXCollections.observableArrayList();
 
         if(actualPage>0){
 
