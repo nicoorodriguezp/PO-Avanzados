@@ -260,7 +260,7 @@ public class ItemListController extends Controller implements Initializable {
     @FXML
     private void filterByWorkplaceAndItem(ActionEvent event) {
 
-        if(workplaceCB.valueProperty().getValue() != null){
+        if(workplaceCB.valueProperty().getValue() != null || selectedItem!=null){
 
             itemsStockInTable.clear();
 
@@ -278,7 +278,7 @@ public class ItemListController extends Controller implements Initializable {
             setPaginas();
 
         }else{
-            m.showAlert("Debe seleccionar un lugar de trabajo para filtrar.", 1);
+            m.showAlert("Debe seleccionar un lugar de trabajo e item para filtrar.", 1);
         }
     }
 

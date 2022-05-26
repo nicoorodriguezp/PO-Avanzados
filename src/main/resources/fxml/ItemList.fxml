@@ -19,13 +19,13 @@
    <children>
       <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="187.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/icons/barcodeIcon.png" />
+            <Image url="@../static/icons/barcodeIcon.png" />
          </image>
       </ImageView>
       <Pane id="menuPane" prefHeight="58.0" prefWidth="1264.0" styleClass="head-background">
          <children>
             <Button id="backButton" fx:id="backButton" layoutX="49.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="backButton" wrapText="true" />
-            <Label id="title" layoutX="454.0" layoutY="13.0" prefHeight="30.0" prefWidth="357.0" styleClass="title" stylesheets="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/css/styles.css" text="Sistema de Control de Insumos" textFill="WHITE">
+            <Label id="title" layoutX="454.0" layoutY="13.0" prefHeight="30.0" prefWidth="357.0" styleClass="title" stylesheets="@../static/css/styles.css" text="Sistema de Control de Insumos" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
@@ -37,7 +37,7 @@
             </Label>
             <ImageView id="iconUser" fitHeight="30.0" fitWidth="32.0" layoutX="1053.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/icons/user-icon.png" />
+                  <Image url="@../static/icons/user-icon.png" />
                </image>
             </ImageView>
          </children>
@@ -49,14 +49,14 @@
             <TableColumn fx:id="criticalColumn" prefWidth="101.0" text="¿Critico?" />
          </columns>
       </TableView>
-      <TableView fx:id="itemDetailTable" layoutX="453.0" layoutY="125.0" prefHeight="180.0" prefWidth="764.0">
+      <TableView fx:id="itemDetailTable" layoutX="561.0" layoutY="125.0" prefHeight="180.0" prefWidth="547.0">
          <columns>
             <TableColumn fx:id="idItemStockColumn" prefWidth="94.0" text="Identificacion" />
             <TableColumn fx:id="nameStockColumn" prefWidth="155.0" text="Nombre" />
             <TableColumn fx:id="criticalStockColumn" prefWidth="69.0" text="¿Critico?" />
             <TableColumn fx:id="itemCodeColumn" prefWidth="74.0" text="Item Code" />
-            <TableColumn fx:id="checkInColumn" prefWidth="72.0" text="Check In" />
-            <TableColumn fx:id="checkOutColumn" prefWidth="72.0" text="Check Out" />
+            <TableColumn fx:id="checkInColumn" prefWidth="75.0" text="Check In" />
+            <TableColumn fx:id="checkOutColumn" prefWidth="75.0" text="Check Out" />
          </columns>
       </TableView>
       <Button layoutX="119.0" layoutY="597.0" mnemonicParsing="false" onAction="#filter" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar Insumo en Lista de Stock" />
@@ -79,12 +79,12 @@
       <Button layoutX="884.0" layoutY="668.0" mnemonicParsing="false" onAction="#filterByWorkplaceAndItem" prefHeight="30.0" prefWidth="203.0" styleClass="button1" text="Filtrar por Workplace e Item" />
       <ImageView fitHeight="46.0" fitWidth="40.0" layoutX="923.0" layoutY="343.0" onMouseClicked="#nextPage" pickOnBounds="true" preserveRatio="true" styleClass="nextPageButton">
          <image>
-            <Image url="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/icons/arrowRightIcon.png" />
+            <Image url="@../static/icons/arrowRightIcon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="708.0" layoutY="343.0" onMouseClicked="#formerPage" pickOnBounds="true" preserveRatio="true" styleClass="FormerPageButton">
          <image>
-            <Image url="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/icons/arrowLeftIcon.png" />
+            <Image url="@../static/icons/arrowLeftIcon.png" />
          </image>
       </ImageView>
       <Label fx:id="pageLabel" layoutX="784.0" layoutY="352.0" styleClass="labelFont" text="Pagina 1/10">
@@ -94,13 +94,13 @@
       </Label>
       <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="808.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/icons/workplaceIcon.png" />
+            <Image url="@../static/icons/workplaceIcon.png" />
          </image>
       </ImageView>
       <Separator layoutX="473.0" layoutY="435.0" prefHeight="12.0" prefWidth="738.0" />
    </children>
    <stylesheets>
-      <URL value="@Desktop/Universidad%20de%20Palermo/PO-Avanzados/src/main/resources/static/css/styles.css" />
+      <URL value="@../static/css/styles.css" />
       <URL value="@../static/css/styles.css" />
    </stylesheets>
 </AnchorPane>

@@ -103,4 +103,9 @@ public class HomeController extends Controller implements Initializable {
         this.m.showLogin("Sistema de Control de Insumos");
     }
 
+    @FXML
+    private void showItemUsageReport(ActionEvent event) {
+        this.m.showItemUsageReport();
+    }
+
 }

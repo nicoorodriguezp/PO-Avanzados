@@ -191,4 +191,17 @@ public class MainController {
         this.stage.show();
 
     }
+
+    public void showItemUsageReport() {
+
+        getFXML("ItemListReport");
+
+        ItemListReportController c = fxmlLoader.<ItemListReportController>getController();
+        c.init(this, wc.getItemCountByWorkplace(user.getWorkplace()), mc.getWorkplaces(), wc.getAllInventoryByWorkplace(user.getWorkplace()));
+
+        this.stage.setScene(new Scene(parent, 1263, 830));
+        this.stage.setTitle("Lista de items");
+        this.stage.show();
+
+    }
 }
