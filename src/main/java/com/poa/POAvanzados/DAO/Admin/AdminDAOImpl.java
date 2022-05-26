@@ -61,7 +61,7 @@ public class AdminDAOImpl extends ManagerDAOImpl implements AdminDAO{
         DataSource ds = (DataSource) applicationContext.getBean("dataSource");
         JdbcTemplate jt = new JdbcTemplate(ds);
         ArrayList<Item_Detail> item_details = new ArrayList<>();
-        List<Item_Detail> item_detailList= jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+        List<Item_Detail> item_detailList= jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\", \"Item\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\" as addressDeposito,\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\" as addressLaboratorio,\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                 "FROM public.\"Item_Detail\"\n" +
                 "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                 "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
