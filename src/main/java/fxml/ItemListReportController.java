@@ -7,6 +7,9 @@ package fxml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -20,11 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -114,7 +113,9 @@ public class ItemListReportController extends Controller implements Initializabl
     @FXML
     private void exportToExcel(ActionEvent event) {
 
-        String date = getDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+        Date dateAux = new Date(System.currentTimeMillis());
+        String date =  formatter.format(dateAux);
         String sheetName = "Reporte_Uso_Descarte_Items" + date;
 
         FileChooser fileChooser = new FileChooser();
@@ -148,11 +149,13 @@ public class ItemListReportController extends Controller implements Initializabl
                 FileOutputStream fileOut = new FileOutputStream(selectedFile.getAbsoluteFile() + ".xls");
                 workbook.write(fileOut);
                 fileOut.close();
+                this.m.showAlert("Reporte de Uso/Descarte exportado correctamente.", 4);
             } catch (Exception e) {
                 this.m.showAlert("Hubo un problema al exportar el documento.", 2);
+                e.printStackTrace();
             }
 
-            this.m.showAlert("Reporte de Uso/Descarte exportado correctamente.", 4);
+
 
         } else {
             this.m.showAlert("Debe seleccionar el directorio donde quiera exportar el documento.", 1);
