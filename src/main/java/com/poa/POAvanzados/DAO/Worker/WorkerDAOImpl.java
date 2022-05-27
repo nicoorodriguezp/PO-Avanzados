@@ -135,7 +135,7 @@ public class WorkerDAOImpl implements WorkerDAO{
             throw new NotAllowedForWarehouse("Solo los usuarios de laboratorio pueden hacer una reparacion");
         }
         else {
-            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\",\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\",\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"warehouse\".\"address\" as addressDeposito,\"warehouse\".\"warehouse\",\"warehouse\".\"idManager\", \"idLaboratory\",\"laboratory\".\"address\" as addressLaboratorio,\"laboratory\".\"warehouse\",\"laboratory\".\"idManager\", \"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
                     "FROM public.\"Item_Detail\"\n" +
                     "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
                     "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
