@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.poa.POAvanzados.Model.ItemModel.Item;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import javafx.beans.property.SimpleObjectProperty;
@@ -88,10 +89,11 @@ public class ItemListReportController extends Controller implements Initializabl
 
         if (workplaceCB.valueProperty().getValue() != null) {
 
-            itemTable.clear();
+
+            itemsInTable.clear();
 
             if (this.m.user.getPosition().getIdPosition() == AdminPosition) {
-                items = this.m.wc.getItemCountByWorkplace(workplaceCB.valueProperty().getValue());
+                items = this.m.mc.getItemCountByWorkplace(workplaceCB.valueProperty().getValue());
             }
 
             System.out.println("Filtrando por workplace " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
@@ -161,15 +163,13 @@ public class ItemListReportController extends Controller implements Initializabl
     public void init(MainController mainController, ArrayList<ItemCount> items, ArrayList<Workplace> workplaces) {
     this.m = mainController;
     this.items = items;
-
-        if(this.m.user.getPosition().getIdPosition() == AdminPosition){
-            //Si es admin, mostrar las opciones de alta, modificacion y baja de items.
-            adminPane.setVisible(true);
-
-            workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
-        }else{
-            adminPane.setVisible(false);
-            workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
-        }
+            if (this.m.user.getPosition().getIdPosition() == AdminPosition) {
+                //Si es admin, mostrar las opciones de alta, modificacion y baja de items.
+                adminPane.setVisible(true);
+                workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
+            } else {
+                adminPane.setVisible(false);
+                workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
+            }
     }
 }

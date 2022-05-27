@@ -76,19 +76,23 @@ public class MainController {
     protected void showRepairPanel() {
 
         try {
-            getFXML("Repair");
+            if(!user.getWorkplace().isWarehouse()) {
+                getFXML("Repair");
 
-            RepairController controller = this.fxmlLoader.getController();
-            controller.init(this, wc.getAllInventoryByWorkplaceOnStock(user.getWorkplace(),user.getPosition().getIdPosition()));
+                RepairController controller = this.fxmlLoader.getController();
+                controller.init(this, wc.getAllInventoryByWorkplaceOnStock(user.getWorkplace(), user.getPosition().getIdPosition()));
 
-            this.stage.setScene(new Scene(parent, 1263, 830));
-            this.stage.setTitle("Repair Panel");
+                this.stage.setScene(new Scene(parent, 1263, 830));
+                this.stage.setTitle("Repair Panel");
 
-            this.stage.show();
+                this.stage.show();
+            }
+            else{
+                throw new NotAllowedForWarehouse("No tiene los permisos para entrar al menu de reparaciones");
+            }
         }
         catch (NotAllowedForWarehouse e){
             showAlert(e.getMessage(),2);
-            e.printStackTrace();
         }
 
     }
@@ -194,14 +198,24 @@ public class MainController {
 
     public void showItemUsageReport() {
 
-        getFXML("ItemListReport");
+        try {
+            if (!user.getWorkplace().isWarehouse()) {
+                getFXML("ItemListReport");
 
-        ItemListReportController c = fxmlLoader.<ItemListReportController>getController();
-        c.init(this, wc.getItemCountByWorkplace(user.getWorkplace()), mc.getWorkplaces(), wc.getAllInventoryByWorkplace(user.getWorkplace()));
+                ItemListReportController c = fxmlLoader.<ItemListReportController>getController();
+                c.init(this, mc.getItemCountByWorkplace(user.getWorkplace()), mc.getWorkplaces());
 
-        this.stage.setScene(new Scene(parent, 1263, 830));
-        this.stage.setTitle("Lista de items");
-        this.stage.show();
+                this.stage.setScene(new Scene(parent, 1263, 830));
+                this.stage.setTitle("Lista de items");
+                this.stage.show();
+            } else {
+                throw new NotAllowedForWarehouse("No tiene los permisos para entrar a esta opcion");
+            }
+
+        }
+        catch (NotAllowedForWarehouse e){
+            showAlert(e.getMessage(),2);
+        }
 
     }
 }

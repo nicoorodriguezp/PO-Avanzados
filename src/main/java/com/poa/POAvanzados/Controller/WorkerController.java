@@ -4,6 +4,7 @@ import com.poa.POAvanzados.DAO.RowMappers.Item_DetailInventoryRowMapper;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
 import com.poa.POAvanzados.Model.ItemModel.Item;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
 import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
 import com.poa.POAvanzados.Model.RepairModel.Repair;
@@ -46,4 +47,6 @@ public class WorkerController{
     public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {
         return workerService.getAllInventoryByWorkplaceOnStock(workplace, user_role);
     }
+
+
 }

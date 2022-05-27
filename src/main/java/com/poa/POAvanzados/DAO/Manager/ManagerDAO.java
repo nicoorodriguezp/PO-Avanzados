@@ -1,6 +1,7 @@
 package com.poa.POAvanzados.DAO.Manager;
 
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 
@@ -18,4 +19,6 @@ public interface ManagerDAO {
     public ArrayList<Position> getPositions();
 
     List<Workplace> getWarehouses();
+
+    ArrayList<ItemCount> getItemCountByWorkplace(Workplace workplace);
 }

@@ -1,10 +1,12 @@
 package com.poa.POAvanzados.DAO.Manager;
 
+import com.poa.POAvanzados.DAO.RowMappers.ItemCountRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.ItemRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.PositionRowMapper;
 import com.poa.POAvanzados.DAO.RowMappers.WorkplaceRowMapper;
 import com.poa.POAvanzados.DAO.Worker.WorkerDAOImpl;
 import com.poa.POAvanzados.Model.ItemModel.Item;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
@@ -94,5 +96,20 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
                 "\tFROM public.\"Workplace\"\n" +
                 "\tWHERE warehouse is true;",new WorkplaceRowMapper());
         return workplaceList;
+    }
+
+    @Override
+    public ArrayList<ItemCount> getItemCountByWorkplace(Workplace workplace) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<ItemCount> itemCounts= new ArrayList<>();
+        List<ItemCount> itemCountList= jt.query("SELECT \"Item\".\"idItem\",\"Item\".\"name\",\"Item\".\"critical\", sum(case when \"Item_Detail\".\"idState\" = 2 then 1 else 0 end) as usedCount, sum(case when \"Item_Detail\".\"idState\" = 3 then 1 else 0 end) as discardedCount\n" +
+                "\tFROM public.\"Item_Detail\" AS \"Item_Detail\"\n" +
+                "\tJOIN \"Item\" ON \"Item_Detail\".\"idItem\"=\"Item\".\"idItem\"\n" +
+                "\tWHERE \"Item_Detail\".\"idLaboratory\" = 3\n" +
+                "\tGROUP BY  \"Item\".\"idItem\",\"Item\".\"name\",\"Item\".\"critical\"",new ItemCountRowMapper());
+        itemCounts.addAll(itemCountList);
+        return itemCounts;
     }
 }

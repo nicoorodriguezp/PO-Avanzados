@@ -3,6 +3,7 @@ package com.poa.POAvanzados.Service;
 import com.poa.POAvanzados.DAO.Manager.ManagerDAOImpl;
 import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.ItemModel.Workplace_Item;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
@@ -67,5 +68,9 @@ public class ManagerService extends WorkerService {
         ArrayList<Workplace> workplaceList=new ArrayList<>();
         workplaceList.addAll(managerDAO.getWarehouses());
         return workplaceList;
+    }
+
+    public ArrayList<ItemCount> getItemCountByWorkplace(Workplace workplace) {
+        return managerDAO.getItemCountByWorkplace(workplace);
     }
 }

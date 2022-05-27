@@ -2,6 +2,7 @@ package com.poa.POAvanzados.Controller;
 
 import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
 import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
+import com.poa.POAvanzados.Model.ItemModel.ItemCount;
 import com.poa.POAvanzados.Model.PositionModel.Position;
 import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
 import com.poa.POAvanzados.Service.ManagerService;
@@ -36,5 +37,9 @@ public class ManagerController extends WorkerController{
 
     public ArrayList<Workplace> getWarehouse() {
         return managerService.getWarehouse();
+    }
+
+    public ArrayList<ItemCount> getItemCountByWorkplace(Workplace workplace) {
+        return managerService.getItemCountByWorkplace(workplace);
     }
 }
