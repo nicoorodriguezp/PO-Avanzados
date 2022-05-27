@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import com.poa.POAvanzados.Model.ItemModel.Item;
 import com.poa.POAvanzados.Model.ItemModel.ItemCount;
@@ -116,7 +117,7 @@ public class ItemListReportController extends Controller implements Initializabl
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         Date dateAux = new Date(System.currentTimeMillis());
         String date =  formatter.format(dateAux);
-        String sheetName = "Reporte_Uso_Descarte_Items" + date;
+        String sheetName = "Reporte_Uso_Descarte_Items_" + date;
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte");
@@ -169,7 +170,9 @@ public class ItemListReportController extends Controller implements Initializabl
             if (this.m.user.getPosition().getIdPosition() == AdminPosition) {
                 //Si es admin, mostrar las opciones de alta, modificacion y baja de items.
                 adminPane.setVisible(true);
-                workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
+                ArrayList<Workplace> laboratories= new ArrayList<>();
+                laboratories.addAll(workplaces.stream().filter(workplace -> !workplace.isWarehouse()).collect(Collectors.toList()));
+                workplaceCB.setItems(FXCollections.observableArrayList(laboratories));
             } else {
                 adminPane.setVisible(false);
                 workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());

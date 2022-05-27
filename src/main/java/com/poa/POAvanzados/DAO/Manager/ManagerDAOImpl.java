@@ -107,8 +107,8 @@ public class ManagerDAOImpl extends WorkerDAOImpl implements ManagerDAO {
         List<ItemCount> itemCountList= jt.query("SELECT \"Item\".\"idItem\",\"Item\".\"name\",\"Item\".\"critical\", sum(case when \"Item_Detail\".\"idState\" = 2 then 1 else 0 end) as usedCount, sum(case when \"Item_Detail\".\"idState\" = 3 then 1 else 0 end) as discardedCount\n" +
                 "\tFROM public.\"Item_Detail\" AS \"Item_Detail\"\n" +
                 "\tJOIN \"Item\" ON \"Item_Detail\".\"idItem\"=\"Item\".\"idItem\"\n" +
-                "\tWHERE \"Item_Detail\".\"idLaboratory\" = 3\n" +
-                "\tGROUP BY  \"Item\".\"idItem\",\"Item\".\"name\",\"Item\".\"critical\"",new ItemCountRowMapper());
+                "\tWHERE \"Item_Detail\".\"idLaboratory\" = ?\n" +
+                "\tGROUP BY  \"Item\".\"idItem\",\"Item\".\"name\",\"Item\".\"critical\"",new Object[]{workplace.getIdWorkplace()},new ItemCountRowMapper());
         itemCounts.addAll(itemCountList);
         return itemCounts;
     }
