@@ -1,4 +1,4 @@
-package com.poa.POAvanzados.Email;
+package com.poa.POAvanzados.Model.Email;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

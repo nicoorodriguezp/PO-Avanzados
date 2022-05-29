@@ -1,8 +1,8 @@
 package com.poa.POAvanzados.DAO.Worker;
 
 import com.poa.POAvanzados.DAO.RowMappers.*;
-import com.poa.POAvanzados.Email.EmailController;
-import com.poa.POAvanzados.Email.EmailDetails;
+import com.poa.POAvanzados.Controller.EmailController;
+import com.poa.POAvanzados.Model.Email.EmailDetails;
 import com.poa.POAvanzados.Exception.DAOException;
 import com.poa.POAvanzados.Exception.LoginUserException;
 import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;

@@ -1,5 +1,8 @@
-package com.poa.POAvanzados.Email;
+package com.poa.POAvanzados.Controller;
 
+import com.poa.POAvanzados.Model.Email.EmailDetails;
+import com.poa.POAvanzados.Service.EmailService;
+import com.poa.POAvanzados.Service.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class EmailController {

@@ -1,7 +1,7 @@
-package com.poa.POAvanzados.Email;
+package com.poa.POAvanzados.Service;
 
 
-import com.poa.POAvanzados.Email.EmailDetails;
+import com.poa.POAvanzados.Model.Email.EmailDetails;
 
 // Interface
 public interface EmailService {

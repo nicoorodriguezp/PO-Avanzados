@@ -1,17 +1,15 @@
-package com.poa.POAvanzados.Email;
+package com.poa.POAvanzados.Service;
 
 import java.io.File;
 import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.poa.POAvanzados.Email.EmailDetails;
-import com.poa.POAvanzados.Email.EmailService;
+import com.poa.POAvanzados.Model.Email.EmailDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
