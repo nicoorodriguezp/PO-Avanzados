@@ -92,20 +92,26 @@ public class WorkerDAOImpl implements WorkerDAO{
                     "\t \"idUser\", \"idWorkplace\", date, description)\n" +
                     "\tVALUES (?, ?, ?, ?) RETURNING \"idRepair\";",new Object[]{repair.getIdTechnician(),repair.getIdLaboratory(),repair.getReparationDate(),repair.getRepairDescription()},Integer.class);
         repair.setIdRepair(idRepair);
+
         for (Item_Detail itemDetail :
                 repair.getItemDetails()) {
             jt.update("INSERT INTO public.\"Repair_Item\"(\n" +
                     "\t\"idRepair\", \"idItemCode\")\n" +
                     "\tVALUES (?, ?);",repair.getIdRepair(), itemDetail.getIdItemCode());
             updateItemDetail(itemDetail);
-            Item item=jt.queryForObject("SELECT \"idItem\", name, critical\n" +
-                    "\tFROM public.\"Item\"\n" +
-                    "\tWHERE \"idItem\"=?;",new Object[]{itemDetail.getItem().getIdItem()},new ItemRowMapper());
-
-            Workplace_Item workplace_item= checkStock(repair.getIdLaboratory(),item.getIdItem());
-            checkingStockForMail(item,workplace_item);
         }
+        int itemIdAux=0;
+        for (Item_Detail itemDetail : repair.getItemDetails()) {
+            if(itemDetail.getItem().getIdItem()!=itemIdAux){
+                itemIdAux=itemDetail.getItem().getIdItem();
+                Item item=jt.queryForObject("SELECT \"idItem\", name, critical\n" +
+                        "\tFROM public.\"Item\"\n" +
+                        "\tWHERE \"idItem\"=?;",new Object[]{itemDetail.getItem().getIdItem()},new ItemRowMapper());
+                Workplace_Item workplace_item= checkStock(repair.getIdLaboratory(),item.getIdItem());
+                checkingStockForMail(item,workplace_item);
+            }
 
+        }
     }
 
     @Override
@@ -173,7 +179,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         int twenty= (int) Math.ceil( max_slots * 0.2);
         String message = "El stock del item se encuentra dentro del nivel de tolerancia.";
         String email = manager.getEmail().trim();
-
+        System.out.println(email);
         if(item.isCritical() && workplace_item.getStock() <= fifty){
             message = " El insumo critico"+ item.getName() + " está por debajo del nivel de tolerancia en su lugar de trabajo. \n\n" +
                     "Por favor, solicite más suministros del item mencionado LO ANTES POSIBLE.\n\n";
