@@ -32,7 +32,6 @@
       </Pane>
       <Pane id="bodyPane" layoutY="56.0" prefHeight="775.0" prefWidth="1264.0" styleClass="bodyPane">
          <children>
-            <Button fx:id="replenishButton" layoutX="324.0" layoutY="376.0" mnemonicParsing="false" onAction="#replenish" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Reponer Item" />
             <Button layoutX="324.0" layoutY="157.0" mnemonicParsing="false" onAction="#showInventory" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Ver Inventario">
                <font>
                   <Font name="Arial" size="13.0" />
@@ -44,11 +43,6 @@
                </font>
             </Button>
             <Label layoutX="539.0" layoutY="68.0" styleClass="labelFont" text="Nivel Tecnico">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <Label layoutX="528.0" layoutY="305.0" styleClass="labelFont" text="Nivel Gerencial">
                <font>
                   <Font size="32.0" />
                </font>
@@ -71,7 +65,22 @@
                   </Label>
                </children>
             </Pane>
-            <Button layoutX="657.0" layoutY="376.0" mnemonicParsing="false" onAction="#showItemUsageReport" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte Uso/Descarte Items" />
+            <Pane fx:id="managerPane" layoutX="14.0" layoutY="245.0" prefHeight="261.0" prefWidth="1241.0">
+               <children>
+                  <Label layoutX="512.0" layoutY="38.0" styleClass="labelFont" text="Nivel Gerencial">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="649.0" layoutY="131.0" mnemonicParsing="false" onAction="#showItemUsageReport" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Generar Reporte Uso/Descarte Items" />
+                  <Button fx:id="replenishButton" layoutX="313.0" layoutY="131.0" mnemonicParsing="false" onAction="#replenish" prefHeight="58.0" prefWidth="289.0" styleClass="button1" text="Reponer Item" />
+               </children>
+            </Pane>
+            <ImageView fx:id="icon" fitHeight="106.0" fitWidth="103.0" layoutX="580.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../static/icons/barcodeIcon.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

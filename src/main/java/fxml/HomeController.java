@@ -29,6 +29,10 @@ public class HomeController extends Controller implements Initializable {
     private ImageView workplaceIcon;
     @FXML
     private Pane adminPane;
+    @FXML
+    private Pane managerPane;
+    @FXML
+    private ImageView icon;
 
     public void init(MainController m) {
         this.m = m;
@@ -49,10 +53,14 @@ public class HomeController extends Controller implements Initializable {
     private void initButtons() {
 
 
+        System.out.println("Posicion del usuario" + m.user.getPosition().getIdPosition());
         if (m.user.getPosition().getIdPosition() != AdminPosition) {
             adminPane.setVisible(false);
-            if (m.user.getPosition().getIdPosition() == WorkerPosition) {
-                replenishButton.setVisible(false);
+
+            if (m.user.getPosition().getIdPosition() != ManagerPosition) {
+                this.managerPane.setVisible(false);
+                System.out.println("It's a worker.");
+                icon.setVisible(true);
             }
 
         }
