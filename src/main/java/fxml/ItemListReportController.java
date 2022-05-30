@@ -176,6 +176,13 @@ public class ItemListReportController extends Controller implements Initializabl
             } else {
                 adminPane.setVisible(false);
                 workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
+                System.out.println(workplaceCB.valueProperty().getValue());
+                items = this.m.mc.getItemCountByWorkplace(workplaceCB.valueProperty().getValue());
+                for (ItemCount item : items) {
+                    itemsInTable.addAll(item);
+                }
+                itemTable.setItems(itemsInTable);
+
             }
     }
 }
