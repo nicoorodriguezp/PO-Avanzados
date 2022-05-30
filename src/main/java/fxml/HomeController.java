@@ -3,7 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Exception.DAOException;
+import com.poa.POAvanzados.exception.DAOException;
 
 import org.springframework.stereotype.Component;
 

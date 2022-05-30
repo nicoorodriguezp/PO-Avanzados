@@ -2,12 +2,12 @@ package fxml;
 
 import java.io.IOException;
 
-import com.poa.POAvanzados.Controller.AdminController;
-import com.poa.POAvanzados.Controller.ManagerController;
-import com.poa.POAvanzados.Controller.WorkerController;
-import com.poa.POAvanzados.Exception.DAOException;
-import com.poa.POAvanzados.Exception.NotAllowedForWarehouse;
-import com.poa.POAvanzados.Model.UserModel.User;
+import com.poa.POAvanzados.controller.AdminController;
+import com.poa.POAvanzados.controller.ManagerController;
+import com.poa.POAvanzados.controller.WorkerController;
+import com.poa.POAvanzados.exception.DAOException;
+import com.poa.POAvanzados.exception.NotAllowedForWarehouse;
+import com.poa.POAvanzados.model.user_model.User;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

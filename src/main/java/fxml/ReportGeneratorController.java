@@ -9,11 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Controller.AdminController;
-import com.poa.POAvanzados.Exception.InvalidDateFormat;
-import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import com.poa.POAvanzados.controller.AdminController;
+import com.poa.POAvanzados.model.item_model.Item;
+import com.poa.POAvanzados.model.item_model.Item_Detail;
+import com.poa.POAvanzados.model.workplace_model.Workplace;
 
 import javafx.beans.property.SimpleObjectProperty;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,7 +31,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;

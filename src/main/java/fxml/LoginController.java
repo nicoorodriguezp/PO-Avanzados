@@ -3,9 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Exception.DAOException;
-
-import com.poa.POAvanzados.Exception.LoginUserException;
+import com.poa.POAvanzados.exception.LoginUserException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import org.springframework.stereotype.Component;
@@ -15,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
-import javax.security.auth.login.LoginException;
 
 @Component
 public class LoginController extends Controller implements Initializable {

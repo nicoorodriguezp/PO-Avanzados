@@ -5,9 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Model.PositionModel.Position;
-import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import com.poa.POAvanzados.model.position_model.Position;
+import com.poa.POAvanzados.model.user_model.User;
+import com.poa.POAvanzados.model.workplace_model.Workplace;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Controller.AdminController;
-import com.poa.POAvanzados.Exception.DAOException;
-import com.poa.POAvanzados.Model.PositionModel.Position;
-import com.poa.POAvanzados.Model.UserModel.User;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import com.poa.POAvanzados.controller.AdminController;
+import com.poa.POAvanzados.exception.DAOException;
+import com.poa.POAvanzados.model.position_model.Position;
+import com.poa.POAvanzados.model.user_model.User;
+import com.poa.POAvanzados.model.workplace_model.Workplace;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -22,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class UserListController extends Controller implements Initializable {

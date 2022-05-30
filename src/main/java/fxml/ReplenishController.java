@@ -8,10 +8,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Exception.NoWarehouseWithEnoughStock;
-import com.poa.POAvanzados.Exception.QuantityExceedsMaxSlots;
-import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
+import com.poa.POAvanzados.exception.NoWarehouseWithEnoughStock;
+import com.poa.POAvanzados.exception.QuantityExceedsMaxSlots;
+import com.poa.POAvanzados.model.item_model.Item;
+import com.poa.POAvanzados.model.workplace_model.Workplace;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

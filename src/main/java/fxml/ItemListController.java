@@ -5,20 +5,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Model.ItemModel.Item;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail_Inventory;
-import com.poa.POAvanzados.Model.WorkplaceModel.Workplace;
-import javafx.beans.property.SimpleBooleanProperty;
+import com.poa.POAvanzados.model.item_model.Item;
+import com.poa.POAvanzados.model.item_model.Item_Detail_Inventory;
+import com.poa.POAvanzados.model.workplace_model.Workplace;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 

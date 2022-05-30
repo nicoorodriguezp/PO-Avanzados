@@ -3,7 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.poa.POAvanzados.Model.ItemModel.Item_Detail;
+import com.poa.POAvanzados.model.item_model.Item_Detail;
 
 import org.springframework.stereotype.Component;
 
