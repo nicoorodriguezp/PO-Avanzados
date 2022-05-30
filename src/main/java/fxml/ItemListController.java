@@ -126,6 +126,7 @@ public class ItemListController extends Controller implements Initializable {
 
             workplaceCB.setItems(FXCollections.observableArrayList(workplaces));
         }else{
+            crudPane.setVisible(false);
             workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
         }
 
