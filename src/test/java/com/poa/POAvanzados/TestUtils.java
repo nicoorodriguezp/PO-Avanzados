@@ -64,4 +64,10 @@ public class TestUtils {
     public static Item_Detail_Inventory createItemDetailInventory() {
         return new Item_Detail_Inventory(1,createItem(),"29/05/2022","29/05/2022",createItemState());
     }
+    public static Workplace_Item createWorkPlaceItem(){
+        return new Workplace_Item(1,1,20,10);
+    }
+    public static Workplace_Item createWorkPlaceItemNotEnoughStock(){
+        return new Workplace_Item(1,1,100,20);
+    }
 }
