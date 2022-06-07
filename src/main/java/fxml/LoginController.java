@@ -45,7 +45,6 @@ public class LoginController extends Controller implements Initializable {
     private void login(ActionEvent event) {
 
         try {
-        //Esto es temporal hasta que arregle el login
             this.m.user = m.wc.getUser(Integer.parseInt(dniTF.getText()),passwordTF.getText());
             if (this.m.user.getActive()) {
                 m.showHome();
