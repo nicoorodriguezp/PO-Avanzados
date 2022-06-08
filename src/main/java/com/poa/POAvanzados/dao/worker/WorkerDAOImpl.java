@@ -183,7 +183,7 @@ public class WorkerDAOImpl implements WorkerDAO{
         String email = manager.getEmail().trim();
         System.out.println(email);
         if(item.isCritical() && workplace_item.getStock() <= fifty){
-            message = " El insumo critico"+ item.getName() + " está por debajo del nivel de tolerancia en su lugar de trabajo. \n\n" +
+            message = " El insumo critico "+ item.getName() + " está por debajo del nivel de tolerancia en su lugar de trabajo. \n\n" +
                     "Por favor, solicite más suministros del item mencionado LO ANTES POSIBLE.\n\n";
             sendEmail(email, message);
 
