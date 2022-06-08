@@ -79,3 +79,10 @@ Aquí se encuentran todos los archivos estáticos dentro del sistema, como imág
 <h3> Create User </h3>
 
 ![CreateUser](https://github.com/nicoorodriguezp/PO-Avanzados/blob/main/src/main/resources/static/images/examples/9.png)
+
+
+PDF
+
+[Sistema de Control de Insumos.pdf](https://github.com/nicoorodriguezp/PO-Avanzados/files/8865297/Sistema.de.Control.de.Insumos.pdf)
+
+
