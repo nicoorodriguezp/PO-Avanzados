@@ -173,7 +173,8 @@ public class WorkerDAOImpl implements WorkerDAO{
                 "\tFROM public.\"User\"\n" +
                 "\tJOIN \"Position\" ON \"User\".\"idPosition\"=\"Position\".\"idPosition\"\n" +
                 "\tJOIN \"Workplace\" ON \"Workplace\".\"idWorkplace\"=\"User\".\"idWorkplace\"" +
-                "\tWHERE \"Workplace\".\"idWorkplace\" = ? AND \"User\".\"idPosition\"=2;", new Object[]{workplace_item.getIdWorkplace()}, new UserNoPasswordRowMapper());
+                "\tWHERE \"Workplace\".\"idWorkplace\" = ? AND \"User\".\"idPosition\"=2 AND activo is true;", new Object[]{workplace_item.getIdWorkplace()}, new UserNoPasswordRowMapper());
+
 
         int max_slots = workplace_item.getMax_slots();
         int fifty = (int) Math.ceil( max_slots / 2.0);
