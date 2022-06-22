@@ -70,9 +70,12 @@ public class ItemListController extends Controller implements Initializable {
     private int maxPageIndex = 10;
     private int actualPage;
 
+    private int from=-5;
+
     private ArrayList<Page> paginas = new ArrayList<>();
     @FXML
     private Label pageLabel;
+    private Integer totalAmmount;
 
     private void setPaginas(){
 
@@ -113,13 +116,12 @@ public class ItemListController extends Controller implements Initializable {
     }
 
 
-    public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail_Inventory> itemsStock){
-
+    public void init(MainController m, ArrayList<Item> items, ArrayList<Workplace> workplaces, ArrayList<Item_Detail_Inventory> itemsStock,Integer totalAmmount){
+        this.totalAmmount= totalAmmount;
         this.m = m;
         this.items = items;
         this.itemsStock = itemsStock;
         this.userNameLabel.setText(m.user.toString());
-
         if(this.m.user.getPosition().getIdPosition() == AdminPosition){
             //Si es admin, mostrar las opciones de alta, modificacion y baja de items.
             crudPane.setVisible(true);
@@ -130,7 +132,7 @@ public class ItemListController extends Controller implements Initializable {
             workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
         }
 
-
+        this.workplaceCB.valueProperty().setValue(this.m.user.getWorkplace());
         this.itemsStockInTable.setAll(itemsStock);
         this.itemsInTable.setAll(items);
 
@@ -233,11 +235,12 @@ public class ItemListController extends Controller implements Initializable {
     private void filterByWorkplace(ActionEvent event) {
 
         if(workplaceCB.valueProperty().getValue() != null){
+            this.from=-5;
 
             itemsStockInTable.clear();
-
+            this.totalAmmount= this.m.wc.getAmmountItemsByWorkplace(workplaceCB.valueProperty().getValue());
             if(this.m.user.getPosition().getIdPosition() == AdminPosition){
-                itemsStock = this.m.wc.getAllInventoryByWorkplace(workplaceCB.valueProperty().getValue());
+                itemsStock = this.m.wc.getAllInventoryByWorkplace(workplaceCB.valueProperty().getValue(),from,5);
             }
 
             System.out.println("Filtrando por workplace " + workplaceCB.valueProperty().getValue() + " con id " + workplaceCB.valueProperty().getValue().getIdWorkplace());
@@ -283,46 +286,40 @@ public class ItemListController extends Controller implements Initializable {
     private void nextPage(MouseEvent event) {
 
         // Hago este auxiliar para trabajar con aquellos items que ya estan filtrados en el array "itemsStockInTable"
-        ObservableList<Item_Detail_Inventory> itemsAux =  FXCollections.observableArrayList();
-
-        if(actualPage + 1 < maxPageIndex){
-
-            actualPage = actualPage + 1;
-
-            for(int i = paginas.get(actualPage).getFromItem(); i<=paginas.get(actualPage).getToItem() && i<itemsStockInTable.size(); i++){
-                itemsAux.add(itemsStockInTable.get(i));
+        System.out.println(from);
+        if(from+5<=this.totalAmmount) {
+            ObservableList<Item_Detail_Inventory> itemsAux = FXCollections.observableArrayList();
+            from += 5;
+            for (Item_Detail_Inventory item_detail_inventory : this.m.wc.getAllInventoryByWorkplace(this.workplaceCB.getValue(), from, 5)) {
+                itemsAux.add(item_detail_inventory);
             }
-
-
             itemDetailTable.setItems(itemsAux);
-            pageLabel.setText("Página " + (actualPage + 1) +"/" + maxPageIndex);
-
-        }else{
-            System.out.println("No hay mas paginas.");
+        }
+        else {
+            System.out.println("Se encuentra en la ultima pagina.");
         }
 
-    }
+        }
+
 
     @FXML
     private void formerPage(MouseEvent event) {
-
+        System.out.println(from);
+        if(this.from-5>=0) {
         ObservableList<Item_Detail_Inventory> itemsAux =  FXCollections.observableArrayList();
 
-        if(actualPage>0){
-
-            actualPage = actualPage - 1;
-
-            for(int i = paginas.get(actualPage).getFromItem(); i<=paginas.get(actualPage).getToItem(); i++){
-                itemsAux.add(itemsStockInTable.get(i));
+            this.from -= 5;
+            for (Item_Detail_Inventory item_detail_inventory : this.m.wc.getAllInventoryByWorkplace(this.workplaceCB.getValue(), from, 5)) {
+                itemsAux.add(item_detail_inventory);
             }
-
             itemDetailTable.setItems(itemsAux);
-            pageLabel.setText("Página " + (actualPage + 1) +"/" + maxPageIndex);
-        }else{
+        }
+        else {
             System.out.println("Se encuentra en la primera pagina.");
         }
 
     }
+
 
     @FXML
     private void deleteItem(ActionEvent event) {

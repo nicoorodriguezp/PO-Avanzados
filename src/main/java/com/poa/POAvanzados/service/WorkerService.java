@@ -39,6 +39,10 @@ public class WorkerService {
         return workerDAO.getAllInventoryByWorkplace(workplace);
     }
 
+    public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace,Integer from,Integer ammount) {
+        return workerDAO.getAllInventoryByWorkplace(workplace,from,ammount);
+    }
+
     public void createRepair(Repair repair) {
 
         workerDAO.createRepair(repair);
@@ -46,5 +50,9 @@ public class WorkerService {
 
     public ArrayList<Item_Detail> getAllInventoryByWorkplaceOnStock(Workplace workplace,int user_role) throws NotAllowedForWarehouse {
         return workerDAO.getAllInventoryByWorkplaceOnStock(workplace,user_role);
+    }
+
+    public Integer getAmmountItemsByWorkplace(Workplace workplace) {
+        return workerDAO.getAmmountItemsByWorkplace(workplace);
     }
 }

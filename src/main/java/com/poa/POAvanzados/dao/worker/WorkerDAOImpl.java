@@ -80,6 +80,32 @@ public class WorkerDAOImpl implements WorkerDAO{
         items.addAll(item_detailList);
         return items;
     }
+    public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace,Integer from,Integer ammount) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Item_Detail_Inventory> items = new ArrayList<>();
+        List<Item_Detail_Inventory> item_detailList;
+        if(workplace.isWarehouse()){
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "WHERE \"idWarehouse\"=? and \"idLaboratory\" is null " +
+                    "OFFSET ? LIMIT ?;",new Object[]{workplace.getIdWorkplace(),from,ammount},new Item_DetailInventoryRowMapper());
+        }
+        else {
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "WHERE \"idLaboratory\"=? and \"Item_Detail\".\"idState\" = 1 " +
+                    "OFFSET ? LIMIT ?;",new Object[]{workplace.getIdWorkplace(),from,ammount},new Item_DetailInventoryRowMapper());
+        }
+
+        items.addAll(item_detailList);
+        return items;
+    }
 
 
     @Override
@@ -217,5 +243,30 @@ public class WorkerDAOImpl implements WorkerDAO{
 
         emailThread.start();
 
+    }
+
+    public Integer getAmmountItemsByWorkplace(Workplace workplace) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        DataSource ds = (DataSource) applicationContext.getBean("dataSource");
+        JdbcTemplate jt = new JdbcTemplate(ds);
+        ArrayList<Item_Detail_Inventory> items = new ArrayList<>();
+        List<Item_Detail_Inventory> item_detailList;
+        if(workplace.isWarehouse()){
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "WHERE \"idWarehouse\"=? and \"idLaboratory\" is null;",new Object[]{workplace.getIdWorkplace()},new Item_DetailInventoryRowMapper());
+        }
+        else {
+            item_detailList=jt.query("SELECT \"idItemCode\", \"Item_Detail\".\"idItem\",\"idWarehouse\",\"idLaboratory\",\"Item_Detail\".\"idState\", check_in, check_out,\"State\".\"state_description\",\"Item\".\"name\",\"Item\".\"critical\"\n" +
+                    "FROM public.\"Item_Detail\"\n" +
+                    "JOIN \"Item\" ON \"Item\".\"idItem\"=\"Item_Detail\".\"idItem\"\n" +
+                    "JOIN \"State\" ON \"Item_Detail\".\"idState\"=\"State\".\"idState\"\n" +
+                    "WHERE \"idLaboratory\"=? and \"Item_Detail\".\"idState\" = 1;",new Object[]{workplace.getIdWorkplace()},new Item_DetailInventoryRowMapper());
+        }
+
+        items.addAll(item_detailList);
+        return items.size();
     }
 }

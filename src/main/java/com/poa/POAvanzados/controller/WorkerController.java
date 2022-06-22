@@ -34,7 +34,9 @@ public class WorkerController{
     public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace) {
         return workerService.getAllInventoryByWorkplace(workplace);
     }
-
+    public ArrayList<Item_Detail_Inventory> getAllInventoryByWorkplace(Workplace workplace,Integer from,Integer ammount) {
+        return workerService.getAllInventoryByWorkplace(workplace,from,ammount);
+    }
 
     public void createRepair(Repair repair) {
         workerService.createRepair(repair);
@@ -47,4 +49,7 @@ public class WorkerController{
     }
 
 
+    public Integer getAmmountItemsByWorkplace(Workplace workplace) {
+        return workerService.getAmmountItemsByWorkplace(workplace);
+    }
 }
